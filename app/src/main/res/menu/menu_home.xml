@@ -5,18 +5,18 @@
     <item
         android:id="@+id/search"
         app:showAsAction="ifRoom"
-        android:icon="@drawable/ic_baseline_search_24"
+        android:icon="@drawable/ic_search"
         android:title="@string/search" />
 
     <item
         android:id="@+id/favourite"
         app:showAsAction="ifRoom"
-        android:icon="@drawable/ic_baseline_favorite_border_24"
+        android:icon="@drawable/ic_favorite"
         android:title="@string/favourite" />
 
     <item
         android:id="@+id/notification"
         app:showAsAction="ifRoom"
-        android:icon="@drawable/ic_baseline_notifications_none_24"
+        android:icon="@drawable/ic_notifications"
         android:title="@string/notification" />
 </menu>

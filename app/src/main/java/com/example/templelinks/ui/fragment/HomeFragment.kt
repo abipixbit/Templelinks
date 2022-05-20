@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.denzcoskun.imageslider.constants.ScaleTypes
 import com.denzcoskun.imageslider.models.SlideModel
+import com.example.templelinks.R
 import com.example.templelinks.adapter.GodListAdapter
 import com.example.templelinks.databinding.FragmentHomeBinding
 
@@ -28,16 +29,7 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val gods = listOf(  "https://www.nicepng.com/png/detail/253-2538627_lord-murugan-png-murugan-god-images-png.png",
-            "https://www.nicepng.com/png/detail/253-2538627_lord-murugan-png-murugan-god-images-png.png",
-            "https://www.nicepng.com/png/detail/253-2538627_lord-murugan-png-murugan-god-images-png.png",
-            "https://www.nicepng.com/png/detail/253-2538627_lord-murugan-png-murugan-god-images-png.png",
-            "https://www.nicepng.com/png/detail/253-2538627_lord-murugan-png-murugan-god-images-png.png",
-            "https://www.nicepng.com/png/detail/253-2538627_lord-murugan-png-murugan-god-images-png.png",
-            "https://www.nicepng.com/png/detail/253-2538627_lord-murugan-png-murugan-god-images-png.png",
-            "https://www.nicepng.com/png/detail/253-2538627_lord-murugan-png-murugan-god-images-png.png")
-
-
+        val gods = resources.getStringArray(R.array.gods_photo).toList()
         binding.rvGods.apply {
             adapter = GodListAdapter(gods,requireView())
         }

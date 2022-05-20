@@ -5,4 +5,36 @@
     <string name="search">Search</string>
     <string name="favourite">Favourite</string>
     <string name="notification">Notification</string>
+    <string name="home">Home</string>
+    <string name="live">Live</string>
+    <string name="gallery">Gallery</string>
+    <string name="account">Account</string>
+    <string name="live_stream">Live Stream</string>
+    <string name="my_account">My Account</string>
+
+    <string-array name="gods_photo">
+        <item>"https://www.hindisoch.com/wp-content/uploads/2015/03/Lord-Ganesha-Wallpaper.jpg"</item>
+        <item>"https://www.hindisoch.com/wp-content/uploads/2015/03/Lord-Ganesha-Wallpaper.jpg"</item>
+        <item>"https://www.hindisoch.com/wp-content/uploads/2015/03/Lord-Ganesha-Wallpaper.jpg"</item>
+        <item>"https://www.hindisoch.com/wp-content/uploads/2015/03/Lord-Ganesha-Wallpaper.jpg"</item>
+        <item>"https://www.hindisoch.com/wp-content/uploads/2015/03/Lord-Ganesha-Wallpaper.jpg"</item>
+        <item>"https://www.hindisoch.com/wp-content/uploads/2015/03/Lord-Ganesha-Wallpaper.jpg"</item>
+        <item>"https://www.nicepng.com/png/detail/253-2538627_lord-murugan-png-murugan-god-images-png.png"</item>
+        <item>"https://www.nicepng.com/png/detail/253-2538627_lord-murugan-png-murugan-god-images-png.png"</item>
+        <item>"https://www.nicepng.com/png/detail/253-2538627_lord-murugan-png-murugan-god-images-png.png"</item>
+        <item>"https://www.nicepng.com/png/detail/253-2538627_lord-murugan-png-murugan-god-images-png.png"</item>
+    </string-array>
+
+    <string-array name="button_text">
+        <item>"Deities"</item>
+        <item>"Temples"</item>
+        <item>"Sainath Menon Photography"</item>
+        <item>"Button4"</item>
+        <item>"Button5"</item>
+        <item>"Button6"</item>
+        <item>"Button7"</item>
+        <item>"Button8"</item>
+        <item>"Button3"</item>
+    </string-array>
+
 </resources>
