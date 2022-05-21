@@ -1,4 +1,4 @@
-package com.example.templelinks.ui.fragment
+package com.example.templelinks.ui.fragment.galleryfragment
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -9,7 +9,6 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.example.templelinks.R
 import com.example.templelinks.adapter.GalleryButtonAdapter
 import com.example.templelinks.adapter.GalleryImageAdapter
-import com.example.templelinks.adapter.GodListAdapter
 import com.example.templelinks.databinding.FragmentImageBinding
 
 class ImageFragment : Fragment() {

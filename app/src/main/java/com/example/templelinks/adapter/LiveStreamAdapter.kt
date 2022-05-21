@@ -4,7 +4,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.templelinks.data.LiveListData
+import com.example.templelinks.data.model.LiveListData
 import com.example.templelinks.databinding.LiveListItemBinding
 import com.example.templelinks.extensions.glide
 

@@ -4,17 +4,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".ui.fragment.AccountFragment">
+    tools:context=".ui.fragment.accountfragment.AccountFragment">
 
     <include
         android:id="@+id/toolBarAccount"
         layout="@layout/tool_bar">
     </include>
 
-    <ListView
-        app:layout_constraintTop_toBottomOf="@id/toolBarAccount"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-    </ListView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

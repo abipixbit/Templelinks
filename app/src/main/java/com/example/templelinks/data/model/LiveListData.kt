@@ -1,4 +1,4 @@
-package com.example.templelinks.data
+package com.example.templelinks.data.model
 
 data class LiveListData
     (

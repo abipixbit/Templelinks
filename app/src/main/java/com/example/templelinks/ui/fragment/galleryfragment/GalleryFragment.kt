@@ -1,4 +1,4 @@
-package com.example.templelinks.ui.fragment
+package com.example.templelinks.ui.fragment.galleryfragment
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.example.templelinks.R
 import com.example.templelinks.databinding.FragmentGalleryBinding
+import com.example.templelinks.adapter.ViewPagerAdapter
 import com.google.android.material.tabs.TabLayoutMediator
 
 class GalleryFragment : Fragment() {

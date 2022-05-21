@@ -2,14 +2,18 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item   android:id="@+id/homeFragment"
+            android:icon="@drawable/ic_home"
             android:title="@string/home" />
 
     <item   android:id="@+id/liveFragment"
+            android:icon="@drawable/ic_baseline_live"
             android:title="@string/live" />
 
     <item   android:id="@+id/galleryFragment"
+            android:icon="@drawable/ic_gallery"
             android:title="@string/gallery" />
 
     <item   android:id="@+id/accountFragment"
+        android:icon="@drawable/ic_account"
             android:title="@string/account" />
 </menu>
