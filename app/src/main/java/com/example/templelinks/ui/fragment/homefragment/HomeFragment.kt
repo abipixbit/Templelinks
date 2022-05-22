@@ -5,13 +5,16 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.denzcoskun.imageslider.constants.ScaleTypes
 import com.denzcoskun.imageslider.models.SlideModel
 import com.example.templelinks.R
 import com.example.templelinks.adapter.GodListAdapter
+import com.example.templelinks.adapter.TempleMainAdapter
 import com.example.templelinks.databinding.FragmentHomeBinding
 import com.example.templelinks.enums.ApiStatus
 
@@ -27,6 +30,8 @@ class HomeFragment : Fragment() {
     ): View {
         // Inflate the layout for this fragment
         binding = FragmentHomeBinding.inflate(layoutInflater,container,false)
+
+
 
         return binding.root
     }
@@ -50,6 +55,26 @@ class HomeFragment : Fragment() {
     private fun displayUI() {
         loadDeities()
         loadBanners()
+        loadHomeCategory()
+    }
+
+
+    private fun loadHomeCategory() {
+        viewModel.homeCategory.observe(viewLifecycleOwner) { apiresponse ->
+            when(apiresponse.apiStatus) {
+                ApiStatus.SUCCESS -> apiresponse.data.let {
+                    binding.rvTempleCategory.adapter = TempleMainAdapter(it!!)
+
+
+
+
+                    Log.d("HomeFragHomeCateSuc",it.toString())
+                }
+                ApiStatus.ERROR -> apiresponse.message.let {
+                    Log.d("HomeFragHomeCateFail",it.toString())
+                }
+            }
+        }
     }
 
     private fun loadBanners() {

@@ -107,6 +107,8 @@
                 android:id="@+id/rvTempleCategory"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                android:orientation="vertical"
                 android:layout_below="@id/bannerSmall"
                 android:padding="10dp"
                 tools:listitem="@layout/temple_main_list_item">
