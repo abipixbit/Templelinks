@@ -50,11 +50,11 @@ class HomeFragment : Fragment() {
     private fun refresh() {
         binding.refreshLayout.setOnRefreshListener {
 
-            binding.relativeLayoutHome.visibility = View.GONE
-            binding.shimmerLayout.startShimmer()
-            binding.shimmerLayout.visibility = View.VISIBLE
-
-            displayUI()
+//            binding.relativeLayoutHome.visibility = View.GONE
+//            binding.shimmerLayout.startShimmer()
+//            binding.shimmerLayout.visibility = View.VISIBLE
+//
+//            displayUI()
             binding.refreshLayout.isRefreshing = false
         }
 
