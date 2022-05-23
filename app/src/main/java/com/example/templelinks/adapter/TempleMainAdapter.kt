@@ -1,6 +1,5 @@
 package com.example.templelinks.adapter
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -22,18 +21,38 @@ class TempleMainAdapter(private val homeCategory : List<TemplesResponse>) : Recy
         val currentItem = homeCategory[position]
         holder.binding.tvCategoryName.text = currentItem.locale?.name
 
-        loadChildRecyclerView(holder.binding.rvTempleList,currentItem.temples!!)
+        if (currentItem.viewType.equals("Large")) {
+            loadChildRecyclerViewLarge(holder.binding.rvTempleList,currentItem.temples!!)
+        }
+        else if (currentItem.viewType.equals("Medium")) {
+            loadChildRecyclerViewMedium(holder.binding.rvTempleList,currentItem.temples!!)
+        }
+        else if (currentItem.viewType.equals("Small")) {
+            loadChildRecyclerViewSmall(holder.binding.rvTempleList,currentItem.temples!!)
+        }
+
+        if (currentItem.temples?.size==0) {
+            holder.binding.tvCategoryName.visibility = View.GONE
+            holder.binding.tvSeeMore.visibility = View.GONE
+            holder.binding.rvTempleList.visibility = View.GONE
+        }
+
     }
 
     override fun getItemCount(): Int {
         return homeCategory.size
     }
 
-    private fun loadChildRecyclerView(recyclerView : RecyclerView, templeList : List<Temple> ) {
+    private fun loadChildRecyclerViewLarge(recyclerView : RecyclerView, templeList : List<Temple> ) {
+        recyclerView.adapter = TemplesAdapterLarge(templeList)
+    }
 
-        recyclerView.adapter = TemplesAdapter(templeList)
+    private fun loadChildRecyclerViewMedium(recyclerView : RecyclerView, templeList : List<Temple> ) {
+        recyclerView.adapter = TemplesAdapterMedium(templeList)
+    }
 
-
+    private fun loadChildRecyclerViewSmall(recyclerView : RecyclerView, templeList : List<Temple> ) {
+        recyclerView.adapter = TemplesAdapterSmall(templeList)
     }
 
 }

@@ -9,7 +9,7 @@
     android:layout_marginTop="5dp"
     android:elevation="9dp"
     android:layout_width="270dp"
-    android:layout_height="165dp">
+    android:layout_height="177dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -20,8 +20,7 @@
             android:id="@+id/ivTemples"
             android:layout_width="match_parent"
             android:scaleType="fitXY"
-            app:layout_constraintDimensionRatio="7:3"
-            android:layout_height="0dp"
+            android:layout_height="125dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:srcCompat="@tools:sample/avatars" />

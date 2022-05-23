@@ -39,14 +39,22 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        binding.relativeLayoutHome.visibility = View.GONE
+        binding.shimmerLayout.startShimmer()
+        binding.shimmerLayout.visibility = View.VISIBLE
+
         displayUI()
         refresh()
     }
 
     private fun refresh() {
         binding.refreshLayout.setOnRefreshListener {
+
+            binding.relativeLayoutHome.visibility = View.GONE
+            binding.shimmerLayout.startShimmer()
+            binding.shimmerLayout.visibility = View.VISIBLE
+
             displayUI()
-            loadBanners()
             binding.refreshLayout.isRefreshing = false
         }
 
@@ -56,8 +64,8 @@ class HomeFragment : Fragment() {
         loadDeities()
         loadBanners()
         loadHomeCategory()
-    }
 
+    }
 
     private fun loadHomeCategory() {
         viewModel.homeCategory.observe(viewLifecycleOwner) { apiresponse ->
@@ -65,7 +73,10 @@ class HomeFragment : Fragment() {
                 ApiStatus.SUCCESS -> apiresponse.data.let {
                     binding.rvTempleCategory.adapter = TempleMainAdapter(it!!)
 
+                    binding.shimmerLayout.stopShimmer()
+                    binding.shimmerLayout.visibility = View.GONE
 
+                    binding.relativeLayoutHome.visibility = View.VISIBLE
 
 
                     Log.d("HomeFragHomeCateSuc",it.toString())
