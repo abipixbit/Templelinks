@@ -3,20 +3,26 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    app:cardElevation="@dimen/elevation"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    app:cardCornerRadius="10dp"
-    app:layout_constraintDimensionRatio="5:2"
-    android:layout_marginStart="5dp"
-    android:layout_marginEnd="5dp">
+    app:cardCornerRadius="@dimen/corner_radius">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
     <com.denzcoskun.imageslider.ImageSlider
         android:id="@+id/ivSlider"
+        app:layout_constraintTop_toTopOf="parent"
         app:iss_auto_cycle="true"
+        app:layout_constraintDimensionRatio="5:2"
         app:iss_delay="2000"
         app:iss_placeholder="@drawable/loading_image"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="0dp">
     </com.denzcoskun.imageslider.ImageSlider>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 
 </androidx.cardview.widget.CardView>

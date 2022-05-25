@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <dimen name="margin_start">16dp</dimen>
+    <dimen name="margin_end">16dp</dimen>
+    <dimen name="elevation">8dp</dimen>
+    <dimen name="margin_top">16dp</dimen>
+    <dimen name="corner_radius">8dp</dimen>
+
+
+    <dimen name="deities_corner_radius">48dp</dimen>
+    <dimen name="deities_list_item_width">82dp</dimen>
+
+    <dimen name="home_category_margin_top">24dp</dimen>
+    <dimen name="home_category_title_size">16sp</dimen>
+    <dimen name="home_category_margin_bottom">8dp</dimen>
+    <dimen name="home_category_temple_name_start">8dp</dimen>
+    <dimen name="home_category_name_top">4dp</dimen>
+
+    <dimen name="like_button_background">24dp</dimen>
+    <dimen name="like_button_size">16dp</dimen>
+
+
+
+
+
+
+</resources>

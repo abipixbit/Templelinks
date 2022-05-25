@@ -9,4 +9,5 @@
     <color name="white">#FFFFFFFF</color>
     <color name="app_color">#EA632F</color>
     <color name="shimmer_color">#dddddd</color>
+    <color name="grey_color">#656464</color>
 </resources>

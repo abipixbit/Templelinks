@@ -21,8 +21,8 @@
         android:elevation="13dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        app:labelVisibilityMode="labeled"
         android:layout_alignParentBottom="true"
-        app:itemIconTint="@color/app_color"
         app:menu="@menu/menu_bottom" />
 
 </RelativeLayout>

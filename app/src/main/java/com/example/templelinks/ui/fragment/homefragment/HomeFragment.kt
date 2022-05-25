@@ -71,7 +71,7 @@ class HomeFragment : Fragment() {
         viewModel.homeCategory.observe(viewLifecycleOwner) { apiresponse ->
             when(apiresponse.apiStatus) {
                 ApiStatus.SUCCESS -> apiresponse.data.let {
-                    binding.rvTempleCategory.adapter = TempleMainAdapter(it!!)
+                    binding.rvHomeCategory.adapter = TempleMainAdapter(it!!)
 
                     binding.shimmerLayout.stopShimmer()
                     binding.shimmerLayout.visibility = View.GONE
@@ -95,7 +95,7 @@ class HomeFragment : Fragment() {
                    bannerList.clear()
                    for (i in banners)
                        bannerList.add(SlideModel(i.imageUrl.toString()))
-                   binding.bannerLarge.ivSlider.setImageList(bannerList,ScaleTypes.FIT)
+                   binding.homeBanner.ivSlider.setImageList(bannerList,ScaleTypes.FIT)
                }
                ApiStatus.ERROR -> apiResponse.message.let {
                    Log.d("HomeFragBannerFail",it.toString())
@@ -109,7 +109,7 @@ class HomeFragment : Fragment() {
         viewModel.deities.observe(viewLifecycleOwner) { apiResponse->
             when(apiResponse.apiStatus) {
                 ApiStatus.SUCCESS -> apiResponse.data.let { deities->
-                    binding.rvGods.adapter = GodListAdapter(deities!!)
+                    binding.rvDeities.adapter = GodListAdapter(deities!!)
                     Log.d("HomeFragBannerSuc",deities.toString())
                 }
                 ApiStatus.ERROR -> apiResponse.message.let { message->

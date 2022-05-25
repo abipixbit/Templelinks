@@ -9,7 +9,7 @@
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolBarHome"
-        android:elevation="13dp"
+        android:elevation="@dimen/elevation"
         android:layout_width="match_parent"
         android:layout_height="55dp"
         android:background="#FFFEFE"
@@ -18,7 +18,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
-            android:layout_marginStart="15dp"
+            android:layout_marginStart="@dimen/margin_start"
             android:layout_width="55dp"
             android:layout_height="match_parent">
             <ImageView
@@ -29,7 +29,7 @@
         </LinearLayout>
 
         <LinearLayout
-            android:layout_marginStart="5dp"
+            android:layout_marginStart="@dimen/margin_start"
             android:layout_width="125dp"
             android:layout_height="match_parent">
             <ImageView
@@ -117,25 +117,26 @@
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:layout_width="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@id/toolBarHome"
         android:id="@+id/refreshLayout"
-        android:layout_height="wrap_content">
+        android:layout_height="0dp">
 
         <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="0dp"
             android:scrollbars="none">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:id="@+id/relativeLayoutHome"
-                android:layout_height="wrap_content">
+                android:layout_height="0dp">
 
                 <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/rvGods"
+                    android:id="@+id/rvDeities"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
+                    android:layout_marginTop="@dimen/margin_top"
                     android:orientation="horizontal"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -145,42 +146,37 @@
                     tools:listitem="@layout/gods_list_item" />
 
                 <include
-                    android:id="@+id/bannerLarge"
-                    layout="@layout/banner_slider"
-                    app:layout_constraintDimensionRatio="5:2"
+                    android:id="@+id/homeBanner"
+                    layout="@layout/home_banner_slider"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
-                    app:layout_constraintTop_toBottomOf="@id/rvGods"
-                    android:layout_marginStart="9dp"
-                    android:layout_marginTop="21dp"
-                    android:layout_marginEnd="9dp"
+                    app:layout_constraintTop_toBottomOf="@id/rvDeities"
+                    android:layout_marginStart="@dimen/margin_start"
+                    android:layout_marginTop="@dimen/margin_top"
+                    android:layout_marginEnd="@dimen/margin_end"
                     tools:layout_editor_absoluteX="16dp"
                     tools:layout_editor_absoluteY="190dp">
                 </include>
 
-                <ImageView
-                    android:id="@+id/bannerSmall"
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_marginTop="21dp"
-                    android:layout_marginStart="16dp"
-                    android:scaleType="centerCrop"
-                    android:layout_marginEnd="16dp"
-                    android:src="@drawable/banner2"
-                    app:layout_constraintDimensionRatio="4:1"
-                    app:layout_constraintTop_toBottomOf="@+id/bannerLarge"
-                    tools:layout_editor_absoluteX="0dp">
-                </ImageView>
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/rvTempleCategory"
+                <include
+                    android:id="@+id/krishnaGeethBanner"
+                    layout="@layout/krishna_geeth_banner"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:layout_constraintTop_toBottomOf="@id/bannerSmall"
+                    android:layout_marginTop="@dimen/margin_top"
+                    android:layout_marginStart="@dimen/margin_start"
+                    android:layout_marginEnd="@dimen/margin_end"
+                    app:layout_constraintTop_toBottomOf="@+id/homeBanner">
+                </include>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rvHomeCategory"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    app:layout_constraintTop_toBottomOf="@id/krishnaGeethBanner"
                     android:orientation="vertical"
-                    android:layout_marginTop="19dp"
                     android:scrollbars="none"
-                    android:paddingBottom="41dp"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                     tools:listitem="@layout/temple_main_list_item">
                 </androidx.recyclerview.widget.RecyclerView>
