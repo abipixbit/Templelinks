@@ -1,11 +1,14 @@
 package com.example.templelinks.ui.fragment.homefragment
 
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.RecyclerView
@@ -15,8 +18,10 @@ import com.denzcoskun.imageslider.models.SlideModel
 import com.example.templelinks.R
 import com.example.templelinks.adapter.GodListAdapter
 import com.example.templelinks.adapter.TempleMainAdapter
+import com.example.templelinks.data.model.response.ApiResponse
 import com.example.templelinks.databinding.FragmentHomeBinding
 import com.example.templelinks.enums.ApiStatus
+import com.example.templelinks.extensions.glide
 
 
 class HomeFragment : Fragment() {
@@ -38,23 +43,15 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+            displayUI()
 
-        binding.relativeLayoutHome.visibility = View.GONE
-        binding.shimmerLayout.startShimmer()
-        binding.shimmerLayout.visibility = View.VISIBLE
-
-        displayUI()
         refresh()
     }
 
+
     private fun refresh() {
         binding.refreshLayout.setOnRefreshListener {
-
-//            binding.relativeLayoutHome.visibility = View.GONE
-//            binding.shimmerLayout.startShimmer()
-//            binding.shimmerLayout.visibility = View.VISIBLE
-//
-//            displayUI()
+            displayUI()
             binding.refreshLayout.isRefreshing = false
         }
 
@@ -62,43 +59,64 @@ class HomeFragment : Fragment() {
 
     private fun displayUI() {
         loadDeities()
-        loadBanners()
+        loadHomeBanner()
         loadHomeCategory()
 
     }
 
     private fun loadHomeCategory() {
         viewModel.homeCategory.observe(viewLifecycleOwner) { apiresponse ->
+
+//            binding.shimmerHomeCategory.isVisible = apiresponse.apiStatus == ApiStatus.LOADING
+
+
             when(apiresponse.apiStatus) {
-                ApiStatus.SUCCESS -> apiresponse.data.let {
-                    binding.rvHomeCategory.adapter = TempleMainAdapter(it!!)
+                ApiStatus.SUCCESS -> {
+                    binding.shimmerHomeCategory.visibility = View.INVISIBLE
 
-                    binding.shimmerLayout.stopShimmer()
-                    binding.shimmerLayout.visibility = View.GONE
-
-                    binding.relativeLayoutHome.visibility = View.VISIBLE
-
-
-                    Log.d("HomeFragHomeCateSuc",it.toString())
+                    apiresponse.data.let {
+                        binding.rvHomeCategory.adapter = TempleMainAdapter(it!!)
+                        Log.d("HomeFragHomeCateSuc",it.toString())
+                    }
                 }
+
                 ApiStatus.ERROR -> apiresponse.message.let {
                     Log.d("HomeFragHomeCateFail",it.toString())
+                }
+
+                ApiStatus.LOADING -> {
+                    binding.shimmerHomeCategory.visibility = View.VISIBLE
                 }
             }
         }
     }
 
-    private fun loadBanners() {
+    private fun loadHomeBanner() {
        viewModel.banners.observe(viewLifecycleOwner) { apiResponse ->
+
            when(apiResponse.apiStatus) {
-               ApiStatus.SUCCESS -> apiResponse.data!!.let { banners->
-                   bannerList.clear()
-                   for (i in banners)
-                       bannerList.add(SlideModel(i.imageUrl.toString()))
-                   binding.homeBanner.ivSlider.setImageList(bannerList,ScaleTypes.FIT)
+               ApiStatus.SUCCESS -> {
+
+                   binding.shimmerHomeBanner.visibility = View.INVISIBLE
+                   binding.homeBanner.cardViewHomeBanner.visibility = View.VISIBLE
+                   binding.krishnaGeethBanner.cardViewKrishnaGeethBanner.visibility = View.VISIBLE
+
+                   apiResponse.data!!.let { banners ->
+                       bannerList.clear()
+                       for (i in banners)
+                           bannerList.add(SlideModel(i.imageUrl.toString()))
+                       binding.homeBanner.ivSlider.setImageList(bannerList, ScaleTypes.FIT)
+                       requireView().glide(banners.get(0).imageUrl.toString(),binding.krishnaGeethBanner.krishnaGeethBanner)
+                   }
                }
                ApiStatus.ERROR -> apiResponse.message.let {
                    Log.d("HomeFragBannerFail",it.toString())
+               }
+
+               ApiStatus.LOADING -> {
+                   binding.shimmerHomeBanner.visibility = View.VISIBLE
+                   binding.homeBanner.cardViewHomeBanner.visibility = View.INVISIBLE
+                   binding.krishnaGeethBanner.cardViewKrishnaGeethBanner.visibility = View.INVISIBLE
                }
            }
        }
@@ -107,13 +125,21 @@ class HomeFragment : Fragment() {
     private fun loadDeities() {
 
         viewModel.deities.observe(viewLifecycleOwner) { apiResponse->
+
             when(apiResponse.apiStatus) {
-                ApiStatus.SUCCESS -> apiResponse.data.let { deities->
-                    binding.rvDeities.adapter = GodListAdapter(deities!!)
-                    Log.d("HomeFragBannerSuc",deities.toString())
+                ApiStatus.SUCCESS -> {
+                    binding.shimmerDeities.visibility = View.INVISIBLE
+                    apiResponse.data.let { deities ->
+                        binding.rvDeities.adapter = GodListAdapter(deities!!)
+                        Log.d("HomeFragBannerSuc", deities.toString())
+                    }
                 }
                 ApiStatus.ERROR -> apiResponse.message.let { message->
                     Log.d("HomeFragBannerFail",message.toString())
+                }
+
+                ApiStatus.LOADING -> {
+                    binding.shimmerDeities.visibility = View.VISIBLE
                 }
             }
         }

@@ -1,5 +1,6 @@
 package com.example.templelinks.data.model.response
 
+import androidx.lifecycle.LiveData
 import com.example.templelinks.enums.ApiStatus
 
 
@@ -15,5 +16,9 @@ data class ApiResponse<T>(
 
         fun <T> error(data: T?, message: String): ApiResponse<T?> =
             ApiResponse(apiStatus = ApiStatus.ERROR, data = data, message = message)
+
+        fun <T> loading() : ApiResponse<T?> =
+            ApiResponse(apiStatus = ApiStatus.LOADING, data = null, message = null)
+
     }
 }

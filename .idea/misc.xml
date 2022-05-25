@@ -19,21 +19,23 @@
         <entry key="app/src/main/res/layout/fragment_account.xml" value="0.35625" />
         <entry key="app/src/main/res/layout/fragment_audio.xml" value="0.35625" />
         <entry key="app/src/main/res/layout/fragment_gallery.xml" value="0.35625" />
-        <entry key="app/src/main/res/layout/fragment_home.xml" value="0.2777101096224117" />
+        <entry key="app/src/main/res/layout/fragment_home.xml" value="0.16835504100337675" />
         <entry key="app/src/main/res/layout/fragment_image.xml" value="0.30337078651685395" />
         <entry key="app/src/main/res/layout/fragment_live.xml" value="0.35625" />
         <entry key="app/src/main/res/layout/god_image_list_item.xml" value="0.35520833333333335" />
         <entry key="app/src/main/res/layout/gods_list_item.xml" value="0.67" />
-        <entry key="app/src/main/res/layout/gods_list_item_shimmer.xml" value="0.35625" />
+        <entry key="app/src/main/res/layout/gods_list_item_shimmer.xml" value="0.67" />
+        <entry key="app/src/main/res/layout/home_banner_slider.xml" value="0.35625" />
         <entry key="app/src/main/res/layout/krishna_geeth_banner.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/krishna_geeth_banner_shimmer.xml" value="0.35625" />
         <entry key="app/src/main/res/layout/live_list_item.xml" value="0.33" />
         <entry key="app/src/main/res/layout/temple_list_item.xml" value="0.33" />
         <entry key="app/src/main/res/layout/temple_list_item_large.xml" value="0.33" />
-        <entry key="app/src/main/res/layout/temple_list_item_large_shimmer.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/temple_list_item_large_shimmer.xml" value="0.5" />
         <entry key="app/src/main/res/layout/temple_list_item_medium.xml" value="0.67" />
         <entry key="app/src/main/res/layout/temple_list_item_small.xml" value="0.67" />
-        <entry key="app/src/main/res/layout/temple_main_list_item.xml" value="0.33" />
-        <entry key="app/src/main/res/layout/temple_main_list_item_shimmer.xml" value="0.35625" />
+        <entry key="app/src/main/res/layout/temple_main_list_item.xml" value="0.5" />
+        <entry key="app/src/main/res/layout/temple_main_list_item_shimmer.xml" value="0.5" />
         <entry key="app/src/main/res/layout/tool_bar.xml" value="0.25" />
         <entry key="app/src/main/res/menu/menu_bottom.xml" value="0.35520833333333335" />
         <entry key="app/src/main/res/menu/menu_home.xml" value="0.42135416666666664" />

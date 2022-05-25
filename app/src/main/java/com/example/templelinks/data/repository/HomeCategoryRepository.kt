@@ -12,6 +12,8 @@ class HomeCategoryRepository {
 
     suspend fun loadHomeCategory() : ApiResponse<List<TemplesResponse>?> {
 
+        homeCategory = ApiResponse.loading()
+
         try {
             val response = apiInterface.loadHomeCategory()
             homeCategory = ApiResponse.success(response.data)

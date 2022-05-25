@@ -12,6 +12,8 @@ class BannerRepository {
 
     suspend fun loadBanners() : ApiResponse<List<Banners>?> {
 
+        banners = ApiResponse.loading()
+
         try {
             val response = apiResponse.loadBanners()
             banners = ApiResponse.success(response.data)

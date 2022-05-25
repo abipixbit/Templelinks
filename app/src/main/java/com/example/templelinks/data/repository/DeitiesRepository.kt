@@ -11,6 +11,8 @@ class DeitiesRepository {
 
     suspend fun deities() : ApiResponse<List<Deities>?> {
 
+        deities = ApiResponse.loading()
+
         try {
             val response = apiInterface.loadDeities()
             deities = ApiResponse.success(response.data)

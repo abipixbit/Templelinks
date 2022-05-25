@@ -3,7 +3,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:paddingBottom="5dp"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <TextView
@@ -11,33 +10,23 @@
         android:layout_width="0dp"
         android:maxLines="2"
         android:textStyle="bold"
-        android:textSize="19sp"
-        android:layout_marginEnd="9dp"
+        android:textSize="@dimen/home_category_title_size"
+        android:layout_marginEnd="@dimen/margin_end"
         android:layout_height="wrap_content"
-        android:layout_marginStart="9dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginStart="@dimen/margin_start"
+        android:layout_marginTop="@dimen/home_category_margin_top"
         android:background="@color/shimmer_color"
-        app:layout_constraintEnd_toStartOf="@+id/tvSeeMore"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/tvSeeMore"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
-        android:textColor="@color/app_color"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
     <LinearLayout
         android:id="@+id/rvTempleList"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="@dimen/margin_top"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintTop_toBottomOf="@+id/tvCategoryName"
         tools:layout_editor_absoluteX="16dp">
 

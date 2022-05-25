@@ -41,80 +41,6 @@
 
     </androidx.appcompat.widget.Toolbar>
 
-
-    <com.facebook.shimmer.ShimmerFrameLayout
-        android:id="@+id/shimmerLayout"
-        android:layout_width="match_parent"
-        android:layout_below="@id/toolBarHome"
-        android:layout_height="match_parent">
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:id="@+id/linearLayoutShimmer"
-            android:orientation="horizontal"
-            android:layout_marginStart="5dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="5dp"
-            android:layout_height="wrap_content">
-
-            <include layout="@layout/gods_list_item_shimmer"/>
-            <include layout="@layout/gods_list_item_shimmer"/>
-            <include layout="@layout/gods_list_item_shimmer"/>
-            <include layout="@layout/gods_list_item_shimmer"/>
-            <include layout="@layout/gods_list_item_shimmer"/>
-            <include layout="@layout/gods_list_item_shimmer"/>
-        </LinearLayout>
-
-        <include
-            android:id="@+id/bannerLargeShimmer"
-            layout="@layout/banner_slider_shimmer"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="9dp"
-            android:layout_marginTop="11dp"
-            android:layout_below="@id/linearLayoutShimmer"
-            android:layout_marginEnd="9dp"
-            tools:layout_editor_absoluteX="16dp"
-            tools:layout_editor_absoluteY="190dp">
-        </include>
-
-        <ImageView
-            android:id="@+id/bannerSmallShimmer"
-            android:layout_width="match_parent"
-            android:layout_height="85dp"
-            android:layout_below="@id/bannerLargeShimmer"
-            android:layout_marginTop="11dp"
-            android:paddingStart="10dp"
-            android:paddingEnd="10dp"
-            android:scaleType="fitXY"
-            android:background="@color/shimmer_color"
-            app:layout_constraintDimensionRatio="2:1"
-            app:layout_constraintTop_toBottomOf="@+id/bannerLargeShimmer"
-            tools:layout_editor_absoluteX="0dp">
-        </ImageView>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_below="@id/bannerSmallShimmer"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:padding="10dp">
-
-            <include layout="@layout/temple_main_list_item_shimmer"/>
-            <include layout="@layout/temple_main_list_item_shimmer"/>
-            <include layout="@layout/temple_main_list_item_shimmer"/>
-
-        </LinearLayout>
-
-        </RelativeLayout>
-
-    </com.facebook.shimmer.ShimmerFrameLayout>
-
-
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:layout_width="match_parent"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -129,7 +55,7 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:id="@+id/relativeLayoutHome"
+                android:id="@+id/constraintLayoutHome"
                 android:layout_height="0dp">
 
                 <androidx.recyclerview.widget.RecyclerView
@@ -186,5 +112,88 @@
         </androidx.core.widget.NestedScrollView>
 
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+
+    <com.facebook.shimmer.ShimmerFrameLayout
+        android:id="@+id/shimmerDeities"
+        android:visibility="invisible"
+        app:layout_constraintTop_toBottomOf="@id/toolBarHome"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:layout_marginTop="@dimen/margin_top"
+            android:layout_height="wrap_content">
+
+            <include layout="@layout/gods_list_item_shimmer"/>
+            <include layout="@layout/gods_list_item_shimmer"/>
+            <include layout="@layout/gods_list_item_shimmer"/>
+            <include layout="@layout/gods_list_item_shimmer"/>
+            <include layout="@layout/gods_list_item_shimmer"/>
+            <include layout="@layout/gods_list_item_shimmer"/>
+        </LinearLayout>
+
+
+    </com.facebook.shimmer.ShimmerFrameLayout>
+
+    <com.facebook.shimmer.ShimmerFrameLayout
+
+        android:id="@+id/shimmerHomeBanner"
+        android:visibility="invisible"
+        android:layout_width="match_parent"
+        app:layout_constraintTop_toBottomOf="@id/shimmerDeities"
+        android:layout_height="wrap_content">
+
+        <include
+            layout="@layout/banner_slider_shimmer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_start"
+            android:layout_marginTop="@dimen/margin_top"
+            android:layout_marginEnd="@dimen/margin_end"
+            tools:layout_editor_absoluteX="16dp"
+            tools:layout_editor_absoluteY="190dp">
+        </include>
+
+    </com.facebook.shimmer.ShimmerFrameLayout>
+
+    <com.facebook.shimmer.ShimmerFrameLayout
+        android:visibility="invisible"
+        android:id="@+id/shimmerKrishnaGeethBanner"
+        android:layout_width="match_parent"
+        app:layout_constraintTop_toBottomOf="@id/shimmerHomeBanner"
+        android:layout_height="wrap_content">
+
+        <include
+            layout="@layout/krishna_geeth_banner_shimmer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_top"
+            android:layout_marginStart="@dimen/margin_start"
+            android:layout_marginEnd="@dimen/margin_end"
+            app:layout_constraintTop_toBottomOf="@+id/homeBanner">
+        </include>
+    </com.facebook.shimmer.ShimmerFrameLayout>
+
+    <com.facebook.shimmer.ShimmerFrameLayout
+        android:id="@+id/shimmerHomeCategory"
+        android:visibility="invisible"
+        app:layout_constraintTop_toBottomOf="@id/shimmerKrishnaGeethBanner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <include layout="@layout/temple_main_list_item_shimmer"/>
+            <include layout="@layout/temple_main_list_item_shimmer"/>
+            <include layout="@layout/temple_main_list_item_shimmer"/>
+        </LinearLayout>
+
+    </com.facebook.shimmer.ShimmerFrameLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
