@@ -19,7 +19,7 @@
         <entry key="app/src/main/res/layout/fragment_account.xml" value="0.35625" />
         <entry key="app/src/main/res/layout/fragment_audio.xml" value="0.35625" />
         <entry key="app/src/main/res/layout/fragment_gallery.xml" value="0.35625" />
-        <entry key="app/src/main/res/layout/fragment_home.xml" value="0.16835504100337675" />
+        <entry key="app/src/main/res/layout/fragment_home.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_image.xml" value="0.30337078651685395" />
         <entry key="app/src/main/res/layout/fragment_live.xml" value="0.35625" />
         <entry key="app/src/main/res/layout/god_image_list_item.xml" value="0.35520833333333335" />

@@ -12,16 +12,14 @@
     </include>
 
     <androidx.recyclerview.widget.RecyclerView
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         android:id="@+id/rvLive"
-        android:layout_marginStart="7dp"
-        android:layout_marginEnd="7dp"
-        android:layout_below="@+id/toolBarLive"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_below="@+id/toolBarLive"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         tools:layout_editor_absoluteX="1dp"
         tools:layout_editor_absoluteY="56dp"
-        tools:listitem="@layout/live_list_item"/>
+        tools:listitem="@layout/live_list_item" />
 
 
 </RelativeLayout>

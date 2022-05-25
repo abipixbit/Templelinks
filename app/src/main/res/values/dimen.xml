@@ -15,7 +15,7 @@
     <dimen name="home_category_title_size">16sp</dimen>
     <dimen name="home_category_margin_bottom">8dp</dimen>
     <dimen name="home_category_temple_name_start">8dp</dimen>
-    <dimen name="home_category_name_top">4dp</dimen>
+    <dimen name="home_category_name_top">8dp</dimen>
 
     <dimen name="like_button_background">24dp</dimen>
     <dimen name="like_button_size">16dp</dimen>

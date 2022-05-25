@@ -1,4 +1,5 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
+
     <!-- Base application theme. -->
     <style name="Theme.Templelinks" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
@@ -14,6 +15,12 @@
         <!-- Customize your theme here. -->
     </style>
 
+    <style name="splash_screen" parent="Theme.SplashScreen">
+        <item name="postSplashScreenTheme">@style/Theme.Templelinks</item>
+        <item name="android:animationDuration">2000</item>
+        <item name="windowSplashScreenAnimatedIcon">@drawable/splash_logo</item>
+    </style>
+
     <style name="style_toolBar_text">
         <item name="android:gravity">center_vertical</item>
         <item name="android:textSize">19sp</item>
@@ -22,9 +29,6 @@
         <item name="android:layout_height">match_parent</item>
         <item name="android:layout_width">match_parent</item>
     </style>
-
-
-
 
 
 </resources>
