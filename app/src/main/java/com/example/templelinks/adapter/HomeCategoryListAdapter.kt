@@ -3,22 +3,25 @@ package com.example.templelinks.adapter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.templelinks.data.model.response.Temple
 import com.example.templelinks.data.model.response.TemplesResponse
 import com.example.templelinks.databinding.TempleMainListItemBinding
 
-class TempleMainAdapter(private val homeCategory : List<TemplesResponse>) : RecyclerView.Adapter<TempleMainAdapter.ViewHolder>() {
+class HomeCategoryListAdapter : ListAdapter<TemplesResponse, HomeCategoryListAdapter.HomeCategoryViewHolder>(HomeCategoryDiffCallBack()) {
 
-    class ViewHolder(val binding : TempleMainListItemBinding) : RecyclerView.ViewHolder(binding.root)
+    class HomeCategoryViewHolder(val binding : TempleMainListItemBinding) : RecyclerView.ViewHolder(binding.root)
 
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TempleMainAdapter.ViewHolder {
-       return ViewHolder(TempleMainListItemBinding.inflate(LayoutInflater.from(parent.context),parent,false))
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HomeCategoryListAdapter.HomeCategoryViewHolder {
+       return HomeCategoryViewHolder(TempleMainListItemBinding.inflate(LayoutInflater.from(parent.context),parent,false))
     }
 
-    override fun onBindViewHolder(holder: TempleMainAdapter.ViewHolder, position: Int) {
-        val currentItem = homeCategory[position]
+    override fun onBindViewHolder(holder: HomeCategoryListAdapter.HomeCategoryViewHolder, position: Int) {
+
+        val currentItem = getItem(position)
         holder.binding.tvCategoryName.text = currentItem.locale?.name
 
         if (currentItem.viewType.equals("Large")) {
@@ -39,12 +42,11 @@ class TempleMainAdapter(private val homeCategory : List<TemplesResponse>) : Recy
 
     }
 
-    override fun getItemCount(): Int {
-        return homeCategory.size
-    }
 
     private fun loadChildRecyclerViewLarge(recyclerView : RecyclerView, templeList : List<Temple> ) {
-        recyclerView.adapter = TemplesAdapterLarge(templeList)
+        val homeAdapterLarge = HomeCategoryAdapterLarge()
+        recyclerView.adapter = homeAdapterLarge
+        homeAdapterLarge.submitList(templeList)
     }
 
     private fun loadChildRecyclerViewMedium(recyclerView : RecyclerView, templeList : List<Temple> ) {
@@ -53,6 +55,17 @@ class TempleMainAdapter(private val homeCategory : List<TemplesResponse>) : Recy
 
     private fun loadChildRecyclerViewSmall(recyclerView : RecyclerView, templeList : List<Temple> ) {
         recyclerView.adapter = TemplesAdapterSmall(templeList)
+    }
+
+}
+
+class HomeCategoryDiffCallBack : DiffUtil.ItemCallback<TemplesResponse>() {
+    override fun areItemsTheSame(oldItem: TemplesResponse, newItem: TemplesResponse): Boolean {
+        return oldItem.id == newItem.id
+    }
+
+    override fun areContentsTheSame(oldItem: TemplesResponse, newItem: TemplesResponse): Boolean {
+        return oldItem.id == newItem.id
     }
 
 }

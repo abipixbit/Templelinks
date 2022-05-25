@@ -1,24 +1,16 @@
 package com.example.templelinks.ui.fragment.homefragment
 
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
-import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.recyclerview.widget.RecyclerView
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.denzcoskun.imageslider.constants.ScaleTypes
 import com.denzcoskun.imageslider.models.SlideModel
-import com.example.templelinks.R
-import com.example.templelinks.adapter.GodListAdapter
-import com.example.templelinks.adapter.TempleMainAdapter
-import com.example.templelinks.data.model.response.ApiResponse
+import com.example.templelinks.adapter.DeitiesListAdapter
+import com.example.templelinks.adapter.HomeCategoryListAdapter
 import com.example.templelinks.databinding.FragmentHomeBinding
 import com.example.templelinks.enums.ApiStatus
 import com.example.templelinks.extensions.glide
@@ -28,6 +20,8 @@ class HomeFragment : Fragment() {
     private lateinit var binding : FragmentHomeBinding
     private val viewModel : HomeViewModel by viewModels()
     private val bannerList = ArrayList<SlideModel>()
+    private lateinit var deitiesAdapter : DeitiesListAdapter
+    private lateinit var homeCategoryAdapter : HomeCategoryListAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -36,7 +30,8 @@ class HomeFragment : Fragment() {
         // Inflate the layout for this fragment
         binding = FragmentHomeBinding.inflate(layoutInflater,container,false)
 
-
+        deitiesAdapter = DeitiesListAdapter()
+        homeCategoryAdapter = HomeCategoryListAdapter()
 
         return binding.root
     }
@@ -73,9 +68,9 @@ class HomeFragment : Fragment() {
             when(apiresponse.apiStatus) {
                 ApiStatus.SUCCESS -> {
                     binding.shimmerHomeCategory.visibility = View.INVISIBLE
-
+                    binding.rvHomeCategory.adapter = homeCategoryAdapter
                     apiresponse.data.let {
-                        binding.rvHomeCategory.adapter = TempleMainAdapter(it!!)
+                        homeCategoryAdapter.submitList(it)
                         Log.d("HomeFragHomeCateSuc",it.toString())
                     }
                 }
@@ -128,9 +123,10 @@ class HomeFragment : Fragment() {
 
             when(apiResponse.apiStatus) {
                 ApiStatus.SUCCESS -> {
+                    binding.rvDeities.adapter = deitiesAdapter
                     binding.shimmerDeities.visibility = View.INVISIBLE
                     apiResponse.data.let { deities ->
-                        binding.rvDeities.adapter = GodListAdapter(deities!!)
+                        deitiesAdapter.submitList(deities)
                         Log.d("HomeFragBannerSuc", deities.toString())
                     }
                 }
