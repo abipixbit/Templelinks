@@ -51,20 +51,36 @@
             android:layout_height="@dimen/like_button_background"
             android:layout_marginEnd="@dimen/home_category_temple_name_start"
             app:layout_constraintBottom_toBottomOf="@+id/view2"
+            app:tint="@color/unlike_color"
             app:layout_constraintEnd_toEndOf="@+id/view2"
             app:layout_constraintTop_toBottomOf="@+id/ivTemples"
             app:srcCompat="@drawable/like_button" />
 
-        <ImageView
-            android:id="@+id/ivLikeButton"
+        <!--        <ImageView-->
+        <!--            android:id="@+id/ivLikeButton"-->
+        <!--            android:layout_width="@dimen/like_button_size"-->
+        <!--            android:layout_height="@dimen/like_button_size"-->
+        <!--            app:layout_constraintBottom_toBottomOf="@+id/ivLikeButtonBackground"-->
+        <!--            app:layout_constraintEnd_toEndOf="@+id/ivLikeButtonBackground"-->
+        <!--            app:layout_constraintStart_toStartOf="@+id/ivLikeButtonBackground"-->
+        <!--            app:layout_constraintTop_toTopOf="@+id/ivLikeButtonBackground"-->
+        <!--            app:srcCompat="@drawable/ic_favorite_filled"-->
+        <!--            app:tint="#938E8E" />-->
+
+        <com.like.LikeButton
+            android:id="@+id/likeButton"
             android:layout_width="@dimen/like_button_size"
             android:layout_height="@dimen/like_button_size"
             app:layout_constraintBottom_toBottomOf="@+id/ivLikeButtonBackground"
             app:layout_constraintEnd_toEndOf="@+id/ivLikeButtonBackground"
             app:layout_constraintStart_toStartOf="@+id/ivLikeButtonBackground"
             app:layout_constraintTop_toTopOf="@+id/ivLikeButtonBackground"
-            app:srcCompat="@drawable/ic_favorite_filled"
-            app:tint="#938E8E" />
+            app:liked="false"
+            app:like_drawable="@drawable/ic_like"
+            app:unlike_drawable="@drawable/ic_unlike">
+
+        </com.like.LikeButton>
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -10,4 +10,8 @@
     <color name="app_color">#EA632F</color>
     <color name="shimmer_color">#dddddd</color>
     <color name="grey_color">#656464</color>
+
+    <color name="like_color">#F6C4B0</color>
+    <color name="unlike_color">#DAD7D7</color>
+
 </resources>

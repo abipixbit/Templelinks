@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.denzcoskun.imageslider.constants.ScaleTypes
 import com.denzcoskun.imageslider.models.SlideModel
+import com.example.templelinks.R
 import com.example.templelinks.adapter.DeitiesListAdapter
 import com.example.templelinks.adapter.HomeCategoryListAdapter
 import com.example.templelinks.databinding.FragmentHomeBinding
@@ -29,6 +30,7 @@ class HomeFragment : Fragment() {
     ): View {
         // Inflate the layout for this fragment
         binding = FragmentHomeBinding.inflate(layoutInflater,container,false)
+        binding.toolBarHome.inflateMenu(R.menu.menu_home)
 
         deitiesAdapter = DeitiesListAdapter()
         homeCategoryAdapter = HomeCategoryListAdapter()
