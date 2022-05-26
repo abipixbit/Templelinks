@@ -17,10 +17,4 @@ interface ApiInterface {
     @GET("home-categories")
     suspend fun loadHomeCategory() : DefaultResponse<TemplesResponse>
 
-    @FormUrlEncoded
-    @POST("temples/:id/add-to-favourite")
-    suspend fun addFavourite(
-        @Field("id") id : Int
-    ) : DefaultResponse<String>
-
 }
