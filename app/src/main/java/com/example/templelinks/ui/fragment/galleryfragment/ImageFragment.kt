@@ -7,8 +7,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.templelinks.R
-import com.example.templelinks.adapter.GalleryButtonAdapter
-import com.example.templelinks.adapter.GalleryImageAdapter
+import com.example.templelinks.ui.adapter.GalleryButtonAdapter
+import com.example.templelinks.ui.adapter.GalleryImageAdapter
 import com.example.templelinks.databinding.FragmentImageBinding
 
 class ImageFragment : Fragment() {

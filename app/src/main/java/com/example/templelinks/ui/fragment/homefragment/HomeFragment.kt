@@ -7,12 +7,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.recyclerview.widget.RecyclerView
 import com.denzcoskun.imageslider.constants.ScaleTypes
 import com.denzcoskun.imageslider.models.SlideModel
 import com.example.templelinks.R
-import com.example.templelinks.adapter.DeitiesListAdapter
-import com.example.templelinks.adapter.HomeCategoryListAdapter
+import com.example.templelinks.ui.adapter.DeitiesListAdapter
+import com.example.templelinks.ui.adapter.HomeCategoryListAdapter
 import com.example.templelinks.databinding.FragmentHomeBinding
 import com.example.templelinks.enums.ApiStatus
 import com.example.templelinks.extensions.glide

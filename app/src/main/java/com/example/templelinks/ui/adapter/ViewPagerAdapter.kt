@@ -1,4 +1,4 @@
-package com.example.templelinks.adapter
+package com.example.templelinks.ui.adapter
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager

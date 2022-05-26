@@ -6,7 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.templelinks.R
-import com.example.templelinks.adapter.LiveStreamAdapter
+import com.example.templelinks.ui.adapter.LiveStreamAdapter
 import com.example.templelinks.data.model.LiveListData
 import com.example.templelinks.databinding.FragmentLiveBinding
 

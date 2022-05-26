@@ -1,9 +1,8 @@
-package com.example.templelinks.adapter
+package com.example.templelinks.ui.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.templelinks.R
 import com.example.templelinks.databinding.ButtonListItemBinding
 
 class GalleryButtonAdapter(private val buttonText : List<String>) : RecyclerView.Adapter<GalleryButtonAdapter.ViewHolder>() {

@@ -7,7 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.example.templelinks.R
 import com.example.templelinks.databinding.FragmentGalleryBinding
-import com.example.templelinks.adapter.ViewPagerAdapter
+import com.example.templelinks.ui.adapter.ViewPagerAdapter
 import com.google.android.material.tabs.TabLayoutMediator
 
 class GalleryFragment : Fragment() {

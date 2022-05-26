@@ -1,4 +1,4 @@
-package com.example.templelinks.adapter
+package com.example.templelinks.ui.adapter
 
 import android.view.LayoutInflater
 import android.view.View
