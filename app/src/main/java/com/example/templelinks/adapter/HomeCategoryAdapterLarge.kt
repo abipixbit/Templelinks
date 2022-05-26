@@ -3,6 +3,7 @@ package com.example.templelinks.adapter
 import android.content.res.ColorStateList
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.view.animation.AnimationUtils
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
@@ -13,6 +14,7 @@ import com.example.templelinks.data.model.response.Temple
 import com.example.templelinks.databinding.TempleListItemLargeBinding
 import com.example.templelinks.extensions.glide
 import com.example.templelinks.extensions.snackBarLike
+import com.example.templelinks.extensions.toast
 import com.like.LikeButton
 import com.like.OnLikeListener
 
@@ -28,18 +30,18 @@ class HomeCategoryAdapterLarge : ListAdapter<Temple,HomeCategoryAdapterLarge.Vie
 
     override fun onBindViewHolder(holder: HomeCategoryAdapterLarge.ViewHolder, position: Int) {
 
+        holder.itemView.animation = AnimationUtils.loadAnimation(TempleApplication.appContext,R.anim.anim_recycler_view)
+
+
         val currentItem = getItem(position)
         holder.itemView.glide(currentItem?.imageUrl.toString(),holder.binding.ivTemples)
         holder.binding.tvTempleName.text = currentItem?.locale?.name
 
-
-        holder.itemView.setOnClickListener {
-
-        }
         holder.binding.likeButton.setOnLikeListener(object : OnLikeListener {
             override fun liked(likeButton: LikeButton?) {
                 holder.binding.ivLikeButtonBackground.imageTintList = ColorStateList.valueOf(ContextCompat.getColor(TempleApplication.appContext,R.color.like_color))
                 holder.itemView.snackBarLike("Liked")
+                TempleApplication.appContext.toast(currentItem.id.toString())
             }
 
             override fun unLiked(likeButton: LikeButton?) {
