@@ -17,7 +17,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
-            android:layout_marginStart="@dimen/margin_start"
+            android:layout_marginStart="@dimen/margin_large"
             android:layout_width="55dp"
             android:layout_height="match_parent">
             <ImageView
@@ -28,7 +28,7 @@
         </LinearLayout>
 
         <LinearLayout
-            android:layout_marginStart="@dimen/margin_start"
+            android:layout_marginStart="@dimen/margin_large"
             android:layout_width="125dp"
             android:layout_height="match_parent">
             <ImageView
@@ -49,6 +49,7 @@
 
         <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
+            android:id="@+id/nestedScrollView"
             android:layout_height="0dp"
             android:scrollbars="none">
 
@@ -61,14 +62,17 @@
                     android:id="@+id/rvDeities"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/margin_top"
+                    android:layout_marginTop="@dimen/margin_large"
+                    android:clipToPadding="false"
+                    android:paddingStart="@dimen/margin_normal"
+                    android:paddingEnd="@dimen/margin_normal"
                     android:orientation="horizontal"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="1.0"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    tools:listitem="@layout/gods_list_item" />
+                    tools:listitem="@layout/deities_list_item" />
 
                 <include
                     android:id="@+id/homeBanner"
@@ -76,9 +80,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     app:layout_constraintTop_toBottomOf="@id/rvDeities"
-                    android:layout_marginStart="@dimen/margin_start"
-                    android:layout_marginTop="@dimen/margin_top"
-                    android:layout_marginEnd="@dimen/margin_end"
+                    android:layout_marginStart="@dimen/margin_large"
+                    android:layout_marginTop="@dimen/margin_large"
+                    android:layout_marginEnd="@dimen/margin_large"
                     tools:layout_editor_absoluteX="16dp"
                     tools:layout_editor_absoluteY="190dp">
                 </include>
@@ -88,9 +92,9 @@
                     layout="@layout/krishna_geeth_banner"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/margin_top"
-                    android:layout_marginStart="@dimen/margin_start"
-                    android:layout_marginEnd="@dimen/margin_end"
+                    android:layout_marginTop="@dimen/margin_large"
+                    android:layout_marginStart="@dimen/margin_large"
+                    android:layout_marginEnd="@dimen/margin_large"
                     app:layout_constraintTop_toBottomOf="@+id/homeBanner">
                 </include>
 
@@ -99,7 +103,7 @@
                     android:layout_width="match_parent"
                     android:nestedScrollingEnabled="false"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="4dp"
+                    android:layout_marginTop="@dimen/margin_small"
                     app:layout_constraintTop_toBottomOf="@id/krishnaGeethBanner"
                     android:orientation="vertical"
                     android:scrollbars="none"
@@ -124,15 +128,15 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:orientation="horizontal"
-            android:layout_marginTop="@dimen/margin_top"
+            android:layout_marginTop="@dimen/margin_large"
             android:layout_height="wrap_content">
 
-            <include layout="@layout/gods_list_item_shimmer"/>
-            <include layout="@layout/gods_list_item_shimmer"/>
-            <include layout="@layout/gods_list_item_shimmer"/>
-            <include layout="@layout/gods_list_item_shimmer"/>
-            <include layout="@layout/gods_list_item_shimmer"/>
-            <include layout="@layout/gods_list_item_shimmer"/>
+            <include layout="@layout/deities_list_item_shimmer"/>
+            <include layout="@layout/deities_list_item_shimmer"/>
+            <include layout="@layout/deities_list_item_shimmer"/>
+            <include layout="@layout/deities_list_item_shimmer"/>
+            <include layout="@layout/deities_list_item_shimmer"/>
+            <include layout="@layout/deities_list_item_shimmer"/>
         </LinearLayout>
 
 
@@ -150,9 +154,9 @@
             layout="@layout/banner_slider_shimmer"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/margin_start"
-            android:layout_marginTop="@dimen/margin_top"
-            android:layout_marginEnd="@dimen/margin_end"
+            android:layout_marginStart="@dimen/margin_large"
+            android:layout_marginTop="@dimen/margin_large"
+            android:layout_marginEnd="@dimen/margin_large"
             tools:layout_editor_absoluteX="16dp"
             tools:layout_editor_absoluteY="190dp">
         </include>
@@ -170,9 +174,9 @@
             layout="@layout/krishna_geeth_banner_shimmer"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_top"
-            android:layout_marginStart="@dimen/margin_start"
-            android:layout_marginEnd="@dimen/margin_end"
+            android:layout_marginTop="@dimen/margin_large"
+            android:layout_marginStart="@dimen/margin_large"
+            android:layout_marginEnd="@dimen/margin_large"
             app:layout_constraintTop_toBottomOf="@+id/homeBanner">
         </include>
     </com.facebook.shimmer.ShimmerFrameLayout>

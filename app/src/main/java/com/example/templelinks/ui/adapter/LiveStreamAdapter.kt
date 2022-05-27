@@ -17,14 +17,14 @@ class LiveStreamAdapter(private val liveList : List<LiveListData>, private val v
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): LiveStreamAdapter.ViewHolder {
-        return ViewHolder(LiveListItemBinding.inflate(LayoutInflater.from(parent.context),parent,false))
+        return ViewHolder(LiveListItemBinding.inflate(LayoutInflater.from(parent.context), parent,false))
     }
 
     override fun onBindViewHolder(holder: LiveStreamAdapter.ViewHolder, position: Int) {
         val currentItem = liveList[position]
 
         holder.binding.tvLiveTitle.text = currentItem.title
-        view.glide(currentItem.image,holder.binding.ivLive)
+        view.glide(currentItem.image, holder.binding.ivLive)
 
     }
 

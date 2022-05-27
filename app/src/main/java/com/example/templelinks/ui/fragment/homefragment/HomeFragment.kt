@@ -7,14 +7,22 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.navGraphViewModels
+import androidx.navigation.ui.setupWithNavController
 import com.denzcoskun.imageslider.constants.ScaleTypes
 import com.denzcoskun.imageslider.models.SlideModel
 import com.example.templelinks.R
+import com.example.templelinks.data.repository.FavouriteRepository
 import com.example.templelinks.ui.adapter.DeitiesListAdapter
 import com.example.templelinks.ui.adapter.HomeCategoryListAdapter
 import com.example.templelinks.databinding.FragmentHomeBinding
 import com.example.templelinks.enums.ApiStatus
 import com.example.templelinks.extensions.glide
+import com.example.templelinks.extensions.navigation
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 
 class HomeFragment : Fragment() {
@@ -29,24 +37,26 @@ class HomeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         // Inflate the layout for this fragment
-        binding = FragmentHomeBinding.inflate(layoutInflater,container,false)
+        binding = FragmentHomeBinding.inflate(layoutInflater, container,false)
         binding.toolBarHome.inflateMenu(R.menu.menu_home)
+
+        binding.toolBarHome.setOnMenuItemClickListener {
+            when(it.itemId) {
+                R.id.favourite -> requireView().navigation(R.id.action_homeFragment_to_favouriteFragment)
+            }
+            true
+        }
 
         deitiesAdapter = DeitiesListAdapter()
         homeCategoryAdapter = HomeCategoryListAdapter()
-
         return binding.root
+
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
             displayUI()
 
-        refresh()
-    }
-
-
-    private fun refresh() {
         binding.refreshLayout.setOnRefreshListener {
             displayUI()
             binding.refreshLayout.isRefreshing = false
@@ -58,7 +68,6 @@ class HomeFragment : Fragment() {
         loadDeities()
         loadHomeBanner()
         loadHomeCategory()
-
     }
 
     private fun loadHomeCategory() {
@@ -66,19 +75,18 @@ class HomeFragment : Fragment() {
 
 //            binding.shimmerHomeCategory.isVisible = apiresponse.apiStatus == ApiStatus.LOADING
 
-
             when(apiresponse.apiStatus) {
                 ApiStatus.SUCCESS -> {
                     binding.shimmerHomeCategory.visibility = View.INVISIBLE
                     binding.rvHomeCategory.adapter = homeCategoryAdapter
                     apiresponse.data.let {
                         homeCategoryAdapter.submitList(it)
-                        Log.d("HomeFragHomeCateSuc",it.toString())
+                        Log.d("HomeFragHomeCateSuc", it.toString())
                     }
                 }
 
                 ApiStatus.ERROR -> apiresponse.message.let {
-                    Log.d("HomeFragHomeCateFail",it.toString())
+                    Log.d("HomeFragHomeCateFail", it.toString())
                 }
 
                 ApiStatus.LOADING -> {
@@ -103,7 +111,7 @@ class HomeFragment : Fragment() {
                        for (i in banners)
                            bannerList.add(SlideModel(i.imageUrl.toString()))
                        binding.homeBanner.ivSlider.setImageList(bannerList, ScaleTypes.FIT)
-                       requireView().glide(banners.get(0).imageUrl.toString(),binding.krishnaGeethBanner.krishnaGeethBanner)
+                       requireView().glide(banners.get(0).imageUrl.toString(), binding.krishnaGeethBanner.krishnaGeethBanner)
                    }
                }
                ApiStatus.ERROR -> apiResponse.message.let {
@@ -133,7 +141,7 @@ class HomeFragment : Fragment() {
                     }
                 }
                 ApiStatus.ERROR -> apiResponse.message.let { message->
-                    Log.d("HomeFragBannerFail",message.toString())
+                    Log.d("HomeFragBannerFail", message.toString())
                 }
 
                 ApiStatus.LOADING -> {

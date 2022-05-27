@@ -6,26 +6,26 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.templelinks.data.model.Deities
-import com.example.templelinks.databinding.GodsListItemBinding
+import com.example.templelinks.databinding.DeitiesListItemBinding
 import com.example.templelinks.extensions.glide
 
 class DeitiesListAdapter : ListAdapter<Deities, DeitiesListAdapter.DeitiesViewHolder>(DeitiesDiffCallBack()) {
 
 
 
-    class DeitiesViewHolder(val binding : GodsListItemBinding) : RecyclerView.ViewHolder(binding.root) {
+    class DeitiesViewHolder(val binding : DeitiesListItemBinding) : RecyclerView.ViewHolder(binding.root) {
 
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DeitiesViewHolder {
 
-        return DeitiesViewHolder(GodsListItemBinding.inflate(LayoutInflater.from(parent.context),parent,false))
+        return DeitiesViewHolder(DeitiesListItemBinding.inflate(LayoutInflater.from(parent.context), parent,false))
     }
 
     override fun onBindViewHolder(holder: DeitiesViewHolder, position: Int) {
 
         val currentItem = getItem(position)
-        holder.itemView.glide(currentItem.imageUrl.toString(),holder.binding.ivGodsListItem)
+        holder.itemView.glide(currentItem.imageUrl.toString(), holder.binding.ivGodsListItem)
 
     }
 

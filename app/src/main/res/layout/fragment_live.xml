@@ -16,10 +16,11 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/toolBarLive"
+        android:clipToPadding="false"
+        android:padding="@dimen/margin_normal"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         tools:layout_editor_absoluteX="1dp"
         tools:layout_editor_absoluteY="56dp"
         tools:listitem="@layout/live_list_item" />
-
 
 </RelativeLayout>

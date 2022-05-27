@@ -20,8 +20,11 @@
         <entry key="app/src/main/res/layout/banner_slider.xml" value="0.5" />
         <entry key="app/src/main/res/layout/banner_slider_shimmer.xml" value="0.35625" />
         <entry key="app/src/main/res/layout/button_list_item.xml" value="0.5" />
+        <entry key="app/src/main/res/layout/deities_image_list_item.xml" value="0.35625" />
+        <entry key="app/src/main/res/layout/deities_list_item.xml" value="0.35625" />
         <entry key="app/src/main/res/layout/fragment_account.xml" value="0.35625" />
         <entry key="app/src/main/res/layout/fragment_audio.xml" value="0.35625" />
+        <entry key="app/src/main/res/layout/fragment_favourite.xml" value="0.35625" />
         <entry key="app/src/main/res/layout/fragment_gallery.xml" value="0.35625" />
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_image.xml" value="0.30337078651685395" />

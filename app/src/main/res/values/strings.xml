@@ -12,6 +12,7 @@
     <string name="live_stream">Live Stream</string>
     <string name="my_account">My Account</string>
     <string name="see_more">See More</string>
+    <string name="nothing_in_favourite">Nothing in Favourite</string>
 
     <string-array name="gods_photo">
         <item>"https://www.hindisoch.com/wp-content/uploads/2015/03/Lord-Ganesha-Wallpaper.jpg"</item>

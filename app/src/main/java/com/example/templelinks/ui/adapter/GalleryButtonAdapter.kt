@@ -11,7 +11,7 @@ class GalleryButtonAdapter(private val buttonText : List<String>) : RecyclerView
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): GalleryButtonAdapter.ViewHolder {
-        return ViewHolder(ButtonListItemBinding.inflate(LayoutInflater.from(parent.context),parent,false))
+        return ViewHolder(ButtonListItemBinding.inflate(LayoutInflater.from(parent.context), parent,false))
     }
 
     override fun onBindViewHolder(holder: GalleryButtonAdapter.ViewHolder, position: Int) {

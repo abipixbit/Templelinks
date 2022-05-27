@@ -9,7 +9,11 @@
         android:id="@+id/homeFragment"
         android:name="com.example.templelinks.ui.fragment.homefragment.HomeFragment"
         android:label="fragment_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_homeFragment_to_favouriteFragment"
+            app:destination="@id/favouriteFragment" />
+    </fragment>
     <fragment
         android:id="@+id/liveFragment"
         android:name="com.example.templelinks.ui.fragment.livefragment.LiveFragment"
@@ -25,4 +29,15 @@
         android:name="com.example.templelinks.ui.fragment.galleryfragment.GalleryFragment"
         android:label="fragment_gallery"
         tools:layout="@layout/fragment_gallery" />
+    <fragment
+        android:id="@+id/favouriteFragment"
+        android:name="com.example.templelinks.ui.fragment.favouritefragment.FavouriteFragment"
+        android:label="fragment_favourite"
+        tools:layout="@layout/fragment_favourite" >
+        <action
+            android:id="@+id/action_favouriteFragment_to_homeFragment"
+            app:destination="@id/homeFragment"
+            app:popUpTo="@id/homeFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
 </navigation>

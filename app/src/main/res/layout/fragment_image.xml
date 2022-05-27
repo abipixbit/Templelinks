@@ -25,7 +25,7 @@
         android:layout_height="match_parent"
         android:layout_below="@id/rvButton"
         android:padding="10dp"
-        tools:listitem="@layout/god_image_list_item">
+        tools:listitem="@layout/deities_image_list_item">
     </androidx.recyclerview.widget.RecyclerView>
 
 </RelativeLayout>

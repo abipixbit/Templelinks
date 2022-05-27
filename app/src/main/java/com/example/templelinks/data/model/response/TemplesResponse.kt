@@ -39,6 +39,9 @@ import com.google.gson.annotations.SerializedName
             @SerializedName("description")
             val description: String?,
 
+            @SerializedName("is_favourite")
+            val isFavourite : Boolean,
+
             @SerializedName("devaswom")
             val devaswom: String?,
 

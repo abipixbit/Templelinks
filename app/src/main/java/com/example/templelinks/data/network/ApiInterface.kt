@@ -3,7 +3,9 @@ package com.example.templelinks.data.network
 import com.example.templelinks.data.model.Banners
 import com.example.templelinks.data.model.Deities
 import com.example.templelinks.data.model.response.DefaultResponse
+import com.example.templelinks.data.model.response.Temple
 import com.example.templelinks.data.model.response.TemplesResponse
+import retrofit2.Response
 import retrofit2.http.*
 
 interface ApiInterface {
@@ -17,4 +19,11 @@ interface ApiInterface {
     @GET("home-categories")
     suspend fun loadHomeCategory() : DefaultResponse<TemplesResponse>
 
+    @GET("favourites-temples")
+    suspend fun loadFavourite() : DefaultResponse<Temple>
+
+    @POST("temples/{id}/add-to-favourite")
+    suspend fun setFavourite(
+        @Path("id") id : Int
+    ) : Response<String>
 }
