@@ -40,7 +40,7 @@ import com.google.gson.annotations.SerializedName
             val description: String?,
 
             @SerializedName("is_favourite")
-            val isFavourite : Boolean,
+            var isFavourite : Boolean,
 
             @SerializedName("devaswom")
             val devaswom: String?,

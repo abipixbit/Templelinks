@@ -16,7 +16,6 @@ import com.example.templelinks.databinding.TempleListItemLargeBinding
 import com.example.templelinks.extensions.glide
 
 
-
 class HomeCategoryAdapterLarge(val itemClick : (Int?) -> Unit ) : ListAdapter<Temple, HomeCategoryAdapterLarge.ViewHolder>(HomeCategoryLargeDiffUtil()) {
 
     class ViewHolder(val binding : TempleListItemLargeBinding) : RecyclerView.ViewHolder(binding.root)
@@ -35,6 +34,11 @@ class HomeCategoryAdapterLarge(val itemClick : (Int?) -> Unit ) : ListAdapter<Te
         if (currentItem.isFavourite) {
             holder.binding.ivLikeButton.imageTintList = ColorStateList.valueOf(ContextCompat.getColor(TempleApplication.appContext,R.color.app_color))
             holder.binding.ivLikeButtonBackground.imageTintList = ColorStateList.valueOf(ContextCompat.getColor(TempleApplication.appContext,R.color.like_color))
+        }
+
+        else {
+            holder.binding.ivLikeButton.imageTintList = ColorStateList.valueOf(ContextCompat.getColor(TempleApplication.appContext,R.color.grey_color))
+            holder.binding.ivLikeButtonBackground.imageTintList = ColorStateList.valueOf(ContextCompat.getColor(TempleApplication.appContext,R.color.unlike_color))
         }
 
 

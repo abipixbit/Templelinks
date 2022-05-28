@@ -10,6 +10,7 @@ import com.example.templelinks.data.model.response.ApiResponse
 import com.example.templelinks.data.model.response.TemplesResponse
 import com.example.templelinks.data.repository.BannerRepository
 import com.example.templelinks.data.repository.DeitiesRepository
+import com.example.templelinks.data.repository.FavouriteRepository
 import com.example.templelinks.data.repository.HomeCategoryRepository
 import com.example.templelinks.enums.ApiStatus
 import kotlinx.coroutines.launch
@@ -53,6 +54,12 @@ class HomeViewModel : ViewModel() {
         viewModelScope.launch {
             _banners.postValue(ApiResponse(ApiStatus.LOADING,null,null))
             _banners.value = BannerRepository().loadBanners()
+        }
+    }
+
+    fun setFavourite (id : Int?) {
+        viewModelScope.launch {
+            FavouriteRepository().setFavourite(id)
         }
     }
 

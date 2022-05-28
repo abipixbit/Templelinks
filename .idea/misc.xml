@@ -3,53 +3,39 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="app/src/main/res/drawable/bottom_navigation_selector.xml" value="0.3565" />
+        <entry key="..\:/Android Projects/Templelinks/app/src/main/res/layout/fragment_home.xml" value="0.3146319569120287" />
+        <entry key="..\:/Android Projects/Templelinks/app/src/main/res/layout/temple_list_item.xml" value="0.3651041666666667" />
+        <entry key="..\:/Android Projects/Templelinks/app/src/main/res/layout/temple_main_list_item.xml" value="0.3651041666666667" />
         <entry key="app/src/main/res/drawable/button.xml" value="0.3185" />
         <entry key="app/src/main/res/drawable/button_selected.xml" value="0.3575" />
         <entry key="app/src/main/res/drawable/button_selector.xml" value="0.3565" />
         <entry key="app/src/main/res/drawable/button_unselected.xml" value="0.3565" />
         <entry key="app/src/main/res/drawable/ic_arrow_right.xml" value="0.3185" />
         <entry key="app/src/main/res/drawable/ic_baseline_favorite_border_24.xml" value="0.3495" />
-        <entry key="app/src/main/res/drawable/ic_favorite.xml" value="0.3575" />
-        <entry key="app/src/main/res/drawable/ic_like.xml" value="0.3575" />
-        <entry key="app/src/main/res/drawable/ic_unlike.xml" value="0.3575" />
         <entry key="app/src/main/res/drawable/like_button.xml" value="0.3565" />
-        <entry key="app/src/main/res/drawable/logo_rotate.xml" value="0.3355" />
         <entry key="app/src/main/res/layout-v23/button_list_item.xml" value="0.35625" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.33" />
-        <entry key="app/src/main/res/layout/banner_slider.xml" value="0.5" />
-        <entry key="app/src/main/res/layout/banner_slider_shimmer.xml" value="0.35625" />
+        <entry key="app/src/main/res/layout/banner_slider.xml" value="0.35520833333333335" />
         <entry key="app/src/main/res/layout/button_list_item.xml" value="0.5" />
-        <entry key="app/src/main/res/layout/deities_image_list_item.xml" value="0.35625" />
-        <entry key="app/src/main/res/layout/deities_list_item.xml" value="0.35625" />
         <entry key="app/src/main/res/layout/fragment_account.xml" value="0.35625" />
         <entry key="app/src/main/res/layout/fragment_audio.xml" value="0.35625" />
-        <entry key="app/src/main/res/layout/fragment_favourite.xml" value="0.35625" />
         <entry key="app/src/main/res/layout/fragment_gallery.xml" value="0.35625" />
-        <entry key="app/src/main/res/layout/fragment_home.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/fragment_home.xml" value="0.3037300177619893" />
         <entry key="app/src/main/res/layout/fragment_image.xml" value="0.30337078651685395" />
         <entry key="app/src/main/res/layout/fragment_live.xml" value="0.35625" />
         <entry key="app/src/main/res/layout/god_image_list_item.xml" value="0.35520833333333335" />
         <entry key="app/src/main/res/layout/gods_list_item.xml" value="0.67" />
-        <entry key="app/src/main/res/layout/gods_list_item_shimmer.xml" value="0.67" />
-        <entry key="app/src/main/res/layout/home_banner_slider.xml" value="0.35625" />
-        <entry key="app/src/main/res/layout/krishna_geeth_banner.xml" value="0.33" />
-        <entry key="app/src/main/res/layout/krishna_geeth_banner_shimmer.xml" value="0.35625" />
         <entry key="app/src/main/res/layout/live_list_item.xml" value="0.33" />
         <entry key="app/src/main/res/layout/temple_list_item.xml" value="0.33" />
-        <entry key="app/src/main/res/layout/temple_list_item_large.xml" value="0.33" />
-        <entry key="app/src/main/res/layout/temple_list_item_large_shimmer.xml" value="0.5" />
-        <entry key="app/src/main/res/layout/temple_list_item_medium.xml" value="0.67" />
-        <entry key="app/src/main/res/layout/temple_list_item_small.xml" value="0.67" />
-        <entry key="app/src/main/res/layout/temple_main_list_item.xml" value="0.5" />
-        <entry key="app/src/main/res/layout/temple_main_list_item_shimmer.xml" value="0.5" />
+        <entry key="app/src/main/res/layout/temple_list_item_small.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/temple_main_list_item.xml" value="0.33" />
         <entry key="app/src/main/res/layout/tool_bar.xml" value="0.25" />
         <entry key="app/src/main/res/menu/menu_bottom.xml" value="0.35520833333333335" />
         <entry key="app/src/main/res/menu/menu_home.xml" value="0.42135416666666664" />
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_16" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">

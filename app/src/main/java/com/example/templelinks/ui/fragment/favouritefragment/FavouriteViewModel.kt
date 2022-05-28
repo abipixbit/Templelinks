@@ -31,11 +31,7 @@ class FavouriteViewModel : ViewModel() {
         }
     }
 
-    fun setFavourite (id : Int?) {
-        viewModelScope.launch {
-            repository.setFavourite(id)
-        }
-    }
+
 
     override fun onCleared() {
         super.onCleared()

@@ -48,7 +48,9 @@ class HomeFragment : Fragment() {
         }
 
         deitiesAdapter = DeitiesListAdapter()
-        homeCategoryAdapter = HomeCategoryListAdapter()
+        homeCategoryAdapter = HomeCategoryListAdapter{
+            viewModel.setFavourite(it)
+        }
         return binding.root
 
     }

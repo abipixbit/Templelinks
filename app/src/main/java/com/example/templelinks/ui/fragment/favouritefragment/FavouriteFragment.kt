@@ -53,7 +53,7 @@ class FavouriteFragment : Fragment() {
                 ApiStatus.SUCCESS -> {
                     if (apiResponse.data?.size == 0) {
                         binding.tvFav.visibility = View.VISIBLE
-                        binding.rvFavourite.adapter = favourite
+                        favourite.submitList(emptyList())
                     }
                     else {
                         binding.rvFavourite.adapter = favourite
