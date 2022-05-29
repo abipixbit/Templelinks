@@ -25,5 +25,10 @@ interface ApiInterface {
     @POST("temples/{id}/add-to-favourite")
     suspend fun setFavourite(
         @Path("id") id : Int
-    ) : Response<String>
+    ) : Response<DefaultResponse<String>>
+
+    @DELETE("temples/{id}/remove-from-favourite")
+    suspend fun deleteFavourite(
+        @Path("id") id : Int
+    ) : Response<DefaultResponse<String>>
 }

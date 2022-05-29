@@ -18,6 +18,9 @@ import kotlinx.coroutines.launch
 class HomeViewModel : ViewModel() {
 
 
+    private val favouriteRepository = FavouriteRepository()
+
+
     private val _deities = MutableLiveData<ApiResponse<List<Deities>?>>()
     val deities : LiveData<ApiResponse<List<Deities>?>>
     get() = _deities
@@ -29,6 +32,10 @@ class HomeViewModel : ViewModel() {
     private val _homeCategory = MutableLiveData<ApiResponse<List<TemplesResponse>?>>()
     val homeCategory : LiveData<ApiResponse<List<TemplesResponse>?>>
     get() = _homeCategory
+
+    private val _favourite = MutableLiveData<String>()
+    val favourite : LiveData<String>
+        get() = _favourite
 
     init {
         loadDeities()
@@ -59,7 +66,13 @@ class HomeViewModel : ViewModel() {
 
     fun setFavourite (id : Int?) {
         viewModelScope.launch {
-            FavouriteRepository().setFavourite(id)
+            _favourite.value = favouriteRepository.setFavourite(id)
+        }
+    }
+
+    fun deleteFavourite( id : Int ?) {
+        viewModelScope.launch {
+          _favourite.value =  favouriteRepository.deleteFavourite(id)
         }
     }
 

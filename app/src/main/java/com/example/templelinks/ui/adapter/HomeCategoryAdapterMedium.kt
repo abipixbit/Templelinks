@@ -14,7 +14,7 @@ import com.example.templelinks.data.model.response.Temple
 import com.example.templelinks.databinding.TempleListItemMediumBinding
 import com.example.templelinks.extensions.glide
 
-class HomeCategoryAdapterMedium(val itemClick : (Int?) -> Unit) : ListAdapter<Temple,HomeCategoryAdapterMedium.ViewHolder>(HomeCategoryMediumDiffUtilCall()) {
+class HomeCategoryAdapterMedium(val itemClick : (Int?, Int, Boolean) -> Unit) : ListAdapter<Temple,HomeCategoryAdapterMedium.ViewHolder>(HomeCategoryMediumDiffUtilCall()) {
 
     class ViewHolder(val binding : TempleListItemMediumBinding) : RecyclerView.ViewHolder(binding.root)
 
@@ -30,7 +30,7 @@ class HomeCategoryAdapterMedium(val itemClick : (Int?) -> Unit) : ListAdapter<Te
         val currentItem = getItem(position)
 
         holder.binding.ivLikeButton.setOnClickListener {
-            itemClick(currentItem.id)
+            itemClick(currentItem.id, position, currentItem.isFavourite)
         }
 
         if (currentItem.isFavourite) {

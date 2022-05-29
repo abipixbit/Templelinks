@@ -1,34 +1,39 @@
 package com.example.templelinks.ui.fragment.homefragment
 
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.util.Log
 import android.view.LayoutInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.size
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.navigation.fragment.NavHostFragment
-import androidx.navigation.navGraphViewModels
-import androidx.navigation.ui.setupWithNavController
-import com.denzcoskun.imageslider.constants.ScaleTypes
-import com.denzcoskun.imageslider.models.SlideModel
 import com.example.templelinks.R
-import com.example.templelinks.data.repository.FavouriteRepository
-import com.example.templelinks.ui.adapter.DeitiesListAdapter
-import com.example.templelinks.ui.adapter.HomeCategoryListAdapter
+import com.example.templelinks.data.model.Banners
 import com.example.templelinks.databinding.FragmentHomeBinding
 import com.example.templelinks.enums.ApiStatus
 import com.example.templelinks.extensions.glide
 import com.example.templelinks.extensions.navigation
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
+import com.example.templelinks.extensions.snackBarLike
+import com.example.templelinks.ui.adapter.DeitiesListAdapter
+import com.example.templelinks.ui.adapter.HomeBannerAdapter
+import com.example.templelinks.ui.adapter.HomeCategoryListAdapter
+import okhttp3.internal.notify
+import okhttp3.internal.notifyAll
+import java.nio.file.Files.size
+import java.util.*
+import kotlin.collections.ArrayList
 
 
 class HomeFragment : Fragment() {
     private lateinit var binding : FragmentHomeBinding
     private val viewModel : HomeViewModel by viewModels()
-    private val bannerList = ArrayList<SlideModel>()
+
+    private val bannerList = ArrayList<Banners>()
+
     private lateinit var deitiesAdapter : DeitiesListAdapter
     private lateinit var homeCategoryAdapter : HomeCategoryListAdapter
 
@@ -48,12 +53,48 @@ class HomeFragment : Fragment() {
         }
 
         deitiesAdapter = DeitiesListAdapter()
-        homeCategoryAdapter = HomeCategoryListAdapter{
-            viewModel.setFavourite(it)
+
+
+
+
+        homeCategoryAdapter = HomeCategoryListAdapter { templeId, position, isFavourite ->
+
+            if (isFavourite) {
+                viewModel.deleteFavourite(templeId)
+            } else {
+                viewModel.setFavourite(templeId)
+            }
         }
+
+            viewModel.favourite.observe(viewLifecycleOwner) { message ->
+                requireView().snackBarLike(message)
+            }
+
+
+
+
+
+
+
+        val handler = Handler(Looper.getMainLooper())
+        val timer = Timer()
+        val runnable = Runnable {
+
+            var currentPage = binding.homeBanner.viewPagerHomeBanner.currentItem
+            val size = binding.homeBanner.viewPagerHomeBanner
+            if (currentPage == 6) { currentPage = -1 }
+            binding.homeBanner.viewPagerHomeBanner.setCurrentItem(1+currentPage, true)
+        }
+        timer.schedule(object : TimerTask(){
+            override fun run() {
+                handler.post(runnable)
+            }
+        },2000,3000)
+
         return binding.root
 
     }
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -63,6 +104,7 @@ class HomeFragment : Fragment() {
             displayUI()
             binding.refreshLayout.isRefreshing = false
         }
+
 
     }
 
@@ -103,16 +145,12 @@ class HomeFragment : Fragment() {
 
            when(apiResponse.apiStatus) {
                ApiStatus.SUCCESS -> {
-
-                   binding.shimmerHomeBanner.visibility = View.INVISIBLE
                    binding.homeBanner.cardViewHomeBanner.visibility = View.VISIBLE
+                   binding.shimmerHomeBanner.visibility = View.INVISIBLE
                    binding.krishnaGeethBanner.cardViewKrishnaGeethBanner.visibility = View.VISIBLE
 
                    apiResponse.data!!.let { banners ->
-                       bannerList.clear()
-                       for (i in banners)
-                           bannerList.add(SlideModel(i.imageUrl.toString()))
-                       binding.homeBanner.ivSlider.setImageList(bannerList, ScaleTypes.FIT)
+                       binding.homeBanner.viewPagerHomeBanner.adapter = HomeBannerAdapter(banners)
                        requireView().glide(banners.get(0).imageUrl.toString(), binding.krishnaGeethBanner.krishnaGeethBanner)
                    }
                }
@@ -122,8 +160,8 @@ class HomeFragment : Fragment() {
 
                ApiStatus.LOADING -> {
                    binding.shimmerHomeBanner.visibility = View.VISIBLE
-                   binding.homeBanner.cardViewHomeBanner.visibility = View.INVISIBLE
                    binding.krishnaGeethBanner.cardViewKrishnaGeethBanner.visibility = View.INVISIBLE
+                   binding.homeBanner.cardViewHomeBanner.visibility = View.INVISIBLE
                }
            }
        }

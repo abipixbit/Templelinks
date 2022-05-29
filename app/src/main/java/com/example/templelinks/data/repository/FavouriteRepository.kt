@@ -11,14 +11,23 @@ class FavouriteRepository {
     private val apiInterface = RetrofitService.retrofitService()
     private lateinit var favourite : ApiResponse<List<Temple>?>
 
+    private var message = ""
 
-    suspend fun setFavourite(id : Int?) {
+
+    suspend fun setFavourite(id : Int?) : String {
         try {
-          apiInterface.setFavourite(id!!)
+            if (id != null) {
+               val response =  apiInterface.setFavourite(id)
+                Log.d("FavMessage", response.raw().toString())
+                message = response.body()?.message.toString()
+            }
         }
         catch (e : Exception) {
+            message = e.message.toString()
             Log.d("FavException", e.message.toString())
         }
+
+        return message
     }
 
     suspend fun loadFavourite() : ApiResponse<List<Temple>?> {
@@ -30,9 +39,23 @@ class FavouriteRepository {
             favourite = ApiResponse.success(response.data)
             }
         catch (e : Exception) {
-            favourite = ApiResponse.error(data = null,e.message.toString())
+            favourite = ApiResponse.error(data = null, e.message.toString())
         }
         return favourite
+    }
+
+    suspend fun deleteFavourite(id : Int ?) : String {
+        try {
+            if (id != null) {
+               val response =  apiInterface.deleteFavourite(id)
+                message = response.body()?.message.toString()
+
+            }
+        } catch (e : Exception) {
+            Log.d("FavDeleteExc", e.message.toString())
+        }
+
+        return message
     }
 
 

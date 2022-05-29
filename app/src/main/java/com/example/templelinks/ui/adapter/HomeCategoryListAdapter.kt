@@ -19,7 +19,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class HomeCategoryListAdapter(val itemClick : (Int?) -> Unit ) : ListAdapter<TemplesResponse, HomeCategoryListAdapter.HomeCategoryViewHolder>(HomeCategoryDiffCallBack()) {
+class HomeCategoryListAdapter(val itemClick : (Int?, Int, Boolean) -> Unit ) : ListAdapter<TemplesResponse, HomeCategoryListAdapter.HomeCategoryViewHolder>(HomeCategoryDiffCallBack()) {
 
     class HomeCategoryViewHolder(val binding : TempleMainListItemBinding) : RecyclerView.ViewHolder(binding.root)
 
@@ -62,8 +62,8 @@ class HomeCategoryListAdapter(val itemClick : (Int?) -> Unit ) : ListAdapter<Tem
     }
 
     private fun loadHomeCategoryLarge(recyclerView : RecyclerView, templeList : List<Temple>?) {
-        val homeAdapterLarge = HomeCategoryAdapterLarge { id ->
-            itemClick(id)
+        val homeAdapterLarge = HomeCategoryAdapterLarge { id, position, isFavourite ->
+            itemClick(id, position, isFavourite)
         }
 
         recyclerView.adapter = homeAdapterLarge
@@ -71,8 +71,8 @@ class HomeCategoryListAdapter(val itemClick : (Int?) -> Unit ) : ListAdapter<Tem
     }
 
     private fun loadHomeCategoryMedium(recyclerView : RecyclerView, templeList : List<Temple>?) {
-        val homeAdapterMedium = HomeCategoryAdapterMedium {
-            itemClick(it)
+        val homeAdapterMedium = HomeCategoryAdapterMedium { it, position, isFavourite ->
+            itemClick(it,position, isFavourite)
         }
         recyclerView.adapter = homeAdapterMedium
         homeAdapterMedium.submitList(templeList)
