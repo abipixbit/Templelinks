@@ -9,15 +9,18 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.example.templelinks.EventBuss
 import com.example.templelinks.R
 import com.example.templelinks.TempleApplication
 import com.example.templelinks.data.model.response.Temple
 import com.example.templelinks.databinding.TempleListItemLargeBinding
 import com.example.templelinks.extensions.glide
+import okhttp3.internal.notify
 import okhttp3.internal.notifyAll
+import org.greenrobot.eventbus.Subscribe
 
 
-class HomeCategoryAdapterLarge(val itemClick : (Int?, Int, Boolean) -> Unit ) : ListAdapter<Temple, HomeCategoryAdapterLarge.ViewHolder>(HomeCategoryLargeDiffUtil()) {
+class HomeCategoryAdapterLarge(val itemClick : (Int?, Int, Boolean, List<Temple>) -> Unit ) : ListAdapter<Temple, HomeCategoryAdapterLarge.ViewHolder>(HomeCategoryLargeDiffUtil()) {
 
     class ViewHolder(val binding : TempleListItemLargeBinding) : RecyclerView.ViewHolder(binding.root)
 
@@ -26,7 +29,7 @@ class HomeCategoryAdapterLarge(val itemClick : (Int?, Int, Boolean) -> Unit ) : 
     }
     override fun onBindViewHolder(holder: HomeCategoryAdapterLarge.ViewHolder, position: Int) {
 
-        holder.itemView.animation = AnimationUtils.loadAnimation(TempleApplication.appContext, R.anim.anim_recycler_view)
+//        holder.itemView.animation = AnimationUtils.loadAnimation(TempleApplication.appContext, R.anim.anim_recycler_view)
         val currentItem = getItem(position)
         holder.itemView.glide(currentItem?.imageUrl.toString(), holder.binding.ivTemples)
         holder.binding.tvTempleName.text = currentItem?.locale?.name
@@ -37,14 +40,20 @@ class HomeCategoryAdapterLarge(val itemClick : (Int?, Int, Boolean) -> Unit ) : 
             holder.binding.ivLikeButtonBackground.imageTintList = ColorStateList.valueOf(ContextCompat.getColor(TempleApplication.appContext,R.color.like_color))
         }
 
+
         else {
             holder.binding.ivLikeButton.imageTintList = ColorStateList.valueOf(ContextCompat.getColor(TempleApplication.appContext,R.color.grey_color))
             holder.binding.ivLikeButtonBackground.imageTintList = ColorStateList.valueOf(ContextCompat.getColor(TempleApplication.appContext,R.color.unlike_color))
         }
 
-        holder.binding.ivLikeButton.setOnClickListener {
-            itemClick(currentItem.id, position, currentItem.isFavourite)
+
+        holder.binding.ivLikeButtonBackground.setOnClickListener {
+            itemClick(currentItem.id, position, currentItem.isFavourite, listOf(currentItem))
+            notifyItemChanged(position)
         }
+
+
+
 
 
     }

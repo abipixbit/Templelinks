@@ -5,12 +5,11 @@ import android.os.Handler
 import android.os.Looper
 import android.util.Log
 import android.view.LayoutInflater
-import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.view.size
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import com.example.templelinks.EventBuss
 import com.example.templelinks.R
 import com.example.templelinks.data.model.Banners
 import com.example.templelinks.databinding.FragmentHomeBinding
@@ -21,9 +20,8 @@ import com.example.templelinks.extensions.snackBarLike
 import com.example.templelinks.ui.adapter.DeitiesListAdapter
 import com.example.templelinks.ui.adapter.HomeBannerAdapter
 import com.example.templelinks.ui.adapter.HomeCategoryListAdapter
-import okhttp3.internal.notify
-import okhttp3.internal.notifyAll
-import java.nio.file.Files.size
+import org.greenrobot.eventbus.EventBus
+import org.greenrobot.eventbus.Subscribe
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -45,6 +43,7 @@ class HomeFragment : Fragment() {
         binding = FragmentHomeBinding.inflate(layoutInflater, container,false)
         binding.toolBarHome.inflateMenu(R.menu.menu_home)
 
+
         binding.toolBarHome.setOnMenuItemClickListener {
             when(it.itemId) {
                 R.id.favourite -> requireView().navigation(R.id.action_homeFragment_to_favouriteFragment)
@@ -52,28 +51,31 @@ class HomeFragment : Fragment() {
             true
         }
 
+
         deitiesAdapter = DeitiesListAdapter()
 
+        val eventBus = EventBuss()
 
-
-
-        homeCategoryAdapter = HomeCategoryListAdapter { templeId, position, isFavourite ->
+        homeCategoryAdapter = HomeCategoryListAdapter {templeId, position, isFavourite, currentTempleList ->
 
             if (isFavourite) {
                 viewModel.deleteFavourite(templeId)
+                eventBus.deleteFav(currentTempleList)
+//                templeList[0].id
+//                templeList[0].isFavourite = false
+
             } else {
                 viewModel.setFavourite(templeId)
+//                templeList[0].isFavourite = true
+                eventBus.setFav(currentTempleList)
             }
+            EventBus.getDefault().post(eventBus)
+
         }
 
             viewModel.favourite.observe(viewLifecycleOwner) { message ->
                 requireView().snackBarLike(message)
             }
-
-
-
-
-
 
 
         val handler = Handler(Looper.getMainLooper())
@@ -95,11 +97,11 @@ class HomeFragment : Fragment() {
 
     }
 
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-            displayUI()
 
+
+        displayUI()
         binding.refreshLayout.setOnRefreshListener {
             displayUI()
             binding.refreshLayout.isRefreshing = false
@@ -189,6 +191,11 @@ class HomeFragment : Fragment() {
                 }
             }
         }
+    }
+
+    override fun onDestroy() {
+        EventBus.getDefault().unregister(this)
+        super.onDestroy()
     }
 
 }

@@ -14,7 +14,7 @@ import com.example.templelinks.data.model.response.Temple
 import com.example.templelinks.databinding.TempleListItemMediumBinding
 import com.example.templelinks.extensions.glide
 
-class HomeCategoryAdapterMedium(val itemClick : (Int?, Int, Boolean) -> Unit) : ListAdapter<Temple,HomeCategoryAdapterMedium.ViewHolder>(HomeCategoryMediumDiffUtilCall()) {
+class HomeCategoryAdapterMedium(val itemClick : (Int?, Int, Boolean, List<Temple>) -> Unit) : ListAdapter<Temple,HomeCategoryAdapterMedium.ViewHolder>(HomeCategoryMediumDiffUtilCall()) {
 
     class ViewHolder(val binding : TempleListItemMediumBinding) : RecyclerView.ViewHolder(binding.root)
 
@@ -25,12 +25,14 @@ class HomeCategoryAdapterMedium(val itemClick : (Int?, Int, Boolean) -> Unit) : 
 
     override fun onBindViewHolder(holder: HomeCategoryAdapterMedium.ViewHolder, position: Int) {
 
-        holder.itemView.animation = AnimationUtils.loadAnimation(TempleApplication.appContext, R.anim.anim_recycler_view)
+        val temple = currentList
+//        holder.itemView.animation = AnimationUtils.loadAnimation(TempleApplication.appContext, R.anim.anim_recycler_view)
 
         val currentItem = getItem(position)
 
-        holder.binding.ivLikeButton.setOnClickListener {
-            itemClick(currentItem.id, position, currentItem.isFavourite)
+        holder.binding.ivLikeButtonBackground.setOnClickListener {
+            itemClick(currentItem.id, position, currentItem.isFavourite, listOf(currentItem))
+            notifyItemChanged(position)
         }
 
         if (currentItem.isFavourite) {
