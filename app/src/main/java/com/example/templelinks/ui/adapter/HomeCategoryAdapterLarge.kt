@@ -3,24 +3,18 @@ package com.example.templelinks.ui.adapter
 import android.content.res.ColorStateList
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.view.animation.AnimationUtils
-import android.widget.AdapterView
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.example.templelinks.EventBuss
 import com.example.templelinks.R
 import com.example.templelinks.TempleApplication
 import com.example.templelinks.data.model.response.Temple
 import com.example.templelinks.databinding.TempleListItemLargeBinding
 import com.example.templelinks.extensions.glide
-import okhttp3.internal.notify
-import okhttp3.internal.notifyAll
-import org.greenrobot.eventbus.Subscribe
 
 
-class HomeCategoryAdapterLarge(val itemClick : (Int?, Int, Boolean, List<Temple>) -> Unit ) : ListAdapter<Temple, HomeCategoryAdapterLarge.ViewHolder>(HomeCategoryLargeDiffUtil()) {
+class HomeCategoryAdapterLarge(val favClick : (List<Temple>) -> Unit, val itemClick : (Temple) -> Unit) : ListAdapter<Temple, HomeCategoryAdapterLarge.ViewHolder>(HomeCategoryLargeDiffUtil()) {
 
     class ViewHolder(val binding : TempleListItemLargeBinding) : RecyclerView.ViewHolder(binding.root)
 
@@ -48,12 +42,13 @@ class HomeCategoryAdapterLarge(val itemClick : (Int?, Int, Boolean, List<Temple>
 
 
         holder.binding.ivLikeButtonBackground.setOnClickListener {
-            itemClick(currentItem.id, position, currentItem.isFavourite, listOf(currentItem))
+            favClick(listOf(currentItem))
             notifyItemChanged(position)
         }
 
-
-
+        holder.itemView.setOnClickListener {
+            itemClick(currentItem)
+        }
 
 
     }

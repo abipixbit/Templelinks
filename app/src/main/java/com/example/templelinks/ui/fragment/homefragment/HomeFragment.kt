@@ -9,7 +9,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import com.example.templelinks.EventBuss
+import androidx.navigation.Navigation
+import androidx.navigation.findNavController
+import com.example.templelinks.FavouriteEvent
 import com.example.templelinks.R
 import com.example.templelinks.data.model.Banners
 import com.example.templelinks.databinding.FragmentHomeBinding
@@ -21,7 +23,6 @@ import com.example.templelinks.ui.adapter.DeitiesListAdapter
 import com.example.templelinks.ui.adapter.HomeBannerAdapter
 import com.example.templelinks.ui.adapter.HomeCategoryListAdapter
 import org.greenrobot.eventbus.EventBus
-import org.greenrobot.eventbus.Subscribe
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -54,24 +55,26 @@ class HomeFragment : Fragment() {
 
         deitiesAdapter = DeitiesListAdapter()
 
-        val eventBus = EventBuss()
+        val eventBus = FavouriteEvent()
 
-        homeCategoryAdapter = HomeCategoryListAdapter {templeId, position, isFavourite, currentTempleList ->
+        homeCategoryAdapter = HomeCategoryListAdapter ({currentTempleList ->
 
-            if (isFavourite) {
-                viewModel.deleteFavourite(templeId)
+            if (currentTempleList[0].isFavourite) {
+                viewModel.deleteFavourite(currentTempleList[0].id)
                 eventBus.deleteFav(currentTempleList)
 //                templeList[0].id
 //                templeList[0].isFavourite = false
 
             } else {
-                viewModel.setFavourite(templeId)
+                viewModel.setFavourite(currentTempleList[0].id)
 //                templeList[0].isFavourite = true
                 eventBus.setFav(currentTempleList)
             }
             EventBus.getDefault().post(eventBus)
 
-        }
+        }, { currentTemple ->
+            Navigation.findNavController(requireView()).navigate(HomeFragmentDirections.actionHomeFragmentToDetailFragment(currentTemple))
+        })
 
             viewModel.favourite.observe(viewLifecycleOwner) { message ->
                 requireView().snackBarLike(message)

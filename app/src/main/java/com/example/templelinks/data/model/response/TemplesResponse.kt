@@ -1,9 +1,11 @@
 package com.example.templelinks.data.model.response
 
 
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import kotlinx.parcelize.Parcelize
 
-    data class TemplesResponse(
+data class TemplesResponse(
 
         @SerializedName("id")
         val id: Int?,
@@ -34,6 +36,7 @@ import com.google.gson.annotations.SerializedName
 
         )
 
+        @Parcelize
         data class Temple(
 
             @SerializedName("description")
@@ -42,19 +45,33 @@ import com.google.gson.annotations.SerializedName
             @SerializedName("is_favourite")
             var isFavourite : Boolean,
 
-            @SerializedName("devaswom")
-            val devaswom: String?,
-
             @SerializedName("id")
             val id: Int?,
 
             @SerializedName("image_url")
             val imageUrl: String?,
 
+            @SerializedName("is_puja_booking")
+            val isPoojaBooking: Boolean?,
+
+            @SerializedName("is_donation")
+            val isDonation: Boolean?,
+
+            @SerializedName("is_virtual_queue")
+            val isVirtualQueue: Boolean?,
+
+            @SerializedName("is_prasada")
+            val isPrasada: Boolean?,
+
             @SerializedName("locale")
             val locale: TempleLocale?,
 
-        )
+            @SerializedName("phone")
+            val phoneNumber : String?
+
+        ) : Parcelable
+
+            @Parcelize
             data class TempleLocale(
                 @SerializedName("address")
                 val address: String?,
@@ -65,15 +82,12 @@ import com.google.gson.annotations.SerializedName
                 @SerializedName("id")
                 val id: Int?,
 
-                @SerializedName("locale_id")
-                val localeId: Int?,
-
                 @SerializedName("name")
                 val name: String?,
 
                 @SerializedName("temple_id")
                 val templeId: Int?,
-            )
+            ) : Parcelable
 
 
 
