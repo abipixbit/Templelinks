@@ -99,7 +99,9 @@ class HomeCategoryListAdapter(val favClick : (List<Temple>) -> Unit, val itemCli
     }
 
     private fun loadHomeCategorySmall(recyclerView: RecyclerView, templeList: List<Temple>?) {
-        val homeAdapterSmall = HomeCategoryAdapterSmall()
+        val homeAdapterSmall = HomeCategoryAdapterSmall{ currentTemple->
+            itemClick(currentTemple)
+        }
         recyclerView.adapter = homeAdapterSmall
         homeAdapterSmall.submitList(templeList)
     }

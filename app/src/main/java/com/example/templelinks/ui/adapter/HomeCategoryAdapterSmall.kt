@@ -13,7 +13,7 @@ import com.example.templelinks.data.model.response.Temple
 import com.example.templelinks.databinding.TempleListItemSmallBinding
 import com.example.templelinks.extensions.glide
 
-class HomeCategoryAdapterSmall : ListAdapter<Temple, HomeCategoryAdapterSmall.ViewHolder>(HomeCategorySmallDiffUtil()) {
+class HomeCategoryAdapterSmall(val itemClick : (Temple) -> Unit) : ListAdapter<Temple, HomeCategoryAdapterSmall.ViewHolder>(HomeCategorySmallDiffUtil()) {
 
     class ViewHolder(val binding : TempleListItemSmallBinding) : RecyclerView.ViewHolder(binding.root)
 
@@ -29,6 +29,11 @@ class HomeCategoryAdapterSmall : ListAdapter<Temple, HomeCategoryAdapterSmall.Vi
 
         holder.itemView.glide(currentItem?.imageUrl.toString(), holder.binding.ivTempleSmall)
         holder.binding.tvTempleSmall.text = currentItem?.locale?.name
+
+        holder.itemView.setOnClickListener {
+            itemClick(currentItem)
+        }
+
     }
 
 
