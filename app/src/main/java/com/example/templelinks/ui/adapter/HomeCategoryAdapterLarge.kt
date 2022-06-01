@@ -36,7 +36,7 @@ class HomeCategoryAdapterLarge(val favClick : (List<Temple>) -> Unit, val itemCl
 
 
         else {
-            holder.binding.ivLikeButton.imageTintList = ColorStateList.valueOf(ContextCompat.getColor(TempleApplication.appContext,R.color.grey_color))
+            holder.binding.ivLikeButton.imageTintList = ColorStateList.valueOf(ContextCompat.getColor(TempleApplication.appContext,R.color.unlike_grey_color))
             holder.binding.ivLikeButtonBackground.imageTintList = ColorStateList.valueOf(ContextCompat.getColor(TempleApplication.appContext,R.color.unlike_color))
         }
 

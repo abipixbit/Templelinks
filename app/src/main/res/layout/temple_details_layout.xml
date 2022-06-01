@@ -8,12 +8,13 @@
 
     <TextView
         android:id="@+id/tvTemple"
+        android:textSize="@dimen/text_size_large"
+        android:textStyle="bold"
         android:layout_width="match_parent"
         android:layout_marginStart="@dimen/margin_large"
         android:layout_marginEnd="@dimen/margin_large"
         android:layout_marginTop="@dimen/margin_large"
         android:layout_height="wrap_content"
-        android:textStyle="bold"
         android:text="TextView"
         app:layout_constraintTop_toTopOf="parent"
         tools:layout_editor_absoluteX="14dp" />
@@ -21,7 +22,6 @@
     <TextView
         android:id="@+id/tvTempleDescription"
         android:layout_width="match_parent"
-        android:ellipsize="end"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/margin_large"
         android:layout_marginEnd="@dimen/margin_large"
@@ -30,20 +30,53 @@
         app:layout_constraintTop_toBottomOf="@+id/tvTemple"
         tools:layout_editor_absoluteX="16dp" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvTempleDetail"
-        android:layout_width="match_parent"
+    <include
         app:layout_constraintTop_toBottomOf="@id/tvTempleDescription"
-        android:layout_marginStart="@dimen/margin_normal"
-        android:layout_marginEnd="@dimen/margin_normal"
-        android:layout_marginTop="@dimen/margin_large"
+        android:layout_width="match_parent"
+        android:layout_marginStart="@dimen/margin_large"
+        android:layout_marginEnd="@dimen/margin_large"
+        android:visibility="gone"
         android:layout_height="wrap_content"
-        tools:layout_editor_absoluteX="1dp"
-        tools:layout_editor_absoluteY="71dp" />
+        android:id="@+id/layoutPoojaBooking"
+        android:layout_marginTop="@dimen/margin_large"
+        layout="@layout/temple_detail_button_list_item"/>
+
+    <include
+        android:layout_marginTop="@dimen/margin_large"
+        android:id="@+id/layoutPrasadaBooking"
+        android:layout_marginStart="@dimen/margin_large"
+        android:layout_marginEnd="@dimen/margin_large"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/layoutPoojaBooking"
+        layout="@layout/temple_detail_button_list_item"/>
+
+    <include
+        android:id="@+id/layoutDonation"
+        android:layout_marginTop="@dimen/margin_large"
+        android:layout_width="match_parent"
+        android:layout_marginStart="@dimen/margin_large"
+        android:visibility="gone"
+        android:layout_marginEnd="@dimen/margin_large"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/layoutPrasadaBooking"
+        layout="@layout/temple_detail_button_list_item"/>
+
+    <include
+        android:id="@+id/layoutVirtualQueue"
+        android:layout_marginTop="@dimen/margin_large"
+        android:layout_width="match_parent"
+        android:layout_marginStart="@dimen/margin_large"
+        android:visibility="gone"
+        android:layout_marginEnd="@dimen/margin_large"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/layoutDonation"
+        layout="@layout/temple_detail_button_list_item"/>
 
     <include
         android:id="@+id/includeAddress"
-        app:layout_constraintTop_toBottomOf="@id/rvTempleDetail"
+        app:layout_constraintTop_toBottomOf="@id/layoutVirtualQueue"
         android:layout_marginTop="@dimen/margin_large"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
