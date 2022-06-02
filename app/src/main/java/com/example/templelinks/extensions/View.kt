@@ -12,7 +12,7 @@ import com.google.android.material.snackbar.Snackbar
 fun View.glide(url : String, imageView: ImageView) {
     Glide.with(this)
         .load(url)
-        .placeholder(R.drawable.loading_image)
+        .placeholder(R.drawable.loading_image).centerInside()
         .into(imageView)
 }
 

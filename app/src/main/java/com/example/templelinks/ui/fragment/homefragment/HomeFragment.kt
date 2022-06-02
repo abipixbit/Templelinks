@@ -30,6 +30,7 @@ import kotlin.collections.ArrayList
 class HomeFragment : Fragment() {
     private lateinit var binding : FragmentHomeBinding
     private val viewModel : HomeViewModel by viewModels()
+    private var bannerSize = 0
 
     private val bannerList = ArrayList<Banners>()
 
@@ -80,29 +81,11 @@ class HomeFragment : Fragment() {
                 requireView().snackBarLike(message)
             }
 
-
-        val handler = Handler(Looper.getMainLooper())
-        val timer = Timer()
-        val runnable = Runnable {
-
-            var currentPage = binding.homeBanner.viewPagerHomeBanner.currentItem
-            val size = binding.homeBanner.viewPagerHomeBanner
-            if (currentPage == 6) { currentPage = -1 }
-            binding.homeBanner.viewPagerHomeBanner.setCurrentItem(1+currentPage, true)
-        }
-        timer.schedule(object : TimerTask(){
-            override fun run() {
-                handler.post(runnable)
-            }
-        },2000,3000)
-
         return binding.root
-
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
 
         displayUI()
         binding.refreshLayout.setOnRefreshListener {
@@ -110,6 +93,19 @@ class HomeFragment : Fragment() {
             binding.refreshLayout.isRefreshing = false
         }
 
+        val handler = Handler(Looper.getMainLooper())
+        val timer = Timer()
+        val runnable = Runnable {
+
+            var currentPage = binding.homeBanner.viewPagerHomeBanner.currentItem
+            if (currentPage == bannerSize-1) { currentPage = -1 }
+            binding.homeBanner.viewPagerHomeBanner.setCurrentItem(1+currentPage, true)
+        }
+        timer.schedule(object : TimerTask(){
+            override fun run() {
+                handler.post(runnable)
+            }
+        },2000,3000)
 
     }
 
@@ -155,6 +151,8 @@ class HomeFragment : Fragment() {
                    binding.krishnaGeethBanner.cardViewKrishnaGeethBanner.visibility = View.VISIBLE
 
                    apiResponse.data!!.let { banners ->
+                       bannerSize = banners.size
+                       Log.d("bannerSize",banners.size.toString())
                        binding.homeBanner.viewPagerHomeBanner.adapter = HomeBannerAdapter(banners)
                        requireView().glide(banners.get(0).imageUrl.toString(), binding.krishnaGeethBanner.krishnaGeethBanner)
                    }
