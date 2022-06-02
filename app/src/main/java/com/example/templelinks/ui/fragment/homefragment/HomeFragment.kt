@@ -14,6 +14,7 @@ import androidx.navigation.findNavController
 import com.example.templelinks.FavouriteEvent
 import com.example.templelinks.R
 import com.example.templelinks.data.model.Banners
+import com.example.templelinks.data.model.response.Temple
 import com.example.templelinks.databinding.FragmentHomeBinding
 import com.example.templelinks.enums.ApiStatus
 import com.example.templelinks.extensions.glide
@@ -31,9 +32,7 @@ class HomeFragment : Fragment() {
     private lateinit var binding : FragmentHomeBinding
     private val viewModel : HomeViewModel by viewModels()
     private var bannerSize = 0
-
     private val bannerList = ArrayList<Banners>()
-
     private lateinit var deitiesAdapter : DeitiesListAdapter
     private lateinit var homeCategoryAdapter : HomeCategoryListAdapter
 
@@ -54,7 +53,9 @@ class HomeFragment : Fragment() {
         }
 
 
-        deitiesAdapter = DeitiesListAdapter()
+        deitiesAdapter = DeitiesListAdapter { deities ->
+            Navigation.findNavController(requireView()).navigate(HomeFragmentDirections.actionHomeFragmentToDeitiesFragment(deities))
+       }
 
         val eventBus = FavouriteEvent()
 

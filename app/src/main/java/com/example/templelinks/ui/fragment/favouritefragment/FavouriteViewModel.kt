@@ -32,7 +32,6 @@ class FavouriteViewModel : ViewModel() {
     }
 
 
-
     override fun onCleared() {
         super.onCleared()
         Log.d("FavViewModel", "ViewModel Destroyed")

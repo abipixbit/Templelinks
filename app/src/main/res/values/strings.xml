@@ -17,6 +17,7 @@
     <string name="prasad">Prasad</string>
     <string name="donation">Donation</string>
     <string name="virtual_queue">Virtual Queue</string>
+    <string name="no_temple">No Temple Found</string>
 
     <string-array name="gods_photo">
         <item>"https://www.hindisoch.com/wp-content/uploads/2015/03/Lord-Ganesha-Wallpaper.jpg"</item>

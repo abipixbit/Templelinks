@@ -9,7 +9,7 @@ import com.example.templelinks.data.model.response.Temple
 import com.example.templelinks.databinding.LiveListItemBinding
 import com.example.templelinks.extensions.glide
 
-class FavouriteAdapter : ListAdapter<Temple, FavouriteAdapter.FavouriteViewHolder>(FavouriteDiffUtil()) {
+class FavouriteAdapter (val itemClick : (Temple) -> Unit) : ListAdapter<Temple, FavouriteAdapter.FavouriteViewHolder>(FavouriteDiffUtil()) {
 
     class FavouriteViewHolder(val binding : LiveListItemBinding) : RecyclerView.ViewHolder(binding.root)
 
@@ -21,6 +21,12 @@ class FavouriteAdapter : ListAdapter<Temple, FavouriteAdapter.FavouriteViewHolde
         val currentItem = getItem(position)
         holder.binding.tvLiveTitle.text = currentItem.locale?.name
         holder.itemView.glide(currentItem.imageUrl.toString(), holder.binding.ivLive)
+
+        holder.itemView.setOnClickListener {
+            itemClick(currentItem)
+        }
+
+
     }
 }
 

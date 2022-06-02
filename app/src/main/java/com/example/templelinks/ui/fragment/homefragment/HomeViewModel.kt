@@ -7,6 +7,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.templelinks.data.model.Banners
 import com.example.templelinks.data.model.Deities
 import com.example.templelinks.data.model.response.ApiResponse
+import com.example.templelinks.data.model.response.Temple
 import com.example.templelinks.data.model.response.TemplesResponse
 import com.example.templelinks.data.repository.BannerRepository
 import com.example.templelinks.data.repository.DeitiesRepository
@@ -19,6 +20,7 @@ class HomeViewModel : ViewModel() {
 
 
     private val favouriteRepository = FavouriteRepository()
+    private val deitiesRepository = DeitiesRepository()
 
 
     private val _deities = MutableLiveData<ApiResponse<List<Deities>?>>()
@@ -37,6 +39,7 @@ class HomeViewModel : ViewModel() {
     val favourite : LiveData<String>
         get() = _favourite
 
+
     init {
         loadDeities()
         loadHomeBanners()
@@ -53,7 +56,7 @@ class HomeViewModel : ViewModel() {
     private fun loadDeities() {
         viewModelScope.launch {
             _deities.postValue(ApiResponse(ApiStatus.LOADING,null,null))
-            _deities.value = DeitiesRepository().deities()
+            _deities.value = deitiesRepository.deities()
         }
     }
 
@@ -70,7 +73,7 @@ class HomeViewModel : ViewModel() {
         }
     }
 
-    fun deleteFavourite( id : Int ?) {
+    fun deleteFavourite(id : Int?) {
         viewModelScope.launch {
           _favourite.value =  favouriteRepository.deleteFavourite(id)
         }

@@ -7,11 +7,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
+import androidx.navigation.Navigation
 import com.example.templelinks.R
 import com.example.templelinks.databinding.FragmentFavouriteBinding
 import com.example.templelinks.enums.ApiStatus
 import com.example.templelinks.extensions.navigation
 import com.example.templelinks.ui.adapter.FavouriteAdapter
+import com.example.templelinks.ui.fragment.homefragment.HomeFragmentDirections
 
 class FavouriteFragment : Fragment() {
 
@@ -27,7 +29,9 @@ class FavouriteFragment : Fragment() {
         binding = FragmentFavouriteBinding.inflate(layoutInflater, container,false)
         binding.toolBarFavourite.tvToolBar.text = getString(R.string.favourite)
         binding.toolBarFavourite.toolBar.setNavigationIcon(R.drawable.ic_back)
-        favourite = FavouriteAdapter()
+        favourite = FavouriteAdapter { currentTemple ->
+            Navigation.findNavController(requireView()).navigate(FavouriteFragmentDirections.actionFavouriteFragmentToDetailFragment(currentTemple))
+        }
         return binding.root
     }
 

@@ -1,5 +1,6 @@
 package com.example.templelinks.ui.fragment.detailfragment
 
+import android.content.res.ColorStateList
 import android.os.Bundle
 import android.text.SpannableString
 import android.text.style.ClickableSpan
@@ -9,16 +10,19 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.Window
 import androidx.core.content.ContextCompat
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
 import com.example.templelinks.R
 import com.example.templelinks.databinding.FragmentDetailBinding
 import com.example.templelinks.extensions.glide
 import com.example.templelinks.extensions.navigation
+import com.example.templelinks.extensions.toast
 
 class DetailFragment : Fragment() {
 
     private lateinit var binding : FragmentDetailBinding
     private val arguments: DetailFragmentArgs by navArgs()
+    private val viewModel  : DetailFragmentViewModel by viewModels()
 
     private var isSeeMore = true
 
@@ -44,8 +48,22 @@ class DetailFragment : Fragment() {
             requireView().navigation(R.id.action_detailFragment_to_homeFragment)
         }
 
-        requireView().glide(arguments.temples.imageUrl.toString(), binding.ivTempleDetail)
+        binding.ivFavourite.setOnClickListener {
 
+            requireContext().toast("Clicked")
+
+            if (arguments.temples.isFavourite) {
+                viewModel.deleteFavourite(arguments.temples.id)
+                arguments.temples.isFavourite = false
+                likeButtonColor()
+            }
+
+            else {
+                viewModel.setFavourite(arguments.temples.id)
+                arguments.temples.isFavourite = true
+                likeButtonColor()
+            }
+        }
     }
 
     private fun seeMore() {
@@ -68,9 +86,21 @@ class DetailFragment : Fragment() {
         binding.includeTempleLayout.includeAddress.tvTempleAddress.text = arguments.temples.locale?.address
         binding.includeTempleLayout.includePhone.tvTemplePhone.text = arguments.temples.phoneNumber
         binding.includeTempleLayout.tvTempleDescription.maxLines = 10
+        requireView().glide(arguments.temples.imageUrl.toString(), binding.ivTempleDetail)
+
+        likeButtonColor()
 
         buttonUI()
 
+    }
+
+    private fun likeButtonColor() {
+        if (arguments.temples.isFavourite) {
+            binding.ivFavourite.imageTintList = ColorStateList.valueOf(ContextCompat.getColor(requireContext(),R.color.app_color))
+        }
+        else {
+            binding.ivFavourite.imageTintList = ColorStateList.valueOf(ContextCompat.getColor(requireContext(),R.color.unlike_color))
+        }
     }
 
     private fun buttonUI() {

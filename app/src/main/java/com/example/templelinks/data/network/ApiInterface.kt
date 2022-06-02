@@ -31,4 +31,9 @@ interface ApiInterface {
     suspend fun deleteFavourite(
         @Path("id") id : Int
     ) : Response<DefaultResponse<String>>
+
+    @GET("temples")
+    suspend fun loadDeitiesTemple(
+    @Query("deity_id") deityId : Int?
+    ) : DefaultResponse<Temple>
 }

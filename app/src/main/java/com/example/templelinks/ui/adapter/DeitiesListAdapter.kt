@@ -6,10 +6,11 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.templelinks.data.model.Deities
+import com.example.templelinks.data.model.response.Temple
 import com.example.templelinks.databinding.DeitiesListItemBinding
 import com.example.templelinks.extensions.glide
 
-class DeitiesListAdapter : ListAdapter<Deities, DeitiesListAdapter.DeitiesViewHolder>(DeitiesDiffCallBack()) {
+class DeitiesListAdapter (val itemClick : (Deities) -> Unit) : ListAdapter<Deities, DeitiesListAdapter.DeitiesViewHolder>(DeitiesDiffCallBack()) {
 
 
 
@@ -27,8 +28,10 @@ class DeitiesListAdapter : ListAdapter<Deities, DeitiesListAdapter.DeitiesViewHo
         val currentItem = getItem(position)
         holder.itemView.glide(currentItem.imageUrl.toString(), holder.binding.ivGodsListItem)
 
+        holder.itemView.setOnClickListener {
+            itemClick(currentItem)
+        }
     }
-
 
 }
 

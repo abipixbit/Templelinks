@@ -4,9 +4,11 @@ import android.content.Context
 import android.view.View
 import android.widget.ImageView
 import androidx.core.content.ContextCompat
+import androidx.navigation.NavDirections
 import androidx.navigation.Navigation
 import com.bumptech.glide.Glide
 import com.example.templelinks.R
+import com.example.templelinks.ui.fragment.homefragment.HomeFragmentDirections
 import com.google.android.material.snackbar.Snackbar
 
 fun View.glide(url : String, imageView: ImageView) {
