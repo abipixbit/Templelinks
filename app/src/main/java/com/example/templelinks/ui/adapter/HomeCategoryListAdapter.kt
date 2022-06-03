@@ -4,21 +4,12 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.example.templelinks.FavouriteEvent
-import com.example.templelinks.TempleApplication
 import com.example.templelinks.data.model.response.Temple
 import com.example.templelinks.data.model.response.TemplesResponse
-import com.example.templelinks.data.repository.FavouriteRepository
 import com.example.templelinks.databinding.TempleMainListItemBinding
-import com.example.templelinks.extensions.toast
-import com.example.templelinks.ui.fragment.favouritefragment.FavouriteViewModel
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 
 class HomeCategoryListAdapter(val favClick : (List<Temple>) -> Unit, val itemClick : (Temple) -> Unit) : ListAdapter<TemplesResponse, HomeCategoryListAdapter.HomeCategoryViewHolder>(HomeCategoryDiffCallBack()) {
 

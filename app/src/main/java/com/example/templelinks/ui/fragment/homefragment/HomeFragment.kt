@@ -10,11 +10,8 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.Navigation
-import androidx.navigation.findNavController
-import com.example.templelinks.FavouriteEvent
 import com.example.templelinks.R
 import com.example.templelinks.data.model.Banners
-import com.example.templelinks.data.model.response.Temple
 import com.example.templelinks.databinding.FragmentHomeBinding
 import com.example.templelinks.enums.ApiStatus
 import com.example.templelinks.extensions.glide
@@ -57,22 +54,17 @@ class HomeFragment : Fragment() {
             Navigation.findNavController(requireView()).navigate(HomeFragmentDirections.actionHomeFragmentToDeitiesFragment(deities))
        }
 
-        val eventBus = FavouriteEvent()
 
         homeCategoryAdapter = HomeCategoryListAdapter ({currentTempleList ->
 
             if (currentTempleList[0].isFavourite) {
                 viewModel.deleteFavourite(currentTempleList[0].id)
-                eventBus.deleteFav(currentTempleList)
-//                templeList[0].id
-//                templeList[0].isFavourite = false
+                currentTempleList[0].isFavourite = false
 
             } else {
                 viewModel.setFavourite(currentTempleList[0].id)
-//                templeList[0].isFavourite = true
-                eventBus.setFav(currentTempleList)
+                currentTempleList[0].isFavourite = true
             }
-            EventBus.getDefault().post(eventBus)
 
         }, { currentTemple ->
             Navigation.findNavController(requireView()).navigate(HomeFragmentDirections.actionHomeFragmentToDetailFragment(currentTemple))

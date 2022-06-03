@@ -11,6 +11,7 @@ import android.view.ViewGroup
 import android.view.Window
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
+import androidx.navigation.Navigation
 import androidx.navigation.fragment.navArgs
 import com.example.templelinks.R
 import com.example.templelinks.databinding.FragmentDetailBinding
@@ -23,7 +24,6 @@ class DetailFragment : Fragment() {
     private lateinit var binding : FragmentDetailBinding
     private val arguments: DetailFragmentArgs by navArgs()
     private val viewModel  : DetailFragmentViewModel by viewModels()
-
     private var isSeeMore = true
 
     override fun onCreateView(
@@ -46,6 +46,10 @@ class DetailFragment : Fragment() {
 
         binding.toolBarTempleDetail.setNavigationOnClickListener {
             requireView().navigation(R.id.action_detailFragment_to_homeFragment)
+        }
+
+        binding.includeTempleLayout.layoutPoojaBooking.cardLayoutButton.setOnClickListener {
+                Navigation.findNavController(requireView()).navigate(DetailFragmentDirections.actionDetailFragmentToPujaBookingFragment(arguments.temples))
         }
 
         binding.ivFavourite.setOnClickListener {
@@ -106,19 +110,19 @@ class DetailFragment : Fragment() {
     private fun buttonUI() {
 
         if (arguments.temples.isVirtualQueue == true) {
-            binding.includeTempleLayout.layoutVirtualQueue.constraintLayoutButton.visibility = View.VISIBLE
+            binding.includeTempleLayout.layoutVirtualQueue.cardLayoutButton.visibility = View.VISIBLE
             binding.includeTempleLayout.layoutVirtualQueue.tvItemName.text = getString(R.string.virtual_queue)
         }
         if (arguments.temples.isDonation == true) {
-            binding.includeTempleLayout.layoutDonation.constraintLayoutButton.visibility = View.VISIBLE
+            binding.includeTempleLayout.layoutDonation.cardLayoutButton.visibility = View.VISIBLE
             binding.includeTempleLayout.layoutDonation.tvItemName.text = getString(R.string.donation)
         }
         if (arguments.temples.isPoojaBooking == true) {
-            binding.includeTempleLayout.layoutPoojaBooking.constraintLayoutButton.visibility = View.VISIBLE
+            binding.includeTempleLayout.layoutPoojaBooking.cardLayoutButton.visibility = View.VISIBLE
             binding.includeTempleLayout.layoutPoojaBooking.tvItemName.text = getString(R.string.puja_booking)
         }
         if (arguments.temples.isPrasada == true) {
-            binding.includeTempleLayout.layoutPrasadaBooking.constraintLayoutButton.visibility = View.VISIBLE
+            binding.includeTempleLayout.layoutPrasadaBooking.cardLayoutButton.visibility = View.VISIBLE
             binding.includeTempleLayout.layoutPrasadaBooking.tvItemName.text = getString(R.string.prasad)
         }
 

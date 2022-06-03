@@ -14,4 +14,5 @@
     <color name="like_color">#F6C4B0</color>
     <color name="unlike_color">#E6E5E5</color>
     <color name="transparent">#00000000</color>
+    <color name="dark_grey">#B6B5B5</color>
 </resources>

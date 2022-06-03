@@ -2,6 +2,7 @@ package com.example.templelinks.data.network
 
 import com.example.templelinks.data.model.Banners
 import com.example.templelinks.data.model.Deities
+import com.example.templelinks.data.model.Pujas
 import com.example.templelinks.data.model.response.DefaultResponse
 import com.example.templelinks.data.model.response.Temple
 import com.example.templelinks.data.model.response.TemplesResponse
@@ -11,7 +12,8 @@ import retrofit2.http.*
 interface ApiInterface {
 
     @GET("deities")
-    suspend fun loadDeities() : DefaultResponse<Deities>
+    suspend fun loadDeities(
+    @Query("temple_id") templeId : Int?) : DefaultResponse<Deities>
 
     @GET("banners")
     suspend fun loadBanners() : DefaultResponse<Banners>
@@ -36,4 +38,10 @@ interface ApiInterface {
     suspend fun loadDeitiesTemple(
     @Query("deity_id") deityId : Int?
     ) : DefaultResponse<Temple>
+
+    @GET("pujas")
+    suspend fun loadPujas(
+        @Query("temple_id") templeId : Int?,
+        @Query("deity_id")  deitiesId: Int?
+    ) : DefaultResponse<Pujas>
 }

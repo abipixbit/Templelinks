@@ -16,7 +16,7 @@ class GalleryButtonAdapter(private val buttonText : List<String>) : RecyclerView
 
     override fun onBindViewHolder(holder: GalleryButtonAdapter.ViewHolder, position: Int) {
         val currentItem = buttonText[position]
-        holder.binding.btnImages.text = currentItem
+        holder.binding.btn.text = currentItem
 
     }
 

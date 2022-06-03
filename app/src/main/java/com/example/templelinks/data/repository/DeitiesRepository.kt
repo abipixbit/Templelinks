@@ -12,12 +12,12 @@ class DeitiesRepository {
 
     private lateinit var deitiesTemple : ApiResponse<List<Temple>?>
 
-    suspend fun deities() : ApiResponse<List<Deities>?> {
+    suspend fun deities(templeId : Int?) : ApiResponse<List<Deities>?> {
 
         deities = ApiResponse.loading()
 
         try {
-            val response = apiInterface.loadDeities()
+            val response = apiInterface.loadDeities(templeId)
             deities = ApiResponse.success(response.data)
         }
         catch (e : Exception){
@@ -26,7 +26,6 @@ class DeitiesRepository {
 
         return deities
     }
-
 
 
     suspend fun deitiesTemple(deityId : Int ?) : ApiResponse<List<Temple>?> {

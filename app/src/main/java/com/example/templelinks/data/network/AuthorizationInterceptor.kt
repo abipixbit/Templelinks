@@ -15,7 +15,6 @@ class AuthorizationInterceptor : Interceptor {
 //        if (TOKEN != null) {
 //            requestBuilder.addHeader("Authorization", "Bearer $TOKEN")
 //        }
-
         requestBuilder.addHeader("Authorization", "Bearer $TOKEN")
         requestBuilder.addHeader("Accept", "application/json")
         return chain.proceed(requestBuilder.build())
