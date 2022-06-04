@@ -10,6 +10,8 @@
         <entry key="..\:/Android Projects/Templelinks/app/src/main/res/layout/temple_main_list_item.xml" value="0.3651041666666667" />
         <entry key="..\:/Android Projects/Templelinks/app/src/main/res/menu/menu_home.xml" value="0.3651041666666667" />
         <entry key="app/src/main/res/drawable/button.xml" value="0.3185" />
+        <entry key="app/src/main/res/drawable/button_background.xml" value="0.321" />
+        <entry key="app/src/main/res/drawable/button_background_normal.xml" value="0.321" />
         <entry key="app/src/main/res/drawable/button_selected.xml" value="0.3575" />
         <entry key="app/src/main/res/drawable/button_selector.xml" value="0.3565" />
         <entry key="app/src/main/res/drawable/button_unselected.xml" value="0.3565" />
@@ -33,10 +35,12 @@
         <entry key="app/src/main/res/layout/deities_image_list_item.xml" value="0.35625" />
         <entry key="app/src/main/res/layout/deities_list_item.xml" value="0.35625" />
         <entry key="app/src/main/res/layout/deities_list_item_shimmer.xml" value="0.35625" />
+        <entry key="app/src/main/res/layout/family_member_list_item.xml" value="0.35520833333333335" />
         <entry key="app/src/main/res/layout/fragment_account.xml" value="0.35625" />
         <entry key="app/src/main/res/layout/fragment_audio.xml" value="0.35625" />
         <entry key="app/src/main/res/layout/fragment_deities.xml" value="0.35625" />
         <entry key="app/src/main/res/layout/fragment_detail.xml" value="0.35625" />
+        <entry key="app/src/main/res/layout/fragment_family_member_dialogue.xml" value="0.35625" />
         <entry key="app/src/main/res/layout/fragment_favourite.xml" value="0.35625" />
         <entry key="app/src/main/res/layout/fragment_gallery.xml" value="0.35625" />
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.2690794649881983" />
@@ -58,6 +62,7 @@
         <entry key="app/src/main/res/layout/temple_list_item_large.xml" value="0.35625" />
         <entry key="app/src/main/res/layout/temple_list_item_small.xml" value="0.33" />
         <entry key="app/src/main/res/layout/temple_main_list_item.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/time_schedule_dropdown.xml" value="0.35520833333333335" />
         <entry key="app/src/main/res/layout/tool_bar.xml" value="0.25" />
         <entry key="app/src/main/res/menu/menu_bottom.xml" value="0.35520833333333335" />
         <entry key="app/src/main/res/menu/menu_home.xml" value="0.42135416666666664" />

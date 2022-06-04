@@ -10,7 +10,7 @@
         android:layout_width="0dp"
         android:maxLines="2"
         android:textStyle="bold"
-        android:textSize="@dimen/title_text_size"
+        android:textSize="@dimen/text_size_normal"
         android:layout_marginEnd="@dimen/margin_large"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/margin_large"

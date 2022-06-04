@@ -1,12 +1,15 @@
 package com.example.templelinks.ui.fragment.pujabookingfragment
 
 import android.app.AlertDialog
+import android.app.DatePickerDialog
+import java.text.SimpleDateFormat
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.DatePicker
 import androidx.fragment.app.viewModels
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.navArgs
@@ -16,6 +19,7 @@ import com.example.templelinks.databinding.FragmentPujaBookingBinding
 import com.example.templelinks.enums.ApiStatus
 import com.example.templelinks.ui.adapter.PoojaBookingDeitiesAdapter
 import com.example.templelinks.ui.adapter.PujasAdapter
+import java.util.*
 
 
 class PujaBookingFragment : Fragment() {
@@ -26,7 +30,8 @@ class PujaBookingFragment : Fragment() {
     private lateinit var deitiesAdapter : PoojaBookingDeitiesAdapter
     private lateinit var pujasAdapter: PujasAdapter
     private lateinit var builder : AlertDialog.Builder
-    private var pujasTempData : Map<Int, List<Pujas>> = mutableMapOf()
+    private var pujaTempData : Map<Int?, List<Pujas>> = mutableMapOf()
+    private val calendar = Calendar.getInstance()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -37,35 +42,76 @@ class PujaBookingFragment : Fragment() {
         binding.toolBarPujaBooking.tvToolBar.text = getString(R.string.pooja_booking)
         binding.toolBarPujaBooking.toolBar.setNavigationIcon(R.drawable.ic_back)
         builder = AlertDialog.Builder(requireContext())
+        updateUI()
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        updateUI()
+
         binding.toolBarPujaBooking.toolBar.setNavigationOnClickListener {
-            Navigation.findNavController(requireView()).navigate(PujaBookingFragmentDirections.actionPujaBookingFragmentToDetailFragment(arguments.currentTemple))
+            Navigation.findNavController(requireView()).navigate(
+                PujaBookingFragmentDirections.actionPujaBookingFragmentToDetailFragment(arguments.currentTemple)
+            )
         }
 
-            deitiesAdapter = PoojaBookingDeitiesAdapter { deitiesId ->
-            viewModel.loadPujas(arguments.currentTemple.id, deitiesId)
-            loadPujas()
+        deitiesAdapter = PoojaBookingDeitiesAdapter { deitiesId ->
+
+            if (pujaTempData.contains(deitiesId)) {
+                pujasAdapter.submitList(pujaTempData.getValue(deitiesId))
+                Log.d("MapIf", pujaTempData.toString())
+            } else {
+                viewModel.loadPujas(arguments.currentTemple.id, deitiesId)
+                loadPujas()
+                Log.d("MapElse", pujaTempData.toString())
+            }
         }
 
-        pujasAdapter = PujasAdapter { pujas ->
-            builder .setTitle(pujas.translation.pujaName)
-                    .setMessage(pujas.translation.pujaDescription)
-                    .setCancelable(false)
-                    .setPositiveButton("Close") { _,_ -> }
-                    .show()
+        val datePickerDialog = DatePickerDialog.OnDateSetListener { datePicker, year, month, date ->
+            calendar.set(Calendar.YEAR, year)
+            calendar.set(Calendar.MONTH, month)
+            calendar.set(Calendar.DAY_OF_MONTH, date)
+            updateDate(calendar)
         }
+
+
+        binding.includePoojaBooking.ivCalendar.setOnClickListener {
+            DatePickerDialog(
+                requireContext(),
+                datePickerDialog,
+                calendar.get(Calendar.YEAR),
+                calendar.get(Calendar.MONTH),
+                calendar.get(Calendar.DAY_OF_MONTH)
+            )
+                .show()
+        }
+
+        pujasAdapter = PujasAdapter({ pujas ->
+            builder.setTitle(pujas.translation.pujaName)
+                .setMessage(pujas.translation.pujaDescription)
+                .setCancelable(false)
+                .setPositiveButton("Close") { _, _ -> }
+                .show()},
+            {
+                val dialogue = FamilyMemberDialogueFragment()
+                dialogue.show(childFragmentManager, "customDialogue")
+            }
+        )
     }
+
+    private fun updateDate(cal: Calendar) {
+        val dateFormat = "dd-MM-yyyy"
+        val sdf = SimpleDateFormat(dateFormat, Locale.UK)
+        binding.includePoojaBooking.tvBookingDate.text = sdf.format(cal.time)
+    }
+
 
     private fun updateUI() {
         binding.tvTempleNamePujaBooking.text = arguments.currentTemple.locale?.name
         binding.tvTempleAddressPujaBooking.text = arguments.currentTemple.locale?.address
         viewModel.loadDeities(arguments.currentTemple.id)
         loadDeities()
+        updateDate(calendar)
     }
 
     private fun loadDeities() {
@@ -93,7 +139,11 @@ class PujaBookingFragment : Fragment() {
             when(apiResponse.apiStatus) {
                 ApiStatus.SUCCESS -> {
                     binding.rvPujas.adapter = pujasAdapter
-                    apiResponse.data.let { pujas ->
+                    apiResponse.data?.let { pujas ->
+
+                        pujaTempData = pujaTempData.plus(pujas[0].deityId to pujas)
+                        Log.d("tempData", pujaTempData.toString())
+
                         pujasAdapter.submitList(pujas)
                         Log.d("LoadPujaSuc", pujas.toString())
                     }

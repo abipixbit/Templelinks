@@ -25,6 +25,10 @@
     <string name="cancel">Cancel</string>
     <string name="pooja_booking">Pooja Booking</string>
     <string name="select_puja">Select Puja</string>
+    <string name="select_time_schedule">Select Time Schedule</string>
+    <string name="add_member">Add Member</string>
+    <string name="select">Select</string>
+    <string name="select_family_member">Select Family Member</string>
 
     <string-array name="gods_photo">
         <item>"https://www.hindisoch.com/wp-content/uploads/2015/03/Lord-Ganesha-Wallpaper.jpg"</item>
@@ -37,6 +41,11 @@
         <item>"https://www.nicepng.com/png/detail/253-2538627_lord-murugan-png-murugan-god-images-png.png"</item>
         <item>"https://www.nicepng.com/png/detail/253-2538627_lord-murugan-png-murugan-god-images-png.png"</item>
         <item>"https://www.nicepng.com/png/detail/253-2538627_lord-murugan-png-murugan-god-images-png.png"</item>
+    </string-array>
+
+    <string-array name="time_schedule_dropdown">
+        <item>Morning</item>
+        <item>Evening</item>
     </string-array>
 
     <string-array name="button_text">
