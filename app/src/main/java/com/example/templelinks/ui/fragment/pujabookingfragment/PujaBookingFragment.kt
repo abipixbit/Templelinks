@@ -10,6 +10,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.DatePicker
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.navArgs
@@ -32,6 +33,7 @@ class PujaBookingFragment : Fragment() {
     private lateinit var builder : AlertDialog.Builder
     private var pujaTempData : Map<Int?, List<Pujas>> = mutableMapOf()
     private val calendar = Calendar.getInstance()
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -74,16 +76,16 @@ class PujaBookingFragment : Fragment() {
             updateDate(calendar)
         }
 
-
         binding.includePoojaBooking.ivCalendar.setOnClickListener {
-            DatePickerDialog(
+          val datePickerDialogue = DatePickerDialog(
                 requireContext(),
                 datePickerDialog,
                 calendar.get(Calendar.YEAR),
                 calendar.get(Calendar.MONTH),
                 calendar.get(Calendar.DAY_OF_MONTH)
             )
-                .show()
+            datePickerDialogue.datePicker.minDate = System.currentTimeMillis()
+            datePickerDialogue.show()
         }
 
         pujasAdapter = PujasAdapter({ pujas ->
@@ -92,11 +94,14 @@ class PujaBookingFragment : Fragment() {
                 .setCancelable(false)
                 .setPositiveButton("Close") { _, _ -> }
                 .show()},
-            {
-                val dialogue = FamilyMemberDialogueFragment()
+            { pujaId ->
+                val dialogue = FamilyMemberDialogueFragment{
+                    viewModel.pujaBook(pujaId, viewModel.familyMember)
+                    viewModel.removeFam()
+                }
                 dialogue.show(childFragmentManager, "customDialogue")
             }
-        )
+        , viewModel.check)
     }
 
     private fun updateDate(cal: Calendar) {
@@ -104,7 +109,6 @@ class PujaBookingFragment : Fragment() {
         val sdf = SimpleDateFormat(dateFormat, Locale.UK)
         binding.includePoojaBooking.tvBookingDate.text = sdf.format(cal.time)
     }
-
 
     private fun updateUI() {
         binding.tvTempleNamePujaBooking.text = arguments.currentTemple.locale?.name

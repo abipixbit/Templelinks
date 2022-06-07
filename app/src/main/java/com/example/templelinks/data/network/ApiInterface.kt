@@ -2,6 +2,7 @@ package com.example.templelinks.data.network
 
 import com.example.templelinks.data.model.Banners
 import com.example.templelinks.data.model.Deities
+import com.example.templelinks.data.model.Families
 import com.example.templelinks.data.model.Pujas
 import com.example.templelinks.data.model.response.DefaultResponse
 import com.example.templelinks.data.model.response.Temple
@@ -44,4 +45,7 @@ interface ApiInterface {
         @Query("temple_id") templeId : Int?,
         @Query("deity_id")  deitiesId: Int?
     ) : DefaultResponse<Pujas>
+
+    @GET("families")
+    suspend fun loadFamilies() : DefaultResponse<Families>
 }

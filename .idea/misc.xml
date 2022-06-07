@@ -35,7 +35,7 @@
         <entry key="app/src/main/res/layout/deities_image_list_item.xml" value="0.35625" />
         <entry key="app/src/main/res/layout/deities_list_item.xml" value="0.35625" />
         <entry key="app/src/main/res/layout/deities_list_item_shimmer.xml" value="0.35625" />
-        <entry key="app/src/main/res/layout/family_member_list_item.xml" value="0.35520833333333335" />
+        <entry key="app/src/main/res/layout/family_member_list_item.xml" value="0.33" />
         <entry key="app/src/main/res/layout/fragment_account.xml" value="0.35625" />
         <entry key="app/src/main/res/layout/fragment_audio.xml" value="0.35625" />
         <entry key="app/src/main/res/layout/fragment_deities.xml" value="0.35625" />
