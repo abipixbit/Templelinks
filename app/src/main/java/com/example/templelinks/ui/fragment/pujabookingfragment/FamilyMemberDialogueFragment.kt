@@ -14,19 +14,24 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import com.example.templelinks.R
+import com.example.templelinks.data.model.Families
+import com.example.templelinks.data.model.Pujas
 import com.example.templelinks.databinding.FragmentFamilyMemberDialogueBinding
 import com.example.templelinks.enums.ApiStatus
 import com.example.templelinks.extensions.setFullScreen
 import com.example.templelinks.ui.adapter.FamilyAdapter
 
 
-class FamilyMemberDialogueFragment(val famMemberAdd : ()->Unit) : DialogFragment() {
+class FamilyMemberDialogueFragment(private val pujas: Pujas, val selectedPujas : (MutableList<Pujas>)->Unit) : DialogFragment() {
 
     private lateinit var binding : FragmentFamilyMemberDialogueBinding
 //    private val viewModel : PujaBookingViewModel by viewModels()
     private lateinit var familyAdapter : FamilyAdapter
 
+    var selectedFamily = mutableListOf<Families>()
     private lateinit var viewModel : PujaBookingViewModel
+
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -40,10 +45,14 @@ class FamilyMemberDialogueFragment(val famMemberAdd : ()->Unit) : DialogFragment
 
         val arrayAdapter = ArrayAdapter(requireContext(), R.layout.time_schedule_dropdown, resources.getStringArray(R.array.time_schedule_dropdown))
         binding.etTimeSchedule.setAdapter(arrayAdapter)
-        familyAdapter = FamilyAdapter({ familyIdAdd->
-            viewModel.addFamMember(familyIdAdd)
-        }, { familyIdRemove ->
-            viewModel.removeFamMember(familyIdRemove)
+        familyAdapter = FamilyAdapter({ familiesAdd->
+            selectedFamily.add(familiesAdd)
+            pujas.isSelected = true
+            pujas.selectedFamilies = selectedFamily
+
+        }, { familyRemove ->
+
+
         }
         )
         return binding.root
@@ -59,7 +68,7 @@ class FamilyMemberDialogueFragment(val famMemberAdd : ()->Unit) : DialogFragment
         }
 
         binding.btnSelect.setOnClickListener {
-            famMemberAdd()
+            selectedPujas(mutableListOf(pujas))
             dismiss()
         }
 

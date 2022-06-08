@@ -1,7 +1,6 @@
 package com.example.templelinks.ui.adapter
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
@@ -11,7 +10,7 @@ import com.example.templelinks.TempleApplication
 import com.example.templelinks.data.model.Pujas
 import com.example.templelinks.databinding.PoojaBookingButtonListItemBinding
 
-class PujasAdapter(val descriptionClick : (Pujas) -> Unit, val selectFamClick : (Int) -> Unit, var check : Boolean) : ListAdapter <Pujas, PujasAdapter.PujasViewHolder>(PujasDiffCall()) {
+class PujasAdapter(val descriptionClick : (Pujas) -> Unit, val selectPuja : (Pujas) -> Unit) : ListAdapter <Pujas, PujasAdapter.PujasViewHolder>(PujasDiffCall()) {
 
     class PujasViewHolder(val binding : PoojaBookingButtonListItemBinding) : RecyclerView.ViewHolder(binding.root)
 
@@ -31,15 +30,7 @@ class PujasAdapter(val descriptionClick : (Pujas) -> Unit, val selectFamClick : 
         }
 
         holder.itemView.setOnClickListener {
-            selectFamClick(currentItem.translation.pujaId)
-            if (check) {
-                holder.binding.ivTick.visibility = View.VISIBLE
-                check = false
-            }
-            else {
-                holder.binding.ivTick.visibility = View.GONE
-                check = true
-            }
+           selectPuja(currentItem)
         }
     }
 }

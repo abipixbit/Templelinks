@@ -89,5 +89,23 @@
         <action
             android:id="@+id/action_pujaBookingFragment_to_detailFragment"
             app:destination="@id/detailFragment" />
+        <action
+            android:id="@+id/action_pujaBookingFragment_to_finalBokingFragment"
+            app:destination="@id/finalBokingFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/finalBokingFragment"
+        android:name="com.example.templelinks.ui.fragment.pujabookingfragment.FinalBokingFragment"
+        android:label="fragment_final_boking"
+        tools:layout="@layout/fragment_final_boking" >
+        <argument
+            android:name="templeName"
+            app:argType="string" />
+        <argument
+            android:name="templeAddress"
+            app:argType="string" />
+        <argument
+            android:name="confirmSelectedPoojaArgs"
+            app:argType="com.example.templelinks.data.model.Pujas" />
     </fragment>
 </navigation>

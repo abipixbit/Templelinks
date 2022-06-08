@@ -1,30 +1,36 @@
 package com.example.templelinks.data.model
 
+import android.os.Parcel
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import kotlinx.parcelize.Parcelize
 
+@Parcelize
 data class Families (
     @SerializedName("id")
-    val id : Int,
+    val id : Int?,
 
     @SerializedName("name")
-    val name : String,
+    val name : String?,
 
     @SerializedName("date_of_birth")
-    val dateOfBirth : String,
+    val dateOfBirth : String?,
 
     @SerializedName("phone")
-    val phoneNumber : String,
+    val phoneNumber : String?,
 
     @SerializedName("nakshatra")
-    val nakshathra : Nakshathra
-    )
+    val nakshathra : Nakshathra?
+    ) : Parcelable
 
+@Parcelize
 data class Nakshathra (
     @SerializedName("locale")
-    val locale : NakshathraLocale
-    )
+    val locale : NakshathraLocale?
+    ) : Parcelable
 
+@Parcelize
 data class NakshathraLocale(
     @SerializedName("name")
-    val nakshathraName : String
-)
+    val nakshathraName : String?
+) : Parcelable

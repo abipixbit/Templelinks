@@ -34,6 +34,8 @@ class PujaBookingFragment : Fragment() {
     private var pujaTempData : Map<Int?, List<Pujas>> = mutableMapOf()
     private val calendar = Calendar.getInstance()
 
+    var selectedPooja = mutableListOf<Pujas>()
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -55,6 +57,23 @@ class PujaBookingFragment : Fragment() {
             Navigation.findNavController(requireView()).navigate(
                 PujaBookingFragmentDirections.actionPujaBookingFragmentToDetailFragment(arguments.currentTemple)
             )
+        }
+
+        binding.btnBook.setOnClickListener {
+
+
+            if (viewModel.selectedPooja.isNotEmpty()) {
+                viewModel.selectedPooja.map { puja ->
+                    Navigation.findNavController(requireView()).navigate(
+                        PujaBookingFragmentDirections.actionPujaBookingFragmentToFinalBokingFragment
+                            (
+                            arguments.currentTemple.locale?.name.toString(),
+                            arguments.currentTemple.locale?.address.toString(), puja
+                        )
+                    )
+                }
+
+            }
         }
 
         deitiesAdapter = PoojaBookingDeitiesAdapter { deitiesId ->
@@ -94,14 +113,15 @@ class PujaBookingFragment : Fragment() {
                 .setCancelable(false)
                 .setPositiveButton("Close") { _, _ -> }
                 .show()},
-            { pujaId ->
-                val dialogue = FamilyMemberDialogueFragment{
-                    viewModel.pujaBook(pujaId, viewModel.familyMember)
-                    viewModel.removeFam()
-                }
+            { selectedPujas ->
+                val dialogue = FamilyMemberDialogueFragment(selectedPujas,{ listPujas ->
+                    viewModel.selectedPooja = (viewModel.selectedPooja + listPujas) as MutableList<Pujas>
+                    Log.d("selectedPooja", viewModel.selectedPooja.toString())
+
+//                            viewModel.pujaBook(pujaId, familyList)
+                })
                 dialogue.show(childFragmentManager, "customDialogue")
-            }
-        , viewModel.check)
+            })
     }
 
     private fun updateDate(cal: Calendar) {
