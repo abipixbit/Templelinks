@@ -1,4 +1,4 @@
-package com.example.templelinks.ui.fragment.favouritefragment
+package com.example.templelinks.ui.fragment.favouriteFragment
 
 import android.util.Log
 import androidx.lifecycle.LiveData
@@ -15,8 +15,7 @@ class FavouriteViewModel : ViewModel() {
     private val repository = FavouriteRepository()
 
     private val _favourite = MutableLiveData<ApiResponse<List<Temple>?>>()
-    val favourite : LiveData<ApiResponse<List<Temple>?>>
-    get() = _favourite
+    val favourite : LiveData<ApiResponse<List<Temple>?>> = _favourite
 
     init {
         loadFavourite()

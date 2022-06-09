@@ -1,4 +1,4 @@
-package com.example.templelinks.ui.fragment.deitiesfragment
+package com.example.templelinks.ui.fragment.deitiesFragment
 
 import android.os.Bundle
 import android.util.Log
@@ -9,13 +9,9 @@ import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.navArgs
-import com.example.templelinks.R
-import com.example.templelinks.data.model.response.Temple
 import com.example.templelinks.databinding.FragmentDeitiesBinding
 import com.example.templelinks.enums.ApiStatus
 import com.example.templelinks.ui.adapter.FavouriteAdapter
-import com.example.templelinks.ui.fragment.detailfragment.DetailFragmentArgs
-import com.example.templelinks.ui.fragment.detailfragment.DetailFragmentDirections
 
 class DeitiesFragment : Fragment() {
 
@@ -31,7 +27,6 @@ class DeitiesFragment : Fragment() {
     ): View {
         // Inflate the layout for this fragment
         binding = FragmentDeitiesBinding.inflate(layoutInflater, container, false)
-        binding.toolBarDeitiesTemple.tvToolBar.text = arguments.deitiesArguments.translation.deitiesName
 
         deitiesAdapter = FavouriteAdapter { currentTemple ->
             Navigation.findNavController(requireView()).navigate(DeitiesFragmentDirections.actionDeitiesFragmentToDetailFragment(currentTemple))
@@ -41,15 +36,15 @@ class DeitiesFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        loadUI()
-
+        setupUI()
     }
 
-    private fun loadUI() {
-
+    private fun setupUI() {
+        binding.apply {
+            toolBarDeitiesTemple.tvToolBar.text = arguments.deitiesArguments.translation.deitiesName
+            rvDeitiesTemples.adapter = deitiesAdapter
+        }
         viewModel.loadDeitiesTemple(arguments.deitiesArguments.id)
-        binding.rvDeitiesTemples.adapter = deitiesAdapter
         loadDeitiesTemple()
     }
 

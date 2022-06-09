@@ -1,6 +1,7 @@
 package com.example.templelinks.ui.adapter
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
@@ -22,15 +23,26 @@ class PujasAdapter(val descriptionClick : (Pujas) -> Unit, val selectPuja : (Puj
     override fun onBindViewHolder(holder: PujasAdapter.PujasViewHolder, position: Int) {
 
         val currentItem = getItem(position)
-        holder.binding.tvItemName.text = currentItem.translation.pujaName
-        holder.binding.tvPoojaPrice.text = TempleApplication.appContext.getString(R.string.pooja_price, currentItem.price)
 
-        holder.binding.ivPoojaHelp.setOnClickListener {
-            descriptionClick(currentItem)
+        holder.binding.apply {
+            tvItemName.text = currentItem.translation.pujaName
+            tvPoojaPrice.text = TempleApplication.appContext.getString(R.string.pooja_price, currentItem.price)
+
+            ivPoojaHelp.setOnClickListener {
+                descriptionClick(currentItem)
+            }
         }
 
         holder.itemView.setOnClickListener {
            selectPuja(currentItem)
+            if (currentItem.isSelected == true) {
+                holder.binding.ivTick.visibility = View.VISIBLE
+            }
+
+            else {
+                holder.binding.ivTick.visibility = View.GONE
+            }
+            notifyItemChanged(position)
         }
     }
 }

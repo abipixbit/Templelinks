@@ -10,8 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.templelinks.data.model.Families
 import com.example.templelinks.databinding.FamilyMemberListItemBinding
 
-class FamilyAdapter(val addItemClick : (Families)-> Unit, val removeItemClick : (List<Families>)-> Unit) : ListAdapter<Families, FamilyAdapter.FamilyViewHolder>(FamilyDIffUtil()) {
-
+class FamilyAdapter(val addItemClick : (Families)-> Unit, val removeItemClick : (Families)-> Unit) : ListAdapter<Families, FamilyAdapter.FamilyViewHolder>(FamilyDIffUtil()) {
 
     class FamilyViewHolder(val binding : FamilyMemberListItemBinding) : RecyclerView.ViewHolder(binding.root)
 
@@ -21,22 +20,31 @@ class FamilyAdapter(val addItemClick : (Families)-> Unit, val removeItemClick : 
     }
 
     override fun onBindViewHolder(holder: FamilyAdapter.FamilyViewHolder, position: Int) {
-        var check = false
-        val currentItem = getItem(position)
-        holder.binding.tvMemberName.text = currentItem.name
-        holder.binding.tvMemberNakshathra.text = currentItem.nakshathra?.locale?.nakshathraName
 
-        holder.itemView.setOnClickListener {
-            holder.binding.ivCheck.visibility = if (check) {
-                removeItemClick(listOf(currentItem))
-                check = false
-                View.GONE
+        val currentItem = getItem(position)
+        holder.binding.apply {
+            tvMemberName.text = currentItem.name
+            tvMemberNakshathra.text = currentItem.nakshathra?.locale?.nakshathraName
+
+            if (currentItem.isSelected == true) {
+                ivCheck.visibility = View.VISIBLE
             }
             else {
-                addItemClick(currentItem)
-                check = true
-                View.VISIBLE
+                ivCheck.visibility = View.GONE
             }
+
+            holder.itemView.setOnClickListener {
+                    if (currentItem.isSelected == true) {
+                    currentItem.isSelected = false
+                    removeItemClick(currentItem)
+                }
+                else {
+                    currentItem.isSelected = true
+                    addItemClick(currentItem)
+                }
+                notifyItemChanged(position)
+            }
+
         }
     }
 }

@@ -1,4 +1,4 @@
-package com.example.templelinks.ui.fragment.favouritefragment
+package com.example.templelinks.ui.fragment.favouriteFragment
 
 import android.os.Bundle
 import android.util.Log
@@ -13,7 +13,6 @@ import com.example.templelinks.databinding.FragmentFavouriteBinding
 import com.example.templelinks.enums.ApiStatus
 import com.example.templelinks.extensions.navigation
 import com.example.templelinks.ui.adapter.FavouriteAdapter
-import com.example.templelinks.ui.fragment.homefragment.HomeFragmentDirections
 
 class FavouriteFragment : Fragment() {
 
@@ -29,29 +28,31 @@ class FavouriteFragment : Fragment() {
         binding = FragmentFavouriteBinding.inflate(layoutInflater, container,false)
         binding.toolBarFavourite.tvToolBar.text = getString(R.string.favourite)
         binding.toolBarFavourite.toolBar.setNavigationIcon(R.drawable.ic_back)
-        favourite = FavouriteAdapter { currentTemple ->
-            Navigation.findNavController(requireView()).navigate(FavouriteFragmentDirections.actionFavouriteFragmentToDetailFragment(currentTemple))
-        }
+
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.toolBarFavourite.toolBar.setNavigationOnClickListener {
-            it.navigation(R.id.action_favouriteFragment_to_homeFragment)
+        favourite = FavouriteAdapter { currentTemple ->
+            Navigation.findNavController(requireView()).navigate(FavouriteFragmentDirections.actionFavouriteFragmentToDetailFragment(currentTemple))
         }
 
-        updateUI()
+        binding.apply {
+            toolBarFavourite.toolBar.setNavigationOnClickListener {
+                it.navigation(R.id.action_favouriteFragment_to_homeFragment)
+            }
 
-        binding.refreshFavourite.setOnRefreshListener {
-            viewModel.loadFavourite()
-            updateUI()
-            binding.refreshFavourite.isRefreshing = false
+            refreshFavourite.setOnRefreshListener {
+                viewModel.loadFavourite()
+                setupUI()
+                binding.refreshFavourite.isRefreshing = false }
         }
+        setupUI()
     }
 
-    private fun updateUI() {
+    private fun setupUI() {
         viewModel.favourite.observe(viewLifecycleOwner) { apiResponse ->
             when(apiResponse.apiStatus) {
                 ApiStatus.SUCCESS -> {

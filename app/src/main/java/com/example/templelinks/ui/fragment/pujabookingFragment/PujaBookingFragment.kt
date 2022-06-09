@@ -1,4 +1,4 @@
-package com.example.templelinks.ui.fragment.pujabookingfragment
+package com.example.templelinks.ui.fragment.pujabookingFragment
 
 import android.app.AlertDialog
 import android.app.DatePickerDialog
@@ -9,10 +9,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.DatePicker
-import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.navigation.Navigation
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.templelinks.R
 import com.example.templelinks.data.model.Pujas
@@ -30,11 +29,6 @@ class PujaBookingFragment : Fragment() {
     private val viewModel : PujaBookingViewModel by viewModels()
     private lateinit var deitiesAdapter : PoojaBookingDeitiesAdapter
     private lateinit var pujasAdapter: PujasAdapter
-    private lateinit var builder : AlertDialog.Builder
-    private var pujaTempData : Map<Int?, List<Pujas>> = mutableMapOf()
-    private val calendar = Calendar.getInstance()
-
-    var selectedPooja = mutableListOf<Pujas>()
 
 
     override fun onCreateView(
@@ -43,41 +37,16 @@ class PujaBookingFragment : Fragment() {
     ): View {
         // Inflate the layout for this fragment
         binding = FragmentPujaBookingBinding.inflate(layoutInflater, container, false)
-        binding.toolBarPujaBooking.tvToolBar.text = getString(R.string.pooja_booking)
-        binding.toolBarPujaBooking.toolBar.setNavigationIcon(R.drawable.ic_back)
-        builder = AlertDialog.Builder(requireContext())
         updateUI()
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        binding.toolBarPujaBooking.toolBar.setNavigationOnClickListener {
-            Navigation.findNavController(requireView()).navigate(
-                PujaBookingFragmentDirections.actionPujaBookingFragmentToDetailFragment(arguments.currentTemple)
-            )
-        }
-
-        binding.btnBook.setOnClickListener {
-
-
-            if (viewModel.selectedPooja.isNotEmpty()) {
-                viewModel.selectedPooja.map { puja ->
-                    Navigation.findNavController(requireView()).navigate(
-                        PujaBookingFragmentDirections.actionPujaBookingFragmentToFinalBokingFragment
-                            (
-                            arguments.currentTemple.locale?.name.toString(),
-                            arguments.currentTemple.locale?.address.toString(), puja
-                        )
-                    )
-                }
-
-            }
-        }
+        val calendar = viewModel.calendar
 
         deitiesAdapter = PoojaBookingDeitiesAdapter { deitiesId ->
-
+            val pujaTempData = viewModel.pujaTempData
             if (pujaTempData.contains(deitiesId)) {
                 pujasAdapter.submitList(pujaTempData.getValue(deitiesId))
                 Log.d("MapIf", pujaTempData.toString())
@@ -89,39 +58,61 @@ class PujaBookingFragment : Fragment() {
         }
 
         val datePickerDialog = DatePickerDialog.OnDateSetListener { datePicker, year, month, date ->
-            calendar.set(Calendar.YEAR, year)
-            calendar.set(Calendar.MONTH, month)
-            calendar.set(Calendar.DAY_OF_MONTH, date)
+            calendar.apply {
+                set(Calendar.YEAR, year)
+                set(Calendar.MONTH, month)
+                set(Calendar.DAY_OF_MONTH, date)
+            }
             updateDate(calendar)
         }
 
-        binding.includePoojaBooking.ivCalendar.setOnClickListener {
-          val datePickerDialogue = DatePickerDialog(
-                requireContext(),
-                datePickerDialog,
-                calendar.get(Calendar.YEAR),
-                calendar.get(Calendar.MONTH),
-                calendar.get(Calendar.DAY_OF_MONTH)
-            )
-            datePickerDialogue.datePicker.minDate = System.currentTimeMillis()
-            datePickerDialogue.show()
+        binding.apply {
+            toolBarPujaBooking.toolBar.setNavigationOnClickListener {
+                Navigation.findNavController(requireView()).navigate(
+                    PujaBookingFragmentDirections.actionPujaBookingFragmentToDetailFragment(arguments.currentTemple)
+                )
+            }
+
+            binding.btnBook.setOnClickListener {
+                val currentTemple = arguments.currentTemple.locale
+                if (findNavController().currentDestination?.id == R.id.pujaBookingFragment) {
+                    findNavController().navigate(PujaBookingFragmentDirections.actionPujaBookingFragmentToFinalBokingFragment
+                        (currentTemple?.name.toString(),
+                        currentTemple?.address.toString(),
+                        viewModel.selectedPooja.toTypedArray())
+                    )
+                }
+            }
+
+            includePoojaBooking.ivCalendar.setOnClickListener {
+                val datePickerDialogue = DatePickerDialog(
+                    requireContext(),
+                    datePickerDialog,
+                    calendar.get(Calendar.YEAR),
+                    calendar.get(Calendar.MONTH),
+                    calendar.get(Calendar.DAY_OF_MONTH))
+
+                datePickerDialogue.apply {
+                    datePicker.minDate = System.currentTimeMillis()
+                    show()
+                }
+            }
         }
 
         pujasAdapter = PujasAdapter({ pujas ->
-            builder.setTitle(pujas.translation.pujaName)
-                .setMessage(pujas.translation.pujaDescription)
-                .setCancelable(false)
-                .setPositiveButton("Close") { _, _ -> }
-                .show()},
-            { selectedPujas ->
-                val dialogue = FamilyMemberDialogueFragment(selectedPujas,{ listPujas ->
-                    viewModel.selectedPooja = (viewModel.selectedPooja + listPujas) as MutableList<Pujas>
-                    Log.d("selectedPooja", viewModel.selectedPooja.toString())
+                AlertDialog .Builder(requireContext())
+                            .setTitle(pujas.translation.pujaName)
+                            .setMessage(pujas.translation.pujaDescription)
+                            .setCancelable(false)
+                            .setPositiveButton("Close") { _, _ -> }
+                            .show()}
+        ) { clickedPujas ->
 
-//                            viewModel.pujaBook(pujaId, familyList)
-                })
-                dialogue.show(childFragmentManager, "customDialogue")
-            })
+            val dialogue = FamilyMemberDialogueFragment(clickedPujas) { selectedPujas ->
+                viewModel.addSelectedPoojas(selectedPujas)
+            }
+            dialogue.show(childFragmentManager, "customDialogue")
+        }
     }
 
     private fun updateDate(cal: Calendar) {
@@ -131,11 +122,20 @@ class PujaBookingFragment : Fragment() {
     }
 
     private fun updateUI() {
-        binding.tvTempleNamePujaBooking.text = arguments.currentTemple.locale?.name
-        binding.tvTempleAddressPujaBooking.text = arguments.currentTemple.locale?.address
-        viewModel.loadDeities(arguments.currentTemple.id)
+        val currentTemple = arguments.currentTemple
+        binding.apply {
+            toolBarPujaBooking.apply {
+                tvToolBar.text = getString(R.string.pooja_booking)
+                toolBar.setNavigationIcon(R.drawable.ic_back)
+            }
+
+            tvTempleNamePujaBooking.text = currentTemple.locale?.name
+            tvTempleAddressPujaBooking.text = currentTemple.locale?.address
+        }
+
+        viewModel.loadDeities(currentTemple.id)
         loadDeities()
-        updateDate(calendar)
+        updateDate(viewModel.calendar)
     }
 
     private fun loadDeities() {
@@ -164,12 +164,9 @@ class PujaBookingFragment : Fragment() {
                 ApiStatus.SUCCESS -> {
                     binding.rvPujas.adapter = pujasAdapter
                     apiResponse.data?.let { pujas ->
-
-                        pujaTempData = pujaTempData.plus(pujas[0].deityId to pujas)
-                        Log.d("tempData", pujaTempData.toString())
-
-                        pujasAdapter.submitList(pujas)
-                        Log.d("LoadPujaSuc", pujas.toString())
+                    viewModel.addPujaTempData(pujas[0].deityId, pujas)
+                    pujasAdapter.submitList(pujas)
+                    Log.d("LoadPujaSuc", pujas.toString())
                     }
                 }
                 ApiStatus.ERROR -> apiResponse.message.let { message->

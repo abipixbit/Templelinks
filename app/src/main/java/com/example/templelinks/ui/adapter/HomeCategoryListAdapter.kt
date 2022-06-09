@@ -17,26 +17,24 @@ class HomeCategoryListAdapter(val favClick : (List<Temple>) -> Unit, val itemCli
         RecyclerView.ViewHolder(binding.root)
 
 
-    override fun onCreateViewHolder(
-        parent: ViewGroup,
-        viewType: Int
-    ): HomeCategoryListAdapter.HomeCategoryViewHolder {
-        return HomeCategoryViewHolder(
-            TempleMainListItemBinding.inflate(
-                LayoutInflater.from(parent.context),
-                parent,
-                false
-            )
-        )
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HomeCategoryListAdapter.HomeCategoryViewHolder {
+        return HomeCategoryViewHolder(TempleMainListItemBinding.inflate(LayoutInflater.from(parent.context), parent, false))
     }
 
     override fun onBindViewHolder(
-        holder: HomeCategoryListAdapter.HomeCategoryViewHolder,
-        position: Int
-    ) {
+        holder: HomeCategoryListAdapter.HomeCategoryViewHolder, position: Int) {
 
         val currentItem = getItem(position)
-        holder.binding.tvCategoryName.text = currentItem.locale?.name
+
+        holder.binding.apply {
+            tvCategoryName.text = currentItem.locale?.name
+
+            if (currentItem.temples?.size == 0) {
+               tvCategoryName.visibility = View.GONE
+               tvSeeMore.visibility = View.GONE
+               rvTempleList.visibility = View.GONE
+            }
+        }
 
         when (currentItem.viewType) {
 
@@ -55,12 +53,6 @@ class HomeCategoryListAdapter(val favClick : (List<Temple>) -> Unit, val itemCli
                 loadHomeCategorySmall(holder.binding.rvTempleList, currentItem.temples)
             }
 
-        }
-
-        if (currentItem.temples?.size == 0) {
-            holder.binding.tvCategoryName.visibility = View.GONE
-            holder.binding.tvSeeMore.visibility = View.GONE
-            holder.binding.rvTempleList.visibility = View.GONE
         }
 
     }

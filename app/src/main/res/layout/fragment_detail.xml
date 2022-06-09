@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     app:contentScrim="@color/grey_color"
     android:layout_height="match_parent"
-    tools:context=".ui.fragment.detailfragment.DetailFragment">
+    tools:context=".ui.fragment.templeDetailFragment.TempleDetailFragment">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appBarLayout"
@@ -38,21 +38,12 @@
                 app:layout_constraintDimensionRatio="5:3"
                 android:scaleType="centerCrop"/>
 
-                <ImageView
-                    android:id="@+id/ivFavourite"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/margin_large"
-                    android:layout_marginEnd="@dimen/margin_large"
-                    android:src="@drawable/ic_favorite_filled"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.appcompat.widget.Toolbar
                 android:id="@+id/toolBarTempleDetail"
                 android:layout_width="match_parent"
+                app:menu="@menu/favourite"
                 android:layout_height="?attr/actionBarSize"
                 app:layout_collapseMode="pin" />
 

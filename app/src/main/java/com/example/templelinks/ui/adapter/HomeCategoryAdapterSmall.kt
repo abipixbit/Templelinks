@@ -23,17 +23,15 @@ class HomeCategoryAdapterSmall(val itemClick : (Temple) -> Unit) : ListAdapter<T
     }
 
     override fun onBindViewHolder(holder: HomeCategoryAdapterSmall.ViewHolder, position: Int) {
-
-        holder.itemView.animation = AnimationUtils.loadAnimation(TempleApplication.appContext, R.anim.anim_recycler_view)
         val currentItem = getItem(position)
 
-        holder.itemView.glide(currentItem?.imageUrl.toString(), holder.binding.ivTempleSmall)
-        holder.binding.tvTempleSmall.text = currentItem?.locale?.name
-
-        holder.itemView.setOnClickListener {
-            itemClick(currentItem)
+        holder.itemView.apply {
+            animation = AnimationUtils.loadAnimation(TempleApplication.appContext, R.anim.anim_recycler_view)
+            glide(currentItem?.imageUrl.toString(), holder.binding.ivTempleSmall)
+            setOnClickListener { itemClick(currentItem) }
         }
 
+        holder.binding.tvTempleSmall.text = currentItem?.locale?.name
     }
 
 

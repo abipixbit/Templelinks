@@ -1,12 +1,11 @@
-package com.example.templelinks.ui.fragment.pujabookingfragment
+package com.example.templelinks.ui.fragment.pujabookingFragment
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.navigation.NavArgs
-import androidx.navigation.NavController
 import androidx.navigation.fragment.navArgs
 import com.example.templelinks.R
 import com.example.templelinks.databinding.FragmentFinalBokingBinding
@@ -26,22 +25,23 @@ class FinalBokingFragment : Fragment() {
     ): View {
         // Inflate the layout for this fragment
         binding = FragmentFinalBokingBinding.inflate(layoutInflater, container, false)
-        updateUI()
         confirmPoojaAdapter = ConfrimPoojaAdapter()
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        binding.rvConfirmPooja.adapter = confirmPoojaAdapter
-        confirmPoojaAdapter.submitList(mutableListOf(arguments.confirmSelectedPoojaArgs))
+        setupUI()
+        confirmPoojaAdapter.submitList(arguments.confirmSelectedPoojaArgs?.toMutableList())
 
     }
 
-    private fun updateUI() {
-        binding.tvTempleNameFinalBooking.text = arguments.templeName
-        binding.tvTempleAddressFinalBooking.text = arguments.templeAddress
-        binding.toolBarFinalPujaBooking.tvToolBar.text = getString(R.string.pooja_booking)
+    private fun setupUI() {
+        binding.apply {
+            tvTempleNameFinalBooking.text = arguments.templeName
+            tvTempleAddressFinalBooking.text = arguments.templeAddress
+            toolBarFinalPujaBooking.tvToolBar.text = getString(R.string.pooja_booking)
+            rvConfirmPooja.adapter = confirmPoojaAdapter
+        }
     }
 }

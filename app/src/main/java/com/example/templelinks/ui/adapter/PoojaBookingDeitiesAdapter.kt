@@ -15,32 +15,40 @@ import com.example.templelinks.databinding.ButtonListItemBinding
 class PoojaBookingDeitiesAdapter (val itemClick : (Int?) -> Unit) : ListAdapter<Deities, PoojaBookingDeitiesAdapter.PoojaBookingViewHolder>(PoojaBookingDiffCall()) {
 
     private var selectedItem : Int = 0
+    private var isInit = true
 
     class PoojaBookingViewHolder(val binding : ButtonListItemBinding) : RecyclerView.ViewHolder(binding.root)
-
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PoojaBookingDeitiesAdapter.PoojaBookingViewHolder {
         return PoojaBookingViewHolder(ButtonListItemBinding.inflate(LayoutInflater.from(parent.context), parent, false))
     }
 
     override fun onBindViewHolder(holder: PoojaBookingDeitiesAdapter.PoojaBookingViewHolder, position: Int) {
+
+        if(position ==0 && isInit) {
+            itemClick(currentList[0].id)
+            isInit = false
+        }
+
         val currentItem = getItem(position)
 
-        if (selectedItem == position) {
-            holder.binding.btn.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(TempleApplication.appContext, R.color.app_color))
-            holder.binding.btn.setTextColor(ContextCompat.getColor(TempleApplication.appContext, R.color.white))
-        }
-        else {
-            holder.binding.btn.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(TempleApplication.appContext, R.color.white))
-            holder.binding.btn.setTextColor(ContextCompat.getColor(TempleApplication.appContext, R.color.black))
-        }
+        holder.binding.apply {
+            btn.apply {
+                text = currentItem.translation.deitiesName
+                setOnClickListener { itemClick(currentItem.id)
+                    notifyItemChanged(selectedItem)
+                    selectedItem = holder.adapterPosition
+                    notifyItemChanged(selectedItem) }
 
-        holder.binding.btn.text = currentItem.translation.deitiesName
-        holder.binding.btn.setOnClickListener {
-            itemClick(currentItem.id)
-            notifyItemChanged(selectedItem)
-            selectedItem = holder.adapterPosition
-            notifyItemChanged(selectedItem)
+                if (selectedItem == position) {
+                    backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(TempleApplication.appContext, R.color.app_color))
+                    setTextColor(ContextCompat.getColor(TempleApplication.appContext, R.color.white))
+                }
+                else {
+                    backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(TempleApplication.appContext, R.color.white))
+                    setTextColor(ContextCompat.getColor(TempleApplication.appContext, R.color.black))
+                }
+            }
         }
     }
 }

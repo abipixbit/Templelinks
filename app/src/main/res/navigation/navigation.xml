@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/homeFragment"
-        android:name="com.example.templelinks.ui.fragment.homefragment.HomeFragment"
+        android:name="com.example.templelinks.ui.fragment.homeFragment.HomeFragment"
         android:label="fragment_home"
         tools:layout="@layout/fragment_home" >
         <action
@@ -22,22 +22,22 @@
     </fragment>
     <fragment
         android:id="@+id/liveFragment"
-        android:name="com.example.templelinks.ui.fragment.livefragment.LiveFragment"
+        android:name="com.example.templelinks.ui.fragment.liveFragment.LiveFragment"
         android:label="fragment_live"
         tools:layout="@layout/fragment_live" />
     <fragment
         android:id="@+id/accountFragment"
-        android:name="com.example.templelinks.ui.fragment.accountfragment.AccountFragment"
+        android:name="com.example.templelinks.ui.fragment.accountFragment.AccountFragment"
         android:label="fragment_account"
         tools:layout="@layout/fragment_account" />
     <fragment
         android:id="@+id/galleryFragment"
-        android:name="com.example.templelinks.ui.fragment.galleryfragment.GalleryFragment"
+        android:name="com.example.templelinks.ui.fragment.galleryFragment.GalleryFragment"
         android:label="fragment_gallery"
         tools:layout="@layout/fragment_gallery" />
     <fragment
         android:id="@+id/favouriteFragment"
-        android:name="com.example.templelinks.ui.fragment.favouritefragment.FavouriteFragment"
+        android:name="com.example.templelinks.ui.fragment.favouriteFragment.FavouriteFragment"
         android:label="fragment_favourite"
         tools:layout="@layout/fragment_favourite" >
         <action
@@ -51,11 +51,11 @@
     </fragment>
     <fragment
         android:id="@+id/detailFragment"
-        android:name="com.example.templelinks.ui.fragment.detailfragment.DetailFragment"
+        android:name="com.example.templelinks.ui.fragment.templeDetailFragment.TempleDetailFragment"
         android:label="fragment_detail"
         tools:layout="@layout/fragment_detail" >
         <argument
-            android:name="temples"
+            android:name="temple"
             app:argType="com.example.templelinks.data.model.response.Temple" />
         <action
             android:id="@+id/action_detailFragment_to_homeFragment"
@@ -66,7 +66,7 @@
     </fragment>
     <fragment
         android:id="@+id/deitiesFragment"
-        android:name="com.example.templelinks.ui.fragment.deitiesfragment.DeitiesFragment"
+        android:name="com.example.templelinks.ui.fragment.deitiesFragment.DeitiesFragment"
         android:label="fragment_deities"
         tools:layout="@layout/fragment_deities" >
         <action
@@ -80,7 +80,7 @@
     </fragment>
     <fragment
         android:id="@+id/pujaBookingFragment"
-        android:name="com.example.templelinks.ui.fragment.pujabookingfragment.PujaBookingFragment"
+        android:name="com.example.templelinks.ui.fragment.pujabookingFragment.PujaBookingFragment"
         android:label="fragment_puja_booking"
         tools:layout="@layout/fragment_puja_booking" >
         <argument
@@ -95,7 +95,7 @@
     </fragment>
     <fragment
         android:id="@+id/finalBokingFragment"
-        android:name="com.example.templelinks.ui.fragment.pujabookingfragment.FinalBokingFragment"
+        android:name="com.example.templelinks.ui.fragment.pujabookingFragment.FinalBokingFragment"
         android:label="fragment_final_boking"
         tools:layout="@layout/fragment_final_boking" >
         <argument
@@ -106,6 +106,7 @@
             app:argType="string" />
         <argument
             android:name="confirmSelectedPoojaArgs"
-            app:argType="com.example.templelinks.data.model.Pujas" />
+            app:argType="com.example.templelinks.data.model.Pujas[]"
+            app:nullable="true" />
     </fragment>
 </navigation>

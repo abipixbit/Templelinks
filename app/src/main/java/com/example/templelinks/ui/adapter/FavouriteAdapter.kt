@@ -11,7 +11,8 @@ import com.example.templelinks.extensions.glide
 
 class FavouriteAdapter (val itemClick : (Temple) -> Unit) : ListAdapter<Temple, FavouriteAdapter.FavouriteViewHolder>(FavouriteDiffUtil()) {
 
-    class FavouriteViewHolder(val binding : LiveListItemBinding) : RecyclerView.ViewHolder(binding.root)
+    class FavouriteViewHolder(val binding: LiveListItemBinding) :
+        RecyclerView.ViewHolder(binding.root)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FavouriteAdapter.FavouriteViewHolder {
         return FavouriteViewHolder(LiveListItemBinding.inflate(LayoutInflater.from(parent.context), parent, false))
@@ -20,13 +21,12 @@ class FavouriteAdapter (val itemClick : (Temple) -> Unit) : ListAdapter<Temple, 
     override fun onBindViewHolder(holder: FavouriteAdapter.FavouriteViewHolder, position: Int) {
         val currentItem = getItem(position)
         holder.binding.tvLiveTitle.text = currentItem.locale?.name
-        holder.itemView.glide(currentItem.imageUrl.toString(), holder.binding.ivLive)
-
-        holder.itemView.setOnClickListener {
-            itemClick(currentItem)
+        holder.itemView.apply {
+            glide(currentItem.imageUrl.toString(), holder.binding.ivLive)
+            setOnClickListener {
+                itemClick(currentItem)
+            }
         }
-
-
     }
 }
 

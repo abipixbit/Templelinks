@@ -7,6 +7,9 @@ import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class Families (
+
+    var isSelected : Boolean? = false,
+
     @SerializedName("id")
     val id : Int?,
 

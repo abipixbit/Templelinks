@@ -23,34 +23,28 @@ class HomeCategoryAdapterLarge(val favClick : (List<Temple>) -> Unit, val itemCl
     }
     override fun onBindViewHolder(holder: HomeCategoryAdapterLarge.ViewHolder, position: Int) {
 
-//        holder.itemView.animation = AnimationUtils.loadAnimation(TempleApplication.appContext, R.anim.anim_recycler_view)
         val currentItem = getItem(position)
-        holder.itemView.glide(currentItem?.imageUrl.toString(), holder.binding.ivTemples)
-        holder.binding.tvTempleName.text = currentItem?.locale?.name
-
-        if (currentItem.isFavourite) {
-
-            holder.binding.ivLikeButton.imageTintList = ColorStateList.valueOf(ContextCompat.getColor(TempleApplication.appContext,R.color.app_color))
-            holder.binding.ivLikeButtonBackground.imageTintList = ColorStateList.valueOf(ContextCompat.getColor(TempleApplication.appContext,R.color.like_color))
+        holder.itemView.apply {
+            glide(currentItem?.imageUrl.toString(), holder.binding.ivTemples)
+            setOnClickListener { itemClick(currentItem) }
         }
+        holder.binding.apply {
+            tvTempleName.text = currentItem?.locale?.name
 
+            if (currentItem.isFavourite) {
+                ivLikeButton.imageTintList = ColorStateList.valueOf(ContextCompat.getColor(TempleApplication.appContext, R.color.app_color))
+                ivLikeButtonBackground.apply {
+                    imageTintList = ColorStateList.valueOf(ContextCompat.getColor(TempleApplication.appContext, R.color.like_color))
+                    setOnClickListener { favClick(listOf(currentItem))
+                        notifyItemChanged(position) }
+                }
+            }
 
-        else {
-            holder.binding.ivLikeButton.imageTintList = ColorStateList.valueOf(ContextCompat.getColor(TempleApplication.appContext,R.color.unlike_grey_color))
-            holder.binding.ivLikeButtonBackground.imageTintList = ColorStateList.valueOf(ContextCompat.getColor(TempleApplication.appContext,R.color.unlike_color))
+            else {
+                ivLikeButton.imageTintList = ColorStateList.valueOf(ContextCompat.getColor(TempleApplication.appContext, R.color.unlike_grey_color))
+                holder.binding.ivLikeButtonBackground.imageTintList = ColorStateList.valueOf(ContextCompat.getColor(TempleApplication.appContext, R.color.unlike_color))
+            }
         }
-
-
-        holder.binding.ivLikeButtonBackground.setOnClickListener {
-            favClick(listOf(currentItem))
-            notifyItemChanged(position)
-        }
-
-        holder.itemView.setOnClickListener {
-            itemClick(currentItem)
-        }
-
-
     }
 }
 

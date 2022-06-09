@@ -23,17 +23,21 @@
 
             <TextView
                 android:id="@+id/tvConfirmPoojaName"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
+                android:textStyle="bold"
+                android:layout_marginEnd="@dimen/margin_normal"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/margin_large"
                 android:layout_marginTop="@dimen/margin_large"
                 android:text="TextView"
+                app:layout_constraintEnd_toStartOf="@+id/tvConfirmPoojaAmount"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/tvConfirmPoojaAmount"
                 android:layout_width="wrap_content"
+                android:textStyle="bold"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/margin_large"
                 android:layout_marginEnd="@dimen/margin_large"

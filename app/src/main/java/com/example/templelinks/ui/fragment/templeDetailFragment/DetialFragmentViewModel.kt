@@ -1,4 +1,4 @@
-package com.example.templelinks.ui.fragment.detailfragment
+package com.example.templelinks.ui.fragment.templeDetailFragment
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -8,6 +8,7 @@ import kotlinx.coroutines.launch
 class DetailFragmentViewModel : ViewModel() {
 
    private val favouriteRepository = FavouriteRepository()
+   var isSeeMore = true
 
     fun setFavourite (id : Int?) {
         viewModelScope.launch {

@@ -1,4 +1,4 @@
-package com.example.templelinks.ui.fragment.homefragment
+package com.example.templelinks.ui.fragment.homeFragment
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -25,25 +25,17 @@ class HomeViewModel : ViewModel(), KoinComponent {
     private val favouriteRepository = FavouriteRepository()
     private val deitiesRepository = DeitiesRepository()
 
-
     private val _deities = MutableLiveData<ApiResponse<List<Deities>?>>()
-    val deities : LiveData<ApiResponse<List<Deities>?>>
-    get() = _deities
+    val deities : LiveData<ApiResponse<List<Deities>?>> = _deities
 
     private val _banners = MutableLiveData<ApiResponse<List<Banners>?>>()
-    val banners : LiveData<ApiResponse<List<Banners>?>>
-    get() = _banners
+    val banners : LiveData<ApiResponse<List<Banners>?>> = _banners
 
     private val _homeCategory = MutableLiveData<ApiResponse<List<TemplesResponse>?>>()
-    val homeCategory : LiveData<ApiResponse<List<TemplesResponse>?>>
-    get() = _homeCategory
+    val homeCategory : LiveData<ApiResponse<List<TemplesResponse>?>> = _homeCategory
 
     private val _favourite = MutableLiveData<String>()
-    val favourite : LiveData<String>
-        get() = _favourite
-
-    private val favouriteEventBus by inject<FavouriteEventBus>()
-    suspend fun favourite() = favouriteEventBus.favourite(FavEvent.FAVOURITE)
+    val favourite : LiveData<String> = _favourite
 
 
     init {

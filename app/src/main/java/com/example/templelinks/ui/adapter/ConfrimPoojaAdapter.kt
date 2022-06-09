@@ -23,10 +23,11 @@ class ConfrimPoojaAdapter : ListAdapter<Pujas, ConfrimPoojaAdapter.ConfirmPoojaV
 
     override fun onBindViewHolder(holder: ConfirmPoojaViewHolder, position: Int) {
         val currentItem = getItem(position)
-        holder.binding.tvConfirmPoojaName.text = currentItem.translation.pujaName
-        holder.binding.tvConfirmPoojaAmount.text = TempleApplication.appContext.getString(R.string.pooja_price, currentItem.price)
-
-        loadFamilies(holder.binding.rvConfirmPoojaFamilyName, currentItem.selectedFamilies)
+        holder.binding.apply {
+            tvConfirmPoojaName.text = currentItem.translation.pujaName
+            tvConfirmPoojaAmount.text = TempleApplication.appContext.getString(R.string.pooja_price, currentItem.price)
+            loadFamilies(this.rvConfirmPoojaFamilyName, currentItem.selectedFamilies)
+        }
 
     }
 

@@ -26,10 +26,11 @@ class DeitiesListAdapter (val itemClick : (Deities) -> Unit) : ListAdapter<Deiti
     override fun onBindViewHolder(holder: DeitiesViewHolder, position: Int) {
 
         val currentItem = getItem(position)
-        holder.itemView.glide(currentItem.imageUrl.toString(), holder.binding.ivGodsListItem)
-
-        holder.itemView.setOnClickListener {
-            itemClick(currentItem)
+        holder.itemView.apply {
+            glide(currentItem.imageUrl.toString(), holder.binding.ivGodsListItem)
+            setOnClickListener {
+                itemClick(currentItem)
+            }
         }
     }
 

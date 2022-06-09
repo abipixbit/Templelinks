@@ -1,11 +1,10 @@
-package com.example.templelinks.ui.fragment.galleryfragment
+package com.example.templelinks.ui.fragment.galleryFragment
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.example.templelinks.R
 import com.example.templelinks.databinding.FragmentAudioBinding
 
 

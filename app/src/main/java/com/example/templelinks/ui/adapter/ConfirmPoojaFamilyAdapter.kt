@@ -1,5 +1,6 @@
 package com.example.templelinks.ui.adapter
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
@@ -19,6 +20,7 @@ class ConfirmPoojaFamilyAdapter : ListAdapter<Families, ConfirmPoojaFamilyAdapte
 
     override fun onBindViewHolder(holder: ConfirmFamViewHolder, position: Int) {
         val currentItem = getItem(position)
+        Log.d("Confirm", currentItem.toString())
 
         holder.binding.tvConfirmFamName.text = currentItem.name
 

@@ -1,4 +1,4 @@
-package com.example.templelinks.ui.fragment.accountfragment
+package com.example.templelinks.ui.fragment.accountFragment
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

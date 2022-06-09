@@ -1,4 +1,4 @@
-package com.example.templelinks.ui.fragment.homefragment
+package com.example.templelinks.ui.fragment.homeFragment
 
 import android.os.Bundle
 import android.os.Handler
@@ -29,7 +29,6 @@ class HomeFragment : Fragment() {
     private lateinit var binding : FragmentHomeBinding
     private val viewModel : HomeViewModel by viewModels()
     private var bannerSize = 0
-    private val bannerList = ArrayList<Banners>()
     private lateinit var deitiesAdapter : DeitiesListAdapter
     private lateinit var homeCategoryAdapter : HomeCategoryListAdapter
 
@@ -39,16 +38,6 @@ class HomeFragment : Fragment() {
     ): View {
         // Inflate the layout for this fragment
         binding = FragmentHomeBinding.inflate(layoutInflater, container,false)
-        binding.toolBarHome.inflateMenu(R.menu.menu_home)
-
-
-        binding.toolBarHome.setOnMenuItemClickListener {
-            when(it.itemId) {
-                R.id.favourite -> requireView().navigation(R.id.action_homeFragment_to_favouriteFragment)
-            }
-            true
-        }
-
 
         deitiesAdapter = DeitiesListAdapter { deities ->
             Navigation.findNavController(requireView()).navigate(HomeFragmentDirections.actionHomeFragmentToDeitiesFragment(deities))
@@ -70,19 +59,26 @@ class HomeFragment : Fragment() {
             Navigation.findNavController(requireView()).navigate(HomeFragmentDirections.actionHomeFragmentToDetailFragment(currentTemple))
         })
 
-            viewModel.favourite.observe(viewLifecycleOwner) { message ->
-                requireView().snackBarLike(message)
-            }
-
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        displayUI()
+        binding.toolBarHome.apply {
+            inflateMenu(R.menu.menu_home)
+            setOnMenuItemClickListener {
+                when(it.itemId) {
+                    R.id.favourite -> requireView().navigation(R.id.action_homeFragment_to_favouriteFragment) }
+                true
+            }
+        }
+
+
+        setupUI()
+
         binding.refreshLayout.setOnRefreshListener {
-            displayUI()
+            setupUI()
             binding.refreshLayout.isRefreshing = false
         }
 
@@ -102,7 +98,7 @@ class HomeFragment : Fragment() {
 
     }
 
-    private fun displayUI() {
+    private fun setupUI() {
         loadDeities()
         loadHomeBanner()
         loadHomeCategory()
@@ -139,25 +135,30 @@ class HomeFragment : Fragment() {
 
            when(apiResponse.apiStatus) {
                ApiStatus.SUCCESS -> {
-                   binding.homeBanner.cardViewHomeBanner.visibility = View.VISIBLE
-                   binding.shimmerHomeBanner.visibility = View.INVISIBLE
-                   binding.krishnaGeethBanner.cardViewKrishnaGeethBanner.visibility = View.VISIBLE
 
-                   apiResponse.data!!.let { banners ->
-                       bannerSize = banners.size
-                       Log.d("bannerSize",banners.size.toString())
-                       binding.homeBanner.viewPagerHomeBanner.adapter = HomeBannerAdapter(banners)
-                       requireView().glide(banners.get(0).imageUrl.toString(), binding.krishnaGeethBanner.krishnaGeethBanner)
+                   binding.apply {
+                       homeBanner.cardViewHomeBanner.visibility = View.VISIBLE
+                       shimmerHomeBanner.visibility = View.INVISIBLE
+                       krishnaGeethBanner.cardViewKrishnaGeethBanner.visibility = View.VISIBLE
+
+                       apiResponse.data!!.let { banners ->
+                           bannerSize = banners.size
+                           Log.d("bannerSize",banners.size.toString())
+                           homeBanner.viewPagerHomeBanner.adapter = HomeBannerAdapter(banners)
+                           requireView().glide(banners.get(0).imageUrl.toString(), binding.krishnaGeethBanner.krishnaGeethBanner)
+                       }
                    }
                }
+
                ApiStatus.ERROR -> apiResponse.message.let {
                    Log.d("HomeFragBannerFail",it.toString())
                }
 
                ApiStatus.LOADING -> {
-                   binding.shimmerHomeBanner.visibility = View.VISIBLE
-                   binding.krishnaGeethBanner.cardViewKrishnaGeethBanner.visibility = View.INVISIBLE
-                   binding.homeBanner.cardViewHomeBanner.visibility = View.INVISIBLE
+                   binding.apply {
+                       shimmerHomeBanner.visibility = View.VISIBLE
+                       krishnaGeethBanner.cardViewKrishnaGeethBanner.visibility = View.INVISIBLE
+                       homeBanner.cardViewHomeBanner.visibility = View.INVISIBLE }
                }
            }
        }
@@ -169,8 +170,10 @@ class HomeFragment : Fragment() {
 
             when(apiResponse.apiStatus) {
                 ApiStatus.SUCCESS -> {
-                    binding.rvDeities.adapter = deitiesAdapter
-                    binding.shimmerDeities.visibility = View.INVISIBLE
+                    binding.apply {
+                        rvDeities.adapter = deitiesAdapter
+                        shimmerDeities.visibility = View.INVISIBLE
+                    }
                     apiResponse.data.let { deities ->
                         deitiesAdapter.submitList(deities)
                         Log.d("HomeFragBannerSuc", deities.toString())
@@ -185,11 +188,6 @@ class HomeFragment : Fragment() {
                 }
             }
         }
-    }
-
-    override fun onDestroy() {
-        EventBus.getDefault().unregister(this)
-        super.onDestroy()
     }
 
 }

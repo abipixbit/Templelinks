@@ -1,4 +1,4 @@
-package com.example.templelinks.ui.fragment.deitiesfragment
+package com.example.templelinks.ui.fragment.deitiesFragment
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -14,8 +14,7 @@ class DeitiesViewModel : ViewModel() {
     private val deitiesRepository = DeitiesRepository()
 
     private val _deitiesTemple = MutableLiveData<ApiResponse<List<Temple>?>>()
-    val deitiesTemple : LiveData<ApiResponse<List<Temple>?>>
-        get() = _deitiesTemple
+    val deitiesTemple : LiveData<ApiResponse<List<Temple>?>> = _deitiesTemple
 
     fun loadDeitiesTemple(deitiesID : Int?) {
         viewModelScope.launch {

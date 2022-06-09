@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/grey_color"
-    tools:context=".ui.fragment.pujabookingfragment.PujaBookingFragment">
+    tools:context=".ui.fragment.pujabookingFragment.PujaBookingFragment">
 
     <include
         android:id="@+id/toolBarPujaBooking"

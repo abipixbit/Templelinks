@@ -1,4 +1,4 @@
-package com.example.templelinks.ui.fragment.pujabookingfragment
+package com.example.templelinks.ui.fragment.pujabookingFragment
 
 import android.util.Log
 import androidx.lifecycle.LiveData
@@ -8,13 +8,12 @@ import androidx.lifecycle.viewModelScope
 import com.example.templelinks.data.model.Deities
 import com.example.templelinks.data.model.Families
 import com.example.templelinks.data.model.Pujas
-import com.example.templelinks.data.model.SelectedPuja
 import com.example.templelinks.data.model.response.ApiResponse
 import com.example.templelinks.data.repository.DeitiesRepository
 import com.example.templelinks.data.repository.FamiliesRepository
 import com.example.templelinks.data.repository.PujaRepository
-import com.example.templelinks.enums.ApiStatus
 import kotlinx.coroutines.launch
+import java.util.*
 
 class PujaBookingViewModel : ViewModel() {
 
@@ -30,14 +29,20 @@ class PujaBookingViewModel : ViewModel() {
     val families : LiveData<ApiResponse<List<Families>?>>
     get() = _families
 
-
+    var pujaTempData : Map<Int?, List<Pujas>> = mutableMapOf()
     var selectedPooja = mutableListOf<Pujas>()
+
+    val calendar: Calendar = Calendar.getInstance()
 
     init {
     loadFamilies()
     Log.d("PujaBookingViewModel", "View Model Created")
     }
 
+    fun addPujaTempData(deityId : Int?, pujas : List<Pujas>) {
+        pujaTempData = pujaTempData.plus(deityId to pujas)
+        Log.d("tempData", pujaTempData.toString())
+    }
 
     fun loadDeities(templeId : Int?) {
         viewModelScope.launch {
@@ -55,6 +60,11 @@ class PujaBookingViewModel : ViewModel() {
         viewModelScope.launch {
             _families.value = FamiliesRepository().loadFamilies()
         }
+    }
+
+    fun addSelectedPoojas(listPujas : MutableList<Pujas>) {
+        selectedPooja = (selectedPooja + listPujas) as MutableList<Pujas>
+        Log.d("selectedPooja", selectedPooja.toString())
     }
 
     override fun onCleared() {
