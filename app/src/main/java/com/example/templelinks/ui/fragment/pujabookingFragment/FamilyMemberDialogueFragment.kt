@@ -55,19 +55,17 @@ class FamilyMemberDialogueFragment(private val pujas: Pujas, val selectedPujas :
         binding.etTimeSchedule.setAdapter(arrayAdapter)
 
         familyAdapter = FamilyAdapter({ familiesAdd->
-
+                familiesAdd.isSelected = true
                 selectedFamily.add(familiesAdd)
-                pujas.isSelected = true
                 pujas.selectedFamilies = selectedFamily
                 Log.d("FamilyAdd", selectedFamily.toString())
 
 
         }, { familyRemove ->
+            familyRemove.isSelected = false
             selectedFamily.remove(familyRemove)
-            pujas.isSelected = false
             pujas.selectedFamilies = selectedFamily
             Log.d("FamilyRemove", selectedFamily.toString())
-
         })
 
         loadFamilies()
@@ -78,15 +76,8 @@ class FamilyMemberDialogueFragment(private val pujas: Pujas, val selectedPujas :
             }
 
             btnSelect.setOnClickListener {
-                if (pujas.isSelected == true) {
                     selectedPujas(mutableListOf(pujas))
                     dismiss()
-                    selectedFamily.clear()
-                }
-                else {
-                    dismiss()
-                    selectedFamily.clear()
-                }
             }
         }
     }

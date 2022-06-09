@@ -73,7 +73,7 @@ class PujaBookingFragment : Fragment() {
                 )
             }
 
-            binding.btnBook.setOnClickListener {
+            btnBook.setOnClickListener {
                 val currentTemple = arguments.currentTemple.locale
                 if (findNavController().currentDestination?.id == R.id.pujaBookingFragment) {
                     findNavController().navigate(PujaBookingFragmentDirections.actionPujaBookingFragmentToFinalBokingFragment

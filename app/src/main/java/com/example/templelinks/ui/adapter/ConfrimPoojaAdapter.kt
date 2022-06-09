@@ -1,6 +1,7 @@
 package com.example.templelinks.ui.adapter
 
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
@@ -23,6 +24,7 @@ class ConfrimPoojaAdapter : ListAdapter<Pujas, ConfrimPoojaAdapter.ConfirmPoojaV
 
     override fun onBindViewHolder(holder: ConfirmPoojaViewHolder, position: Int) {
         val currentItem = getItem(position)
+        Log.d("ConfirmAdapter", currentItem.toString())
         holder.binding.apply {
             tvConfirmPoojaName.text = currentItem.translation.pujaName
             tvConfirmPoojaAmount.text = TempleApplication.appContext.getString(R.string.pooja_price, currentItem.price)

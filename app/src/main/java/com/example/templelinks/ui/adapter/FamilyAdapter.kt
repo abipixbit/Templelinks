@@ -35,12 +35,12 @@ class FamilyAdapter(val addItemClick : (Families)-> Unit, val removeItemClick : 
 
             holder.itemView.setOnClickListener {
                     if (currentItem.isSelected == true) {
-                    currentItem.isSelected = false
                     removeItemClick(currentItem)
+                    currentItem.isSelected = false
                 }
                 else {
-                    currentItem.isSelected = true
                     addItemClick(currentItem)
+                    currentItem.isSelected = true
                 }
                 notifyItemChanged(position)
             }

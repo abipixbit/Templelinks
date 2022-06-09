@@ -21,7 +21,6 @@ class ConfirmPoojaFamilyAdapter : ListAdapter<Families, ConfirmPoojaFamilyAdapte
     override fun onBindViewHolder(holder: ConfirmFamViewHolder, position: Int) {
         val currentItem = getItem(position)
         Log.d("Confirm", currentItem.toString())
-
         holder.binding.tvConfirmFamName.text = currentItem.name
 
     }

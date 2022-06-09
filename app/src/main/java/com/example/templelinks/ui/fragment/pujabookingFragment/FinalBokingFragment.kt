@@ -32,8 +32,9 @@ class FinalBokingFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupUI()
+        Log.d("Arguments", arguments.toString())
+        binding.rvConfirmPooja.adapter = confirmPoojaAdapter
         confirmPoojaAdapter.submitList(arguments.confirmSelectedPoojaArgs?.toMutableList())
-
     }
 
     private fun setupUI() {
@@ -41,8 +42,6 @@ class FinalBokingFragment : Fragment() {
             tvTempleNameFinalBooking.text = arguments.templeName
             tvTempleAddressFinalBooking.text = arguments.templeAddress
             toolBarFinalPujaBooking.tvToolBar.text = getString(R.string.pooja_booking)
-            rvConfirmPooja.adapter = confirmPoojaAdapter
-
         }
     }
 }
