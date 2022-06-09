@@ -76,8 +76,13 @@ class FamilyMemberDialogueFragment(private val pujas: Pujas, val selectedPujas :
             }
 
             btnSelect.setOnClickListener {
-                selectedPujas(mutableListOf(pujas))
-                dismiss()
+                if (pujas.isSelected == true) {
+                    selectedPujas(mutableListOf(pujas))
+                    dismiss()
+                }
+                else {
+                    dismiss()
+                }
             }
         }
     }
