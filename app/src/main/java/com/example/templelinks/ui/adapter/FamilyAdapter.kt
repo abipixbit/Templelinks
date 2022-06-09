@@ -44,7 +44,6 @@ class FamilyAdapter(val addItemClick : (Families)-> Unit, val removeItemClick : 
                 }
                 notifyItemChanged(position)
             }
-
         }
     }
 }

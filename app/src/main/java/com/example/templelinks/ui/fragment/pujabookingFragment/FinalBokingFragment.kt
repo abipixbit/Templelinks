@@ -42,6 +42,7 @@ class FinalBokingFragment : Fragment() {
             tvTempleAddressFinalBooking.text = arguments.templeAddress
             toolBarFinalPujaBooking.tvToolBar.text = getString(R.string.pooja_booking)
             rvConfirmPooja.adapter = confirmPoojaAdapter
+
         }
     }
 }

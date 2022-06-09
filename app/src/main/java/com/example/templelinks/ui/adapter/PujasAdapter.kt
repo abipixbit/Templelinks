@@ -24,6 +24,13 @@ class PujasAdapter(val descriptionClick : (Pujas) -> Unit, val selectPuja : (Puj
 
         val currentItem = getItem(position)
 
+        if (currentItem.isSelected == true) {
+            holder.binding.ivTick.visibility = View.VISIBLE
+        }
+        else {
+            holder.binding.ivTick.visibility = View.GONE
+        }
+
         holder.binding.apply {
             tvItemName.text = currentItem.translation.pujaName
             tvPoojaPrice.text = TempleApplication.appContext.getString(R.string.pooja_price, currentItem.price)
@@ -35,14 +42,6 @@ class PujasAdapter(val descriptionClick : (Pujas) -> Unit, val selectPuja : (Puj
 
         holder.itemView.setOnClickListener {
            selectPuja(currentItem)
-            if (currentItem.isSelected == true) {
-                holder.binding.ivTick.visibility = View.VISIBLE
-            }
-
-            else {
-                holder.binding.ivTick.visibility = View.GONE
-            }
-            notifyItemChanged(position)
         }
     }
 }

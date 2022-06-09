@@ -53,16 +53,18 @@ class FamilyMemberDialogueFragment(private val pujas: Pujas, val selectedPujas :
 
         val arrayAdapter = ArrayAdapter(requireContext(), R.layout.time_schedule_dropdown, resources.getStringArray(R.array.time_schedule_dropdown))
         binding.etTimeSchedule.setAdapter(arrayAdapter)
+
         familyAdapter = FamilyAdapter({ familiesAdd->
-            if (!selectedFamily.contains(familiesAdd)) {
+
                 selectedFamily.add(familiesAdd)
                 pujas.isSelected = true
                 pujas.selectedFamilies = selectedFamily
                 Log.d("FamilyAdd", selectedFamily.toString())
-            }
+
 
         }, { familyRemove ->
             selectedFamily.remove(familyRemove)
+            pujas.isSelected = false
             pujas.selectedFamilies = selectedFamily
             Log.d("FamilyRemove", selectedFamily.toString())
 
@@ -79,9 +81,11 @@ class FamilyMemberDialogueFragment(private val pujas: Pujas, val selectedPujas :
                 if (pujas.isSelected == true) {
                     selectedPujas(mutableListOf(pujas))
                     dismiss()
+                    selectedFamily.clear()
                 }
                 else {
                     dismiss()
+                    selectedFamily.clear()
                 }
             }
         }

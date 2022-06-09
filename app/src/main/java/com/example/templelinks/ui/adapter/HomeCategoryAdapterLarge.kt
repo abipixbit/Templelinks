@@ -33,17 +33,14 @@ class HomeCategoryAdapterLarge(val favClick : (List<Temple>) -> Unit, val itemCl
 
             if (currentItem.isFavourite) {
                 ivLikeButton.imageTintList = ColorStateList.valueOf(ContextCompat.getColor(TempleApplication.appContext, R.color.app_color))
-                ivLikeButtonBackground.apply {
-                    imageTintList = ColorStateList.valueOf(ContextCompat.getColor(TempleApplication.appContext, R.color.like_color))
-                    setOnClickListener { favClick(listOf(currentItem))
-                        notifyItemChanged(position) }
-                }
+                ivLikeButtonBackground.imageTintList = ColorStateList.valueOf(ContextCompat.getColor(TempleApplication.appContext, R.color.like_color))
             }
-
             else {
                 ivLikeButton.imageTintList = ColorStateList.valueOf(ContextCompat.getColor(TempleApplication.appContext, R.color.unlike_grey_color))
                 holder.binding.ivLikeButtonBackground.imageTintList = ColorStateList.valueOf(ContextCompat.getColor(TempleApplication.appContext, R.color.unlike_color))
             }
+            ivLikeButtonBackground.setOnClickListener { favClick(listOf(currentItem))
+                notifyItemChanged(position) }
         }
     }
 }
