@@ -39,7 +39,9 @@ class PujasAdapter(val descriptionClick : (Pujas) -> Unit, val selectPuja : (Puj
 
         holder.itemView.setOnClickListener {
            selectPuja(currentItem)
+           notifyItemChanged(position)
         }
+
     }
 }
 
