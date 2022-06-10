@@ -33,7 +33,7 @@ class FamilyMemberDialogueFragment(private val pujas: Pujas, val selectedPujas :
         // Inflate the layout for this fragment
         binding = FragmentFamilyMemberDialogueBinding.inflate(layoutInflater, container, false)
         viewModel = ViewModelProvider(requireParentFragment())[PujaBookingViewModel::class.java]
-        selectedFamily.clear()
+
 
         return binding.root
     }
@@ -67,7 +67,8 @@ class FamilyMemberDialogueFragment(private val pujas: Pujas, val selectedPujas :
             Log.d("FamilyRemove", selectedFamily.toString())
         })
 
-        loadFamilies()
+            loadFamilies()
+
 
         binding.apply {
             ivExit.setOnClickListener {

@@ -24,12 +24,9 @@ class PujasAdapter(val descriptionClick : (Pujas) -> Unit, val selectPuja : (Puj
 
         val currentItem = getItem(position)
 
-        if (currentItem.isSelected == true) {
-            holder.binding.ivTick.visibility = View.VISIBLE
-        }
-        else {
-            holder.binding.ivTick.visibility = View.GONE
-        }
+        holder.binding.ivTick.visibility =
+            if (currentItem.isSelected == true) { View.VISIBLE }
+            else { View.GONE }
 
         holder.binding.apply {
             tvItemName.text = currentItem.translation.pujaName

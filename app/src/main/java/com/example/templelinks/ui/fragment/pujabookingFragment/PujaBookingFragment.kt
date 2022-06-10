@@ -37,7 +37,7 @@ class PujaBookingFragment : Fragment() {
     ): View {
         // Inflate the layout for this fragment
         binding = FragmentPujaBookingBinding.inflate(layoutInflater, container, false)
-        updateUI()
+        setupUI()
         return binding.root
     }
 
@@ -121,7 +121,7 @@ class PujaBookingFragment : Fragment() {
         binding.includePoojaBooking.tvBookingDate.text = sdf.format(cal.time)
     }
 
-    private fun updateUI() {
+    private fun setupUI() {
         val currentTemple = arguments.currentTemple
         binding.apply {
             toolBarPujaBooking.apply {
