@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Android Projects/Templelinks/app/src/main/res/layout/confirm_puja_member_list_item.xml" value="0.5" />
         <entry key="..\:/Android Projects/Templelinks/app/src/main/res/layout/fragment_home.xml" value="0.5" />
         <entry key="..\:/Android Projects/Templelinks/app/src/main/res/layout/home_banner_slider.xml" value="0.3651041666666667" />
         <entry key="..\:/Android Projects/Templelinks/app/src/main/res/layout/home_banner_view_pager.xml" value="0.3651041666666667" />
@@ -78,7 +79,7 @@
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_16_PREVIEW" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_16" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">

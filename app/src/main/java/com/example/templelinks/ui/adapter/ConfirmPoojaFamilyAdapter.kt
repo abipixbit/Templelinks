@@ -21,12 +21,25 @@ class ConfirmPoojaFamilyAdapter : ListAdapter<Families, ConfirmPoojaFamilyAdapte
     override fun onBindViewHolder(holder: ConfirmFamViewHolder, position: Int) {
         val currentItem = getItem(position)
         Log.d("Confirm", currentItem.toString())
-        holder.binding.tvConfirmFamName.text = currentItem.name
+        holder.binding.apply {
+
+            var count = tvConfirmCount.text.toString().toInt()
+
+            tvConfirmFamName.text = currentItem.name
+
+            ivAdd.setOnClickListener { count += 1
+            tvConfirmCount.text = count.toString()
+            }
+
+            ivMinus.setOnClickListener {
+                if (count > 1) { count -= 1 }
+            tvConfirmCount.text = count.toString()
+            }
+
+        }
 
     }
 }
-
-
 
 class ConfirmFamDiffUtils : DiffUtil.ItemCallback<Families>() {
     override fun areItemsTheSame(oldItem: Families, newItem: Families): Boolean {

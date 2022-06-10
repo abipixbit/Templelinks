@@ -36,6 +36,7 @@
     <string name="banking_charges">Banking Charges</string>
     <string name="gst">GST</string>
     <string name="total_amount">Total Amount</string>
+    <string name="_1">1</string>
 
     <string-array name="gods_photo">
         <item>"https://www.hindisoch.com/wp-content/uploads/2015/03/Lord-Ganesha-Wallpaper.jpg"</item>
