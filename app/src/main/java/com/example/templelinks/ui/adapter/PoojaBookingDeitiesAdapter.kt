@@ -25,7 +25,7 @@ class PoojaBookingDeitiesAdapter (val itemClick : (Int?) -> Unit) : ListAdapter<
 
     override fun onBindViewHolder(holder: PoojaBookingDeitiesAdapter.PoojaBookingViewHolder, position: Int) {
 
-        if(position ==0 && isInit) {
+        if(isInit) {
             itemClick(currentList[0].id)
             isInit = false
         }
