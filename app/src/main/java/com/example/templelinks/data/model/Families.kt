@@ -26,14 +26,16 @@ data class Families (
     val nakshathra : Nakshathra?
     ) : Parcelable
 
-@Parcelize
-data class Nakshathra (
+    @Parcelize
+    data class Nakshathra (
     @SerializedName("locale")
+
     val locale : NakshathraLocale?
     ) : Parcelable
 
-@Parcelize
-data class NakshathraLocale(
+    @Parcelize
+    data class NakshathraLocale(
     @SerializedName("name")
+
     val nakshathraName : String?
-) : Parcelable
+    ) : Parcelable

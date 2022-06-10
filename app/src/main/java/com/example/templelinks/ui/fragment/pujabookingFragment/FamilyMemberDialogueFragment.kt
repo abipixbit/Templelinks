@@ -56,6 +56,7 @@ class FamilyMemberDialogueFragment(private val pujas: Pujas, val selectedPujas :
 
         familyAdapter = FamilyAdapter({ familiesAdd->
                 familiesAdd.isSelected = true
+                pujas.isSelected = true
                 selectedFamily.add(familiesAdd)
                 pujas.selectedFamilies = selectedFamily
                 Log.d("FamilyAdd", selectedFamily.toString())
@@ -63,6 +64,7 @@ class FamilyMemberDialogueFragment(private val pujas: Pujas, val selectedPujas :
 
         }, { familyRemove ->
             familyRemove.isSelected = false
+            pujas.isSelected = false
             selectedFamily.remove(familyRemove)
             pujas.selectedFamilies = selectedFamily
             Log.d("FamilyRemove", selectedFamily.toString())
@@ -76,9 +78,13 @@ class FamilyMemberDialogueFragment(private val pujas: Pujas, val selectedPujas :
             }
 
             btnSelect.setOnClickListener {
+                    if (pujas.isSelected == true) {
                     selectedPujas(mutableListOf(pujas))
-                    dismiss()
+                    dismiss() }
+
+                    else { dismiss() }
             }
+
         }
     }
 
