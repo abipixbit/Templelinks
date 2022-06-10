@@ -1,6 +1,7 @@
 package com.example.templelinks.ui.adapter
 
 import android.opengl.Visibility
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,6 +15,9 @@ class FamilyAdapter(val addItemClick : (Families)-> Unit, val removeItemClick : 
 
     class FamilyViewHolder(val binding : FamilyMemberListItemBinding) : RecyclerView.ViewHolder(binding.root)
 
+    init {
+        Log.d("FamilyAdapter", "Created")
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FamilyAdapter.FamilyViewHolder {
         return FamilyViewHolder(FamilyMemberListItemBinding.inflate(LayoutInflater.from(parent.context), parent, false))
@@ -32,18 +36,18 @@ class FamilyAdapter(val addItemClick : (Families)-> Unit, val removeItemClick : 
             else {
                 ivCheck.visibility = View.GONE
             }
+        }
 
-            holder.itemView.setOnClickListener {
-                    if (currentItem.isSelected == true) {
-                    removeItemClick(currentItem)
-                    currentItem.isSelected = false
-                }
-                else {
-                    addItemClick(currentItem)
-                    currentItem.isSelected = true
-                }
-                notifyItemChanged(position)
+        holder.itemView.setOnClickListener {
+            if (currentItem.isSelected == true) {
+                currentItem.isSelected = false
+                removeItemClick(currentItem)
             }
+            else {
+                currentItem.isSelected = true
+                addItemClick(currentItem)
+            }
+            notifyItemChanged(position)
         }
     }
 }

@@ -55,15 +55,12 @@ class FamilyMemberDialogueFragment(private val pujas: Pujas, val selectedPujas :
         binding.etTimeSchedule.setAdapter(arrayAdapter)
 
         familyAdapter = FamilyAdapter({ familiesAdd->
-                familiesAdd.isSelected = true
                 pujas.isSelected = true
                 selectedFamily.add(familiesAdd)
                 pujas.selectedFamilies = selectedFamily
                 Log.d("FamilyAdd", selectedFamily.toString())
 
-
         }, { familyRemove ->
-            familyRemove.isSelected = false
             pujas.isSelected = false
             selectedFamily.remove(familyRemove)
             pujas.selectedFamilies = selectedFamily
