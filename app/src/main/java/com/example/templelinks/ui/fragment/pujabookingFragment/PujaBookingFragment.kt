@@ -30,7 +30,6 @@ class PujaBookingFragment : Fragment() {
     private lateinit var deitiesAdapter : PoojaBookingDeitiesAdapter
     private lateinit var pujasAdapter: PujasAdapter
 
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -46,15 +45,8 @@ class PujaBookingFragment : Fragment() {
         val calendar = viewModel.calendar
 
         deitiesAdapter = PoojaBookingDeitiesAdapter { deitiesId ->
-            val pujaTempData = viewModel.pujaTempData
-            if (pujaTempData.contains(deitiesId)) {
-                pujasAdapter.submitList(pujaTempData.getValue(deitiesId))
-                Log.d("MapIf", pujaTempData.toString())
-            } else {
                 viewModel.loadPujas(arguments.currentTemple.id, deitiesId)
                 loadPujas()
-                Log.d("MapElse", pujaTempData.toString())
-            }
         }
 
         val datePickerDialog = DatePickerDialog.OnDateSetListener { datePicker, year, month, date ->
@@ -106,10 +98,11 @@ class PujaBookingFragment : Fragment() {
                             .setCancelable(false)
                             .setPositiveButton("Close") { _, _ -> }
                             .show()}
-        ) { clickedPujas ->
+        ) { clickedPujas, position ->
 
             val dialogue = FamilyMemberDialogueFragment(clickedPujas) { selectedPujas ->
                 viewModel.addSelectedPoojas(selectedPujas)
+                pujasAdapter.notifyItemChanged(position)
             }
             dialogue.show(childFragmentManager, "customDialogue")
         }
@@ -164,7 +157,15 @@ class PujaBookingFragment : Fragment() {
                 ApiStatus.SUCCESS -> {
                     binding.rvPujas.adapter = pujasAdapter
                     apiResponse.data?.let { pujas ->
-                    viewModel.addPujaTempData(pujas[0].deityId, pujas)
+
+                        val selectedPujaId =  viewModel.selectedPooja.map {
+                        it.translation.pujaId
+                    }
+                        pujas.forEach {
+                            if (selectedPujaId.contains(it.translation.pujaId))
+                                it.isSelected = true
+                        }
+
                     pujasAdapter.submitList(pujas)
                     Log.d("LoadPujaSuc", pujas.toString())
                     }

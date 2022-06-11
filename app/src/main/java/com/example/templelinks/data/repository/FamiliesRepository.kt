@@ -11,6 +11,8 @@ class FamiliesRepository {
 
     suspend fun loadFamilies() : ApiResponse<List<Families>?> {
 
+//        families = ApiResponse.loading()
+
         try {
             val response = apiResponse.loadFamilies()
             families = ApiResponse.success(response.data)

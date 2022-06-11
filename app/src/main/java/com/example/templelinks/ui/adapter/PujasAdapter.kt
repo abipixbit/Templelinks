@@ -11,7 +11,7 @@ import com.example.templelinks.TempleApplication
 import com.example.templelinks.data.model.Pujas
 import com.example.templelinks.databinding.PoojaBookingButtonListItemBinding
 
-class PujasAdapter(val descriptionClick : (Pujas) -> Unit, val selectPuja : (Pujas) -> Unit) : ListAdapter <Pujas, PujasAdapter.PujasViewHolder>(PujasDiffCall()) {
+class PujasAdapter(val descriptionClick : (Pujas) -> Unit, val selectPuja : (Pujas, Int) -> Unit) : ListAdapter <Pujas, PujasAdapter.PujasViewHolder>(PujasDiffCall()) {
 
     class PujasViewHolder(val binding : PoojaBookingButtonListItemBinding) : RecyclerView.ViewHolder(binding.root)
 
@@ -38,8 +38,8 @@ class PujasAdapter(val descriptionClick : (Pujas) -> Unit, val selectPuja : (Puj
         }
 
         holder.itemView.setOnClickListener {
-           selectPuja(currentItem)
-           notifyItemChanged(position)
+           selectPuja(currentItem, position)
+//           notifyItemChanged(position)
         }
 
     }

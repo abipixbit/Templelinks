@@ -25,6 +25,8 @@ class FamilyAdapter(val addItemClick : (Families)-> Unit, val removeItemClick : 
 
     override fun onBindViewHolder(holder: FamilyAdapter.FamilyViewHolder, position: Int) {
 
+        Log.d("FamilyAdapter", currentList.toString())
+        
         val currentItem = getItem(position)
         holder.binding.apply {
             tvMemberName.text = currentItem.name

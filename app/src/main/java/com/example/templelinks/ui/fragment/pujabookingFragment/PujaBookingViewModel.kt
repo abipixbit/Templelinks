@@ -25,23 +25,12 @@ class PujaBookingViewModel : ViewModel() {
     val pujas : LiveData<ApiResponse<List<Pujas>?>>
         get() = _pujas
 
-    private val _families = MutableLiveData<ApiResponse<List<Families>?>>()
-    val families : LiveData<ApiResponse<List<Families>?>>
-    get() = _families
-
-    var pujaTempData : Map<Int?, List<Pujas>> = mutableMapOf()
     var selectedPooja = mutableListOf<Pujas>()
 
     val calendar: Calendar = Calendar.getInstance()
 
     init {
-    loadFamilies()
     Log.d("PujaBookingViewModel", "View Model Created")
-    }
-
-    fun addPujaTempData(deityId : Int?, pujas : List<Pujas>) {
-        pujaTempData = pujaTempData.plus(deityId to pujas)
-        Log.d("tempData", pujaTempData.toString())
     }
 
     fun loadDeities(templeId : Int?) {
@@ -53,12 +42,6 @@ class PujaBookingViewModel : ViewModel() {
     fun loadPujas(templeId : Int?, deitiesId : Int?) {
         viewModelScope.launch {
             _pujas.value = PujaRepository().loadPujas(templeId, deitiesId)
-        }
-    }
-
-    private fun loadFamilies() {
-        viewModelScope.launch {
-            _families.value = FamiliesRepository().loadFamilies()
         }
     }
 
