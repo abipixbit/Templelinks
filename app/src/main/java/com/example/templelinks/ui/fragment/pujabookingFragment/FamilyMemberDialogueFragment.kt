@@ -47,7 +47,6 @@ class FamilyMemberDialogueFragment(private val pujas: Pujas, val selectedPujas :
         familyAdapter = FamilyAdapter { family->
 
                 if (family.isSelected == true) {
-                    pujas.isSelected = true
                     viewModel.addSelectedFamily(family)
                 }
                 else {
@@ -58,10 +57,10 @@ class FamilyMemberDialogueFragment(private val pujas: Pujas, val selectedPujas :
                     pujas.isSelected = false
                 }
                 else {
+                    pujas.isSelected = true
                     pujas.selectedFamilies = viewModel.selectedFamily
                     Log.d("FamilyAdd", viewModel.selectedFamily.toString())
                 }
-
         }
 
         binding.apply {
