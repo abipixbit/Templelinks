@@ -35,7 +35,7 @@ class FamilyMemberDialogueFragment(private val pujas: Pujas, val selectedPujas :
     ): View {
         // Inflate the layout for this fragment
         binding = FragmentFamilyMemberDialogueBinding.inflate(layoutInflater, container, false)
-        Log.d("pujasDialogFrag", pujas.toString())
+        Log.d("pujasDialogFrag", pujas.selectedFamilies.toString())
         return binding.root
     }
 
