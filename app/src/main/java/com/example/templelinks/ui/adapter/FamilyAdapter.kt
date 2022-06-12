@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.templelinks.data.model.Families
 import com.example.templelinks.databinding.FamilyMemberListItemBinding
 
-class FamilyAdapter(val addItemClick : (Families)-> Unit, val removeItemClick : (Families)-> Unit) : ListAdapter<Families, FamilyAdapter.FamilyViewHolder>(FamilyDIffUtil()) {
+class FamilyAdapter(val itemClick : (Families)-> Unit) : ListAdapter<Families, FamilyAdapter.FamilyViewHolder>(FamilyDIffUtil()) {
 
     class FamilyViewHolder(val binding : FamilyMemberListItemBinding) : RecyclerView.ViewHolder(binding.root)
 
@@ -32,23 +32,14 @@ class FamilyAdapter(val addItemClick : (Families)-> Unit, val removeItemClick : 
             tvMemberName.text = currentItem.name
             tvMemberNakshathra.text = currentItem.nakshathra?.locale?.nakshathraName
 
-            if (currentItem.isSelected == true) {
-                ivCheck.visibility = View.VISIBLE
-            }
-            else {
-                ivCheck.visibility = View.GONE
-            }
+            ivCheck.visibility =
+                if (currentItem.isSelected == true) { View.VISIBLE }
+                else { View.GONE }
         }
 
         holder.itemView.setOnClickListener {
-            if (currentItem.isSelected == true) {
-                currentItem.isSelected = false
-                removeItemClick(currentItem)
-            }
-            else {
-                currentItem.isSelected = true
-                addItemClick(currentItem)
-            }
+            currentItem.isSelected = currentItem.isSelected != true
+            itemClick(currentItem)
             notifyItemChanged(position)
         }
     }

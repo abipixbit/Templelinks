@@ -44,17 +44,19 @@ class FamilyMemberDialogueFragment(private val pujas: Pujas, val selectedPujas :
 
         setupUI()
 
-        familyAdapter = FamilyAdapter({ familiesAdd->
-                pujas.isSelected = true
-                viewModel.addSelectedFamily(familiesAdd)
+        familyAdapter = FamilyAdapter { family->
+
+                if (family.isSelected == true) {
+                    pujas.isSelected = true
+                    viewModel.addSelectedFamily(family)
+                }
+                else {
+                viewModel.deleteSelectedFamily(family)
+                }
+
                 pujas.selectedFamilies = viewModel.selectedFamily
                 Log.d("FamilyAdd", viewModel.selectedFamily.toString())
-
-        }, { familyRemove ->
-            viewModel.deleteSelectedFamily(familyRemove)
-            pujas.selectedFamilies = viewModel.selectedFamily
-            Log.d("FamilyRemove", viewModel.selectedFamily.toString())
-        })
+        }
 
         binding.apply {
             ivExit.setOnClickListener {

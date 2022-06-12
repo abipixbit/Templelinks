@@ -25,7 +25,7 @@ class PujaBookingViewModel : ViewModel() {
     val pujas : LiveData<ApiResponse<List<Pujas>?>>
         get() = _pujas
 
-    var selectedPooja = mutableListOf<Pujas>()
+    var selectedPoojas = mutableListOf<Pujas>()
 
     val calendar: Calendar = Calendar.getInstance()
 
@@ -46,8 +46,15 @@ class PujaBookingViewModel : ViewModel() {
     }
 
     fun addSelectedPoojas(listPujas : MutableList<Pujas>) {
-        selectedPooja = (selectedPooja + listPujas) as MutableList<Pujas>
-        Log.d("selectedPooja", selectedPooja.toString())
+
+//        if (selectedPoojas.containsAll(listPujas)) {
+//            Log.d("Truee","Truee")
+//
+//        }
+
+        Log.d("ListPujas", listPujas.toString())
+        selectedPoojas = (selectedPoojas + listPujas) as MutableList<Pujas>
+        Log.d("selectedPooja", selectedPoojas.toString())
     }
 
     override fun onCleared() {

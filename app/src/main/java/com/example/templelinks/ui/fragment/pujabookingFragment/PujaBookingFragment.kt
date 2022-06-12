@@ -75,7 +75,7 @@ class PujaBookingFragment : Fragment() {
                     findNavController().navigate(PujaBookingFragmentDirections.actionPujaBookingFragmentToFinalBokingFragment
                         (currentTemple?.name.toString(),
                         currentTemple?.address.toString(),
-                        viewModel.selectedPooja.toTypedArray())
+                        viewModel.selectedPoojas.toTypedArray())
                     )
                 }
             }
@@ -169,7 +169,7 @@ class PujaBookingFragment : Fragment() {
                     binding.rvPujas.adapter = pujasAdapter
                     apiResponse.data?.let { pujas ->
 
-                        val selectedPujaId =  viewModel.selectedPooja.map {
+                        val selectedPujaId =  viewModel.selectedPoojas.map {
                         it.translation.pujaId
                     }
                         pujas.forEach {
