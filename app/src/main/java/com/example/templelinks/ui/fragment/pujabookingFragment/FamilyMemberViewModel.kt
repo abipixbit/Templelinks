@@ -15,6 +15,8 @@ class FamilyMemberViewModel : ViewModel() {
     val families : LiveData<ApiResponse<List<Families>?>>
         get() = _families
 
+    var selectedFamily = mutableListOf<Families>()
+
     init {
     loadFamilies()
     }
@@ -24,6 +26,14 @@ class FamilyMemberViewModel : ViewModel() {
             _families.value = ApiResponse.loading()
             _families.value = FamiliesRepository().loadFamilies()
         }
+    }
+
+    fun addSelectedFamily(familyAdd : Families) {
+        selectedFamily.add(familyAdd)
+    }
+
+    fun deleteSelectedFamily(famiyRemove : Families) {
+        selectedFamily.remove(famiyRemove)
     }
 
 }

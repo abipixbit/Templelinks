@@ -27,7 +27,6 @@ class FamilyMemberDialogueFragment(private val pujas: Pujas, val selectedPujas :
 
     private lateinit var binding : FragmentFamilyMemberDialogueBinding
     private lateinit var familyAdapter : FamilyAdapter
-    var selectedFamily = mutableListOf<Families>()
     private val viewModel : FamilyMemberViewModel by viewModels()
 
     override fun onCreateView(
@@ -40,34 +39,21 @@ class FamilyMemberDialogueFragment(private val pujas: Pujas, val selectedPujas :
         return binding.root
     }
 
-    init {
-        Log.d("Dialog","Created, ${selectedFamily.toString()}")
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        Log.d("Dialog","Destroy ${selectedFamily.toString()}")
-    }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setFullScreen()
-        requireView().glide("file:///android_asset/loading.gif", binding.ivLoading)
-        val arrayAdapter = ArrayAdapter(requireContext(), R.layout.time_schedule_dropdown, resources.getStringArray(R.array.time_schedule_dropdown))
-        binding.etTimeSchedule.setAdapter(arrayAdapter)
 
-        loadFamilies()
+        setupUI()
 
         familyAdapter = FamilyAdapter({ familiesAdd->
                 pujas.isSelected = true
-                selectedFamily.add(familiesAdd)
-                pujas.selectedFamilies = selectedFamily
-                Log.d("FamilyAdd", selectedFamily.toString())
+                viewModel.addSelectedFamily(familiesAdd)
+                pujas.selectedFamilies = viewModel.selectedFamily
+                Log.d("FamilyAdd", viewModel.selectedFamily.toString())
 
         }, { familyRemove ->
-            selectedFamily.remove(familyRemove)
-            pujas.selectedFamilies = selectedFamily
-            Log.d("FamilyRemove", selectedFamily.toString())
+            viewModel.deleteSelectedFamily(familyRemove)
+            pujas.selectedFamilies = viewModel.selectedFamily
+            Log.d("FamilyRemove", viewModel.selectedFamily.toString())
         })
 
         binding.apply {
@@ -86,6 +72,15 @@ class FamilyMemberDialogueFragment(private val pujas: Pujas, val selectedPujas :
         }
     }
 
+    private fun setupUI() {
+        requireView().glide("file:///android_asset/loading.gif", binding.ivLoading)
+        setFullScreen()
+        val arrayAdapter = ArrayAdapter(requireContext(), R.layout.time_schedule_dropdown, resources.getStringArray(R.array.time_schedule_dropdown))
+        binding.etTimeSchedule.setAdapter(arrayAdapter)
+
+        loadFamilies()
+    }
+
     private fun loadFamilies() {
         viewModel.families.observe(viewLifecycleOwner) { apiResponse ->
             binding.ivLoading.isVisible = apiResponse.apiStatus == ApiStatus.LOADING
@@ -96,14 +91,12 @@ class FamilyMemberDialogueFragment(private val pujas: Pujas, val selectedPujas :
 
                      val selectedFamilyId = pujas.selectedFamilies?.map {
                             it.id
-                        } ?: emptyList()
-
-                        families?.forEach {
-                            if (selectedFamilyId.contains(it.id))
-                                it.isSelected = true
                         }
 
-
+                        families?.forEach {
+                            if (selectedFamilyId?.contains(it.id) == true)
+                                it.isSelected = true
+                        }
 
                         familyAdapter.submitList(families)
                     }

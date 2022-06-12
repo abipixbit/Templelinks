@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
@@ -17,6 +18,7 @@ import com.example.templelinks.R
 import com.example.templelinks.data.model.Pujas
 import com.example.templelinks.databinding.FragmentPujaBookingBinding
 import com.example.templelinks.enums.ApiStatus
+import com.example.templelinks.extensions.glide
 import com.example.templelinks.ui.adapter.PoojaBookingDeitiesAdapter
 import com.example.templelinks.ui.adapter.PujasAdapter
 import java.util.*
@@ -36,12 +38,14 @@ class PujaBookingFragment : Fragment() {
     ): View {
         // Inflate the layout for this fragment
         binding = FragmentPujaBookingBinding.inflate(layoutInflater, container, false)
-        setupUI()
+
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        setupUI()
+
         val calendar = viewModel.calendar
 
         deitiesAdapter = PoojaBookingDeitiesAdapter { deitiesId ->
@@ -115,7 +119,11 @@ class PujaBookingFragment : Fragment() {
     }
 
     private fun setupUI() {
+
+        requireView().glide("file:///android_asset/loading.gif", binding.ivLoading)
+
         val currentTemple = arguments.currentTemple
+
         binding.apply {
             toolBarPujaBooking.apply {
                 tvToolBar.text = getString(R.string.pooja_booking)
@@ -153,6 +161,9 @@ class PujaBookingFragment : Fragment() {
     private fun loadPujas() {
 
         viewModel.pujas.observe(viewLifecycleOwner) { apiResponse->
+
+            binding.ivLoading.isVisible = apiResponse.apiStatus == ApiStatus.LOADING
+
             when(apiResponse.apiStatus) {
                 ApiStatus.SUCCESS -> {
                     binding.rvPujas.adapter = pujasAdapter
@@ -171,9 +182,10 @@ class PujaBookingFragment : Fragment() {
                     }
                 }
                 ApiStatus.ERROR -> apiResponse.message.let { message->
+                    binding.ivLoading.isVisible = false
                     Log.d("LoadPujaFail", message.toString())
                 }
-                else -> {}
+                else -> { }
             }
         }
     }
