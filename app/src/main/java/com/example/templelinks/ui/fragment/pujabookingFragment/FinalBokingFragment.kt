@@ -6,7 +6,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import androidx.navigation.ui.setupWithNavController
 import com.example.templelinks.R
 import com.example.templelinks.databinding.FragmentFinalBokingBinding
 import com.example.templelinks.ui.adapter.ConfrimPoojaAdapter
@@ -31,6 +33,8 @@ class FinalBokingFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+
         setupUI()
         Log.d("Arguments", arguments.toString())
         binding.rvConfirmPooja.adapter = confirmPoojaAdapter
@@ -39,9 +43,10 @@ class FinalBokingFragment : Fragment() {
 
     private fun setupUI() {
         binding.apply {
+            toolBarFinalPujaBooking.toolBar.setupWithNavController(findNavController())
             tvTempleNameFinalBooking.text = arguments.templeName
             tvTempleAddressFinalBooking.text = arguments.templeAddress
-            toolBarFinalPujaBooking.tvToolBar.text = getString(R.string.pooja_booking)
+
         }
     }
 }

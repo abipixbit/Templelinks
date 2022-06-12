@@ -96,7 +96,7 @@
     <fragment
         android:id="@+id/finalBokingFragment"
         android:name="com.example.templelinks.ui.fragment.pujabookingFragment.FinalBokingFragment"
-        android:label="fragment_final_boking"
+        android:label="Pooja Booking"
         tools:layout="@layout/fragment_final_boking" >
         <argument
             android:name="templeName"
@@ -108,5 +108,8 @@
             android:name="confirmSelectedPoojaArgs"
             app:argType="com.example.templelinks.data.model.Pujas[]"
             app:nullable="true" />
+        <action
+            android:id="@+id/action_finalBokingFragment_to_pujaBookingFragment"
+            app:destination="@id/pujaBookingFragment" />
     </fragment>
 </navigation>

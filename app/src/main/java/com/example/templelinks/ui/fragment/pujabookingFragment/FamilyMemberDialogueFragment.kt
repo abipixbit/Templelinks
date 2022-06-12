@@ -35,7 +35,7 @@ class FamilyMemberDialogueFragment(private val pujas: Pujas, val selectedPujas :
     ): View {
         // Inflate the layout for this fragment
         binding = FragmentFamilyMemberDialogueBinding.inflate(layoutInflater, container, false)
-
+        Log.d("pujasDialogFrag", pujas.toString())
         return binding.root
     }
 
@@ -54,8 +54,14 @@ class FamilyMemberDialogueFragment(private val pujas: Pujas, val selectedPujas :
                 viewModel.deleteSelectedFamily(family)
                 }
 
-                pujas.selectedFamilies = viewModel.selectedFamily
-                Log.d("FamilyAdd", viewModel.selectedFamily.toString())
+                if (viewModel.selectedFamily.isEmpty()) {
+                    pujas.isSelected = false
+                }
+                else {
+                    pujas.selectedFamilies = viewModel.selectedFamily
+                    Log.d("FamilyAdd", viewModel.selectedFamily.toString())
+                }
+
         }
 
         binding.apply {
@@ -64,7 +70,7 @@ class FamilyMemberDialogueFragment(private val pujas: Pujas, val selectedPujas :
             }
 
             btnSelect.setOnClickListener {
-                    if (pujas.isSelected == true) {
+                    if (pujas.isSelected) {
                     selectedPujas(mutableListOf(pujas))
                     dismiss() }
 

@@ -9,7 +9,7 @@ import kotlinx.parcelize.Parcelize
 data class Pujas
         (
 
-        var isSelected : Boolean? = false,
+        var isSelected : Boolean = false,
 
         var selectedFamilies : List<Families>?,
 

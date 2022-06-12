@@ -1,5 +1,6 @@
 package com.example.templelinks.ui.fragment.pujabookingFragment
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -19,6 +20,7 @@ class FamilyMemberViewModel : ViewModel() {
 
     init {
     loadFamilies()
+        Log.d("ViewModelFam", "Created")
     }
 
     private fun loadFamilies() {

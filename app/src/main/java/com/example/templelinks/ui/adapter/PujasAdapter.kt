@@ -25,7 +25,7 @@ class PujasAdapter(val descriptionClick : (Pujas) -> Unit, val selectPuja : (Puj
         val currentItem = getItem(position)
 
         holder.binding.ivTick.visibility =
-            if (currentItem.isSelected == true) { View.VISIBLE }
+            if (currentItem.isSelected) { View.VISIBLE }
             else { View.GONE }
 
         holder.binding.apply {

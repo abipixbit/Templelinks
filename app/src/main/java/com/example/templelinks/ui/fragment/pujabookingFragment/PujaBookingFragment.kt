@@ -104,6 +104,10 @@ class PujaBookingFragment : Fragment() {
                             .show()}
         ) { clickedPujas, position ->
 
+            if (clickedPujas.isSelected) {
+                Log.d("ClickedPooja", clickedPujas.toString())
+            }
+
             val dialogue = FamilyMemberDialogueFragment(clickedPujas) { selectedPujas ->
                 viewModel.addSelectedPoojas(selectedPujas)
                 pujasAdapter.notifyItemChanged(position)
