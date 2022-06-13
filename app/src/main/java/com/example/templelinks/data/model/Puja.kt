@@ -6,7 +6,7 @@ import kotlinx.parcelize.Parcelize
 
 
 @Parcelize
-data class Pujas
+data class Puja
         (
 
         var isSelected : Boolean = false,

@@ -10,11 +10,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.templelinks.R
 import com.example.templelinks.TempleApplication
 import com.example.templelinks.data.model.Families
-import com.example.templelinks.data.model.Pujas
+import com.example.templelinks.data.model.Puja
 import com.example.templelinks.databinding.ConfirmPujaListItemBinding
 
 
-class ConfrimPoojaAdapter : ListAdapter<Pujas, ConfrimPoojaAdapter.ConfirmPoojaViewHolder>(ConfirmPoojaDiffUtils()) {
+class ConfrimPoojaAdapter : ListAdapter<Puja, ConfrimPoojaAdapter.ConfirmPoojaViewHolder>(ConfirmPoojaDiffUtils()) {
 
     class ConfirmPoojaViewHolder(val binding : ConfirmPujaListItemBinding) : RecyclerView.ViewHolder(binding.root)
 
@@ -41,12 +41,12 @@ class ConfrimPoojaAdapter : ListAdapter<Pujas, ConfrimPoojaAdapter.ConfirmPoojaV
 
 }
 
-class ConfirmPoojaDiffUtils : DiffUtil.ItemCallback<Pujas>() {
-    override fun areItemsTheSame(oldItem: Pujas, newItem: Pujas): Boolean {
+class ConfirmPoojaDiffUtils : DiffUtil.ItemCallback<Puja>() {
+    override fun areItemsTheSame(oldItem: Puja, newItem: Puja): Boolean {
         return oldItem.deityId == newItem.deityId
     }
 
-    override fun areContentsTheSame(oldItem: Pujas, newItem: Pujas): Boolean {
+    override fun areContentsTheSame(oldItem: Puja, newItem: Puja): Boolean {
         return oldItem.deityId == newItem.deityId
     }
 

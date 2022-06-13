@@ -8,10 +8,10 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.templelinks.R
 import com.example.templelinks.TempleApplication
-import com.example.templelinks.data.model.Pujas
+import com.example.templelinks.data.model.Puja
 import com.example.templelinks.databinding.PoojaBookingButtonListItemBinding
 
-class PujasAdapter(val descriptionClick : (Pujas) -> Unit, val selectPuja : (Pujas, Int) -> Unit) : ListAdapter <Pujas, PujasAdapter.PujasViewHolder>(PujasDiffCall()) {
+class PujasAdapter(val descriptionClick : (Puja) -> Unit, val selectPuja : (Puja, Int) -> Unit) : ListAdapter <Puja, PujasAdapter.PujasViewHolder>(PujasDiffCall()) {
 
     class PujasViewHolder(val binding : PoojaBookingButtonListItemBinding) : RecyclerView.ViewHolder(binding.root)
 
@@ -45,13 +45,13 @@ class PujasAdapter(val descriptionClick : (Pujas) -> Unit, val selectPuja : (Puj
     }
 }
 
-class PujasDiffCall : DiffUtil.ItemCallback<Pujas>() {
+class PujasDiffCall : DiffUtil.ItemCallback<Puja>() {
 
-    override fun areItemsTheSame(oldItem: Pujas, newItem: Pujas): Boolean {
+    override fun areItemsTheSame(oldItem: Puja, newItem: Puja): Boolean {
         return oldItem.deityId == newItem.deityId
     }
 
-    override fun areContentsTheSame(oldItem: Pujas, newItem: Pujas): Boolean {
+    override fun areContentsTheSame(oldItem: Puja, newItem: Puja): Boolean {
         return oldItem.deityId == newItem.deityId
     }
 

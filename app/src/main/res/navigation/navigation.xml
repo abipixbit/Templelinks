@@ -106,7 +106,7 @@
             app:argType="string" />
         <argument
             android:name="confirmSelectedPoojaArgs"
-            app:argType="com.example.templelinks.data.model.Pujas[]"
+            app:argType="com.example.templelinks.data.model.Puja[]"
             app:nullable="true" />
         <action
             android:id="@+id/action_finalBokingFragment_to_pujaBookingFragment"

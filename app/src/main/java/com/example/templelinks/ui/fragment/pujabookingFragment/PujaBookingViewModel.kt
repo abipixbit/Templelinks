@@ -6,11 +6,9 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.templelinks.data.model.Deities
-import com.example.templelinks.data.model.Families
-import com.example.templelinks.data.model.Pujas
+import com.example.templelinks.data.model.Puja
 import com.example.templelinks.data.model.response.ApiResponse
 import com.example.templelinks.data.repository.DeitiesRepository
-import com.example.templelinks.data.repository.FamiliesRepository
 import com.example.templelinks.data.repository.PujaRepository
 import kotlinx.coroutines.launch
 import java.util.*
@@ -21,11 +19,11 @@ class PujaBookingViewModel : ViewModel() {
     val deities : LiveData<ApiResponse<List<Deities>?>>
         get() = _deities
 
-    private val _pujas = MutableLiveData<ApiResponse<List<Pujas>?>>()
-    val pujas : LiveData<ApiResponse<List<Pujas>?>>
+    private val _pujas = MutableLiveData<ApiResponse<List<Puja>?>>()
+    val pujas : LiveData<ApiResponse<List<Puja>?>>
         get() = _pujas
 
-    var selectedPoojas = mutableListOf<Pujas>()
+    var selectedPoojas = mutableListOf<Puja>()
 
     val calendar: Calendar = Calendar.getInstance()
 
@@ -45,9 +43,9 @@ class PujaBookingViewModel : ViewModel() {
         }
     }
 
-    fun addSelectedPoojas(listPujas : MutableList<Pujas>) {
+    fun addSelectedPoojas(listPujas : MutableList<Puja>) {
         if(!selectedPoojas.containsAll(listPujas))
-        selectedPoojas = (selectedPoojas + listPujas) as MutableList<Pujas>
+        selectedPoojas = (selectedPoojas + listPujas) as MutableList<Puja>
         Log.d("selectedPooja", selectedPoojas.toString())
     }
 

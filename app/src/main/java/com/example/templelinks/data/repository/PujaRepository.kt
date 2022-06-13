@@ -1,17 +1,15 @@
 package com.example.templelinks.data.repository
 
-import com.example.templelinks.data.model.Banners
-import com.example.templelinks.data.model.Pujas
+import com.example.templelinks.data.model.Puja
 import com.example.templelinks.data.model.response.ApiResponse
-import com.example.templelinks.data.network.ApiInterface
 import com.example.templelinks.data.network.RetrofitService
 
 class PujaRepository {
 
     private val apiInterface = RetrofitService.retrofitService()
-    private lateinit var pujas : ApiResponse<List<Pujas>?>
+    private lateinit var pujas : ApiResponse<List<Puja>?>
 
-    suspend fun loadPujas(templeId : Int?, deitiesId : Int?) : ApiResponse<List<Pujas>?> {
+    suspend fun loadPujas(templeId : Int?, deitiesId : Int?) : ApiResponse<List<Puja>?> {
 
         try {
             val response = apiInterface.loadPujas(templeId, deitiesId)

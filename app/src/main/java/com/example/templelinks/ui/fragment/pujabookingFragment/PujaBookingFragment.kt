@@ -15,7 +15,6 @@ import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.templelinks.R
-import com.example.templelinks.data.model.Pujas
 import com.example.templelinks.databinding.FragmentPujaBookingBinding
 import com.example.templelinks.enums.ApiStatus
 import com.example.templelinks.extensions.glide
@@ -44,13 +43,26 @@ class PujaBookingFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setupUI()
+        if (savedInstanceState == null) {
+            setupUI()
+        }
+
+
+    }
+
+    private fun updateDate(cal: Calendar) {
+        val dateFormat = "dd-MM-yyyy"
+        val sdf = SimpleDateFormat(dateFormat, Locale.UK)
+        binding.includePoojaBooking.tvBookingDate.text = sdf.format(cal.time)
+    }
+
+    private fun setupUI() {
 
         val calendar = viewModel.calendar
 
         deitiesAdapter = PoojaBookingDeitiesAdapter { deitiesId ->
-                viewModel.loadPujas(arguments.currentTemple.id, deitiesId)
-                loadPujas()
+            viewModel.loadPujas(arguments.currentTemple.id, deitiesId)
+            loadPujas()
         }
 
         val datePickerDialog = DatePickerDialog.OnDateSetListener { datePicker, year, month, date ->
@@ -96,12 +108,12 @@ class PujaBookingFragment : Fragment() {
         }
 
         pujasAdapter = PujasAdapter({ pujas ->
-                AlertDialog .Builder(requireContext())
-                            .setTitle(pujas.translation.pujaName)
-                            .setMessage(pujas.translation.pujaDescription)
-                            .setCancelable(false)
-                            .setPositiveButton("Close") { _, _ -> }
-                            .show()}
+            AlertDialog .Builder(requireContext())
+                .setTitle(pujas.translation.pujaName)
+                .setMessage(pujas.translation.pujaDescription)
+                .setCancelable(false)
+                .setPositiveButton("Close") { _, _ -> }
+                .show()}
         ) { clickedPujas, position ->
 
             if (clickedPujas.isSelected) {
@@ -114,15 +126,6 @@ class PujaBookingFragment : Fragment() {
             }
             dialogue.show(childFragmentManager, "customDialogue")
         }
-    }
-
-    private fun updateDate(cal: Calendar) {
-        val dateFormat = "dd-MM-yyyy"
-        val sdf = SimpleDateFormat(dateFormat, Locale.UK)
-        binding.includePoojaBooking.tvBookingDate.text = sdf.format(cal.time)
-    }
-
-    private fun setupUI() {
 
         requireView().glide("file:///android_asset/loading.gif", binding.ivLoading)
 

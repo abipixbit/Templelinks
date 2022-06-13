@@ -11,11 +11,8 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.viewModels
 
-import androidx.lifecycle.ViewModelProvider
 import com.example.templelinks.R
-import com.example.templelinks.data.model.Families
-import com.example.templelinks.data.model.Pujas
-import com.example.templelinks.data.model.response.ApiResponse
+import com.example.templelinks.data.model.Puja
 import com.example.templelinks.databinding.FragmentFamilyMemberDialogueBinding
 import com.example.templelinks.enums.ApiStatus
 import com.example.templelinks.extensions.glide
@@ -23,7 +20,7 @@ import com.example.templelinks.extensions.setFullScreen
 import com.example.templelinks.ui.adapter.FamilyAdapter
 
 
-class FamilyMemberDialogueFragment(private val puja: Pujas, val selectedPujas : (MutableList<Pujas>)->Unit) : DialogFragment() {
+class FamilyMemberDialogueFragment(private val puja: Puja, val selectedPujas : (MutableList<Puja>)->Unit) : DialogFragment() {
 
     private lateinit var binding : FragmentFamilyMemberDialogueBinding
     private lateinit var familyAdapter : FamilyAdapter
@@ -61,7 +58,6 @@ class FamilyMemberDialogueFragment(private val puja: Pujas, val selectedPujas : 
             }
 
             btnSelect.setOnClickListener {
-
                 if (viewModel.selectedFamily.isEmpty()) {
                         puja.isSelected = false
                         dismiss()
@@ -79,7 +75,6 @@ class FamilyMemberDialogueFragment(private val puja: Pujas, val selectedPujas : 
             }
         }
     }
-
 
     private fun setupUI() {
         requireView().glide("file:///android_asset/loading.gif", binding.ivLoading)

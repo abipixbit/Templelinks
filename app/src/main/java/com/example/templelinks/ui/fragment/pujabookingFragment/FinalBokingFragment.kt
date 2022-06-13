@@ -9,7 +9,6 @@ import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.navigation.ui.setupWithNavController
-import com.example.templelinks.R
 import com.example.templelinks.databinding.FragmentFinalBokingBinding
 import com.example.templelinks.ui.adapter.ConfrimPoojaAdapter
 
@@ -33,7 +32,6 @@ class FinalBokingFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
 
         setupUI()
         Log.d("Arguments", arguments.toString())

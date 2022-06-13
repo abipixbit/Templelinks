@@ -7,7 +7,6 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.templelinks.data.model.Families
-import com.example.templelinks.data.model.Pujas
 import com.example.templelinks.databinding.ConfirmPujaMemberListItemBinding
 
 class ConfirmPoojaFamilyAdapter : ListAdapter<Families, ConfirmPoojaFamilyAdapter.ConfirmFamViewHolder>(ConfirmFamDiffUtils()) {
