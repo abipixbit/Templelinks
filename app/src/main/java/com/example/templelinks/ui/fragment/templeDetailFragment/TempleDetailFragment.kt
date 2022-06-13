@@ -74,7 +74,7 @@ class TempleDetailFragment : Fragment() {
 
             includePhone.tvTemplePhone.apply {
                 setOnClickListener {
-                    val intent = Intent(Intent.ACTION_CALL, Uri.parse("tel: ${this.text}"))
+                    val intent = Intent(Intent.ACTION_CALL, Uri.parse("tel: $text"))
                     startActivity(intent)
                 }
             }

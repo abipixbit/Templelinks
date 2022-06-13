@@ -62,15 +62,20 @@ class FamilyMemberDialogueFragment(private val pujas: Pujas, val selectedPujas :
 
             btnSelect.setOnClickListener {
 
+                if (viewModel.selectedFamily.isEmpty()) {
+                        pujas.isSelected = false
+                        dismiss()
+                }
+                else {
                     if (pujas.isSelected) {
                         pujas.selectedFamilies = pujas.selectedFamilies?.plus(viewModel.selectedFamily)
-                    }
-                    else {
+                    } else {
                         pujas.isSelected = true
                         pujas.selectedFamilies = viewModel.selectedFamily
                     }
                     selectedPujas(mutableListOf(pujas))
                     dismiss()
+                }
             }
         }
     }
