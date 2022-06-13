@@ -11,9 +11,7 @@ import com.example.templelinks.extensions.glide
 class LiveStreamAdapter(private val liveList : List<LiveListData>, private val view : View) : RecyclerView.Adapter<LiveStreamAdapter.ViewHolder>() {
 
 
-    class ViewHolder(val binding : LiveListItemBinding) : RecyclerView.ViewHolder(binding.root) {
-
-    }
+    class ViewHolder(val binding : LiveListItemBinding) : RecyclerView.ViewHolder(binding.root)
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): LiveStreamAdapter.ViewHolder {

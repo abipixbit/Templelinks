@@ -14,9 +14,7 @@ class DeitiesListAdapter (val itemClick : (Deities) -> Unit) : ListAdapter<Deiti
 
 
 
-    class DeitiesViewHolder(val binding : DeitiesListItemBinding) : RecyclerView.ViewHolder(binding.root) {
-
-    }
+    class DeitiesViewHolder(val binding : DeitiesListItemBinding) : RecyclerView.ViewHolder(binding.root)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DeitiesViewHolder {
 

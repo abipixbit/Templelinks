@@ -53,14 +53,6 @@ class FamilyMemberDialogueFragment(private val pujas: Pujas, val selectedPujas :
                 viewModel.deleteSelectedFamily(family)
                 }
 
-                if (viewModel.selectedFamily.isEmpty()) {
-                    pujas.isSelected = false
-                }
-                else {
-                    pujas.isSelected = true
-                    pujas.selectedFamilies = viewModel.selectedFamily
-                    Log.d("FamilyAdd", viewModel.selectedFamily.toString())
-                }
         }
 
         binding.apply {
@@ -69,15 +61,26 @@ class FamilyMemberDialogueFragment(private val pujas: Pujas, val selectedPujas :
             }
 
             btnSelect.setOnClickListener {
+
+                if (viewModel.selectedFamily.isEmpty()) {
+                    pujas.isSelected = false
+                    dismiss()
+                }
+                else {
                     if (pujas.isSelected) {
+                        pujas.selectedFamilies = pujas.selectedFamilies?.plus(viewModel.selectedFamily)
+                    }
+                    else {
+                        pujas.isSelected = true
+                        pujas.selectedFamilies = viewModel.selectedFamily
+                    }
                     selectedPujas(mutableListOf(pujas))
-                    dismiss() }
-
-                    else { dismiss() }
+                    dismiss()
             }
-
         }
-    }
+                }
+        }
+
 
     private fun setupUI() {
         requireView().glide("file:///android_asset/loading.gif", binding.ivLoading)

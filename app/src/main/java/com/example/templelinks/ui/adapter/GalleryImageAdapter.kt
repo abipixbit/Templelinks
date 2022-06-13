@@ -9,9 +9,7 @@ import com.example.templelinks.extensions.glide
 
 class GalleryImageAdapter(private val gods : List<String>, val view : View) : RecyclerView.Adapter<GalleryImageAdapter.MyViewHolder>() {
 
-    class MyViewHolder(val binding : DeitiesImageListItemBinding) : RecyclerView.ViewHolder(binding.root) {
-
-    }
+    class MyViewHolder(val binding : DeitiesImageListItemBinding) : RecyclerView.ViewHolder(binding.root)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): GalleryImageAdapter.MyViewHolder {
         return MyViewHolder(DeitiesImageListItemBinding.inflate(LayoutInflater.from(parent.context), parent,false))
