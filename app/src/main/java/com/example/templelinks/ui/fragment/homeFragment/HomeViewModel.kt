@@ -4,7 +4,6 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.templelinks.FavouriteEventBus
 import com.example.templelinks.data.model.Banners
 import com.example.templelinks.data.model.Deities
 import com.example.templelinks.data.model.response.ApiResponse
@@ -14,10 +13,8 @@ import com.example.templelinks.data.repository.DeitiesRepository
 import com.example.templelinks.data.repository.FavouriteRepository
 import com.example.templelinks.data.repository.HomeCategoryRepository
 import com.example.templelinks.enums.ApiStatus
-import com.example.templelinks.enums.FavEvent
 import kotlinx.coroutines.launch
 import org.koin.core.component.KoinComponent
-import org.koin.core.component.inject
 
 class HomeViewModel : ViewModel(), KoinComponent {
 
