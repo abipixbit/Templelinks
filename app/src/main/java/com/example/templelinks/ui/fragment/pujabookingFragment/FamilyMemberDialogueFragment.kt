@@ -23,7 +23,7 @@ import com.example.templelinks.extensions.setFullScreen
 import com.example.templelinks.ui.adapter.FamilyAdapter
 
 
-class FamilyMemberDialogueFragment(private val pujas: Pujas, val selectedPujas : (MutableList<Pujas>)->Unit) : DialogFragment() {
+class FamilyMemberDialogueFragment(private val puja: Pujas, val selectedPujas : (MutableList<Pujas>)->Unit) : DialogFragment() {
 
     private lateinit var binding : FragmentFamilyMemberDialogueBinding
     private lateinit var familyAdapter : FamilyAdapter
@@ -35,7 +35,7 @@ class FamilyMemberDialogueFragment(private val pujas: Pujas, val selectedPujas :
     ): View {
         // Inflate the layout for this fragment
         binding = FragmentFamilyMemberDialogueBinding.inflate(layoutInflater, container, false)
-        Log.d("pujasDialogFrag", pujas.selectedFamilies.toString())
+        Log.d("pujasDialogFrag", puja.selectedFamilies.toString())
         return binding.root
     }
 
@@ -63,17 +63,17 @@ class FamilyMemberDialogueFragment(private val pujas: Pujas, val selectedPujas :
             btnSelect.setOnClickListener {
 
                 if (viewModel.selectedFamily.isEmpty()) {
-                        pujas.isSelected = false
+                        puja.isSelected = false
                         dismiss()
                 }
                 else {
-                    if (pujas.isSelected) {
-                        pujas.selectedFamilies = pujas.selectedFamilies?.plus(viewModel.selectedFamily)
+                    if (puja.isSelected) {
+                        puja.selectedFamilies = puja.selectedFamilies?.plus(viewModel.selectedFamily)
                     } else {
-                        pujas.isSelected = true
-                        pujas.selectedFamilies = viewModel.selectedFamily
+                        puja.isSelected = true
+                        puja.selectedFamilies = viewModel.selectedFamily
                     }
-                    selectedPujas(mutableListOf(pujas))
+                    selectedPujas(mutableListOf(puja))
                     dismiss()
                 }
             }
@@ -98,7 +98,7 @@ class FamilyMemberDialogueFragment(private val pujas: Pujas, val selectedPujas :
                     binding.rvFamilyMembers.adapter = familyAdapter
                     apiResponse.data.let { families ->
 
-                     val selectedFamilyId = pujas.selectedFamilies?.map {
+                     val selectedFamilyId = puja.selectedFamilies?.map {
                             it.id
                         }
 
