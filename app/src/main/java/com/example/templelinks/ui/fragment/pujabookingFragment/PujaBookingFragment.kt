@@ -15,6 +15,7 @@ import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.templelinks.R
+import com.example.templelinks.data.model.Families
 import com.example.templelinks.databinding.FragmentPujaBookingBinding
 import com.example.templelinks.enums.ApiStatus
 import com.example.templelinks.extensions.glide
@@ -116,10 +117,6 @@ class PujaBookingFragment : Fragment() {
                 .show()}
         ) { clickedPujas, position ->
 
-            if (clickedPujas.isSelected) {
-                Log.d("ClickedPooja", clickedPujas.toString())
-            }
-
             val dialogue = FamilyMemberDialogueFragment(clickedPujas) { selectedPujas ->
                 viewModel.addSelectedPoojas(selectedPujas)
                 pujasAdapter.notifyItemChanged(position)
@@ -179,9 +176,16 @@ class PujaBookingFragment : Fragment() {
                         val selectedPujaId =  viewModel.selectedPoojas.map {
                         it.translation.pujaId
                     }
+                        val famMap : MutableMap<Int, List<Families>?> = mutableMapOf()
+
+                        viewModel.selectedPoojas.forEach {
+                            famMap.put(it.translation.pujaId, it.selectedFamilies)
+                        }
+
                         pujas.forEach {
                             if (selectedPujaId.contains(it.translation.pujaId))
                                 it.isSelected = true
+                                it.selectedFamilies = famMap.get(it.translation.pujaId)
                         }
 
                     pujasAdapter.submitList(pujas)
@@ -189,7 +193,6 @@ class PujaBookingFragment : Fragment() {
                     }
                 }
                 ApiStatus.ERROR -> apiResponse.message.let { message->
-                    binding.ivLoading.isVisible = false
                     Log.d("LoadPujaFail", message.toString())
                 }
                 else -> { }
