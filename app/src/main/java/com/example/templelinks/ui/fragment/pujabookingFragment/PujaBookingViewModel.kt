@@ -6,6 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.templelinks.data.model.Deities
+import com.example.templelinks.data.model.Families
 import com.example.templelinks.data.model.Puja
 import com.example.templelinks.data.model.response.ApiResponse
 import com.example.templelinks.data.repository.DeitiesRepository
@@ -24,6 +25,7 @@ class PujaBookingViewModel : ViewModel() {
         get() = _pujas
 
     var selectedPoojas = mutableListOf<Puja>()
+    val famMap : MutableMap<Int, List<Families>?> = mutableMapOf()
 
     val calendar: Calendar = Calendar.getInstance()
 
@@ -53,4 +55,9 @@ class PujaBookingViewModel : ViewModel() {
         super.onCleared()
         Log.d("PujaBookingViewModel", "View Model Cleared")
     }
+
+    fun addtofamMap(pujaId: Int, selectedFamilies: List<Families>?) {
+        famMap.put(pujaId, selectedFamilies)
+    }
+
 }

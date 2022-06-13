@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     app:cardCornerRadius="@dimen/corner_radius"
     android:layout_height="match_parent"
-    tools:context=".ui.fragment.pujabookingFragment.FamilyMemberDialogueFragment">
+    tools:context=".ui.fragment.pujabookingFragment.familyMemberDialogueFragment.FamilyMemberDialogueFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"

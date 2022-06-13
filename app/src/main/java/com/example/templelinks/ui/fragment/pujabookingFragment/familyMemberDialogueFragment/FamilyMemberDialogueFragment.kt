@@ -1,4 +1,4 @@
-package com.example.templelinks.ui.fragment.pujabookingFragment
+package com.example.templelinks.ui.fragment.pujabookingFragment.familyMemberDialogueFragment
 
 
 import android.os.Bundle
@@ -24,7 +24,7 @@ class FamilyMemberDialogueFragment(private val puja: Puja, val selectedPujas : (
 
     private lateinit var binding : FragmentFamilyMemberDialogueBinding
     private lateinit var familyAdapter : FamilyAdapter
-    private val viewModel : FamilyMemberViewModel by viewModels()
+    private val viewModel : FamilyMemberDialogFragmentViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -49,7 +49,6 @@ class FamilyMemberDialogueFragment(private val puja: Puja, val selectedPujas : (
                 else {
                 viewModel.deleteSelectedFamily(family)
                 }
-
         }
 
         binding.apply {

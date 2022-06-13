@@ -95,7 +95,7 @@
     </fragment>
     <fragment
         android:id="@+id/finalBokingFragment"
-        android:name="com.example.templelinks.ui.fragment.pujabookingFragment.FinalBokingFragment"
+        android:name="com.example.templelinks.ui.fragment.pujabookingFragment.finalBookingFragment.FinalBokingFragment"
         android:label="Pooja Booking"
         tools:layout="@layout/fragment_final_boking" >
         <argument

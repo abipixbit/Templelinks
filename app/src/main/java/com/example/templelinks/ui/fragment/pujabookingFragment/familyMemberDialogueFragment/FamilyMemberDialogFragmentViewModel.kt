@@ -1,4 +1,4 @@
-package com.example.templelinks.ui.fragment.pujabookingFragment
+package com.example.templelinks.ui.fragment.pujabookingFragment.familyMemberDialogueFragment
 
 import android.util.Log
 import androidx.lifecycle.LiveData
@@ -10,7 +10,7 @@ import com.example.templelinks.data.model.response.ApiResponse
 import com.example.templelinks.data.repository.FamiliesRepository
 import kotlinx.coroutines.launch
 
-class FamilyMemberViewModel : ViewModel() {
+class FamilyMemberDialogFragmentViewModel : ViewModel() {
 
     private val _families = MutableLiveData<ApiResponse<List<Families>?>>()
     val families : LiveData<ApiResponse<List<Families>?>>

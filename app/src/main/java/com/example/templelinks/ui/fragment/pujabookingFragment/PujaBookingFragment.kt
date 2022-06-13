@@ -21,6 +21,7 @@ import com.example.templelinks.enums.ApiStatus
 import com.example.templelinks.extensions.glide
 import com.example.templelinks.ui.adapter.PoojaBookingDeitiesAdapter
 import com.example.templelinks.ui.adapter.PujasAdapter
+import com.example.templelinks.ui.fragment.pujabookingFragment.familyMemberDialogueFragment.FamilyMemberDialogueFragment
 import java.util.*
 
 
@@ -31,6 +32,7 @@ class PujaBookingFragment : Fragment() {
     private val viewModel : PujaBookingViewModel by viewModels()
     private lateinit var deitiesAdapter : PoojaBookingDeitiesAdapter
     private lateinit var pujasAdapter: PujasAdapter
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -176,16 +178,14 @@ class PujaBookingFragment : Fragment() {
                         val selectedPujaId =  viewModel.selectedPoojas.map {
                         it.translation.pujaId
                     }
-                        val famMap : MutableMap<Int, List<Families>?> = mutableMapOf()
-
                         viewModel.selectedPoojas.forEach {
-                            famMap.put(it.translation.pujaId, it.selectedFamilies)
+                            viewModel.addtofamMap(it.translation.pujaId, it.selectedFamilies)
                         }
 
                         pujas.forEach {
                             if (selectedPujaId.contains(it.translation.pujaId))
                                 it.isSelected = true
-                                it.selectedFamilies = famMap.get(it.translation.pujaId)
+                                it.selectedFamilies = viewModel.famMap[it.translation.pujaId]
                         }
 
                     pujasAdapter.submitList(pujas)
