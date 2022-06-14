@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.templelinks.data.model.Families
 import com.example.templelinks.databinding.ConfirmPujaMemberListItemBinding
 
-class ConfirmPoojaFamilyAdapter : ListAdapter<Families, ConfirmPoojaFamilyAdapter.ConfirmFamViewHolder>(ConfirmFamDiffUtils()) {
+class ConfirmPoojaFamilyAdapter(var currentItem : (Families)->Unit) : ListAdapter<Families, ConfirmPoojaFamilyAdapter.ConfirmFamViewHolder>(ConfirmFamDiffUtils()) {
 
     class ConfirmFamViewHolder(val binding: ConfirmPujaMemberListItemBinding) : RecyclerView.ViewHolder(binding.root)
 
@@ -27,12 +27,16 @@ class ConfirmPoojaFamilyAdapter : ListAdapter<Families, ConfirmPoojaFamilyAdapte
             tvConfirmFamName.text = currentItem.name
 
             ivAdd.setOnClickListener { count += 1
-            tvConfirmCount.text = count.toString()
+                tvConfirmCount.text = count.toString()
+                currentItem.count = count
+                currentItem(currentItem)
             }
 
             ivMinus.setOnClickListener {
                 if (count > 1) { count -= 1 }
-            tvConfirmCount.text = count.toString()
+                tvConfirmCount.text = count.toString()
+                currentItem.count = count
+                currentItem(currentItem)
             }
 
         }

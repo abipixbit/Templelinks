@@ -48,6 +48,11 @@ class PujaBookingViewModel : ViewModel() {
     fun addSelectedPoojas(listPujas : MutableList<Puja>) {
         if(!selectedPoojas.containsAll(listPujas))
         selectedPoojas = (selectedPoojas + listPujas) as MutableList<Puja>
+        selectedPoojas.forEach {
+            it.selectedFamilies?.forEach { family->
+                family.count = 1
+            }
+        }
         Log.d("selectedPooja", selectedPoojas.toString())
     }
 

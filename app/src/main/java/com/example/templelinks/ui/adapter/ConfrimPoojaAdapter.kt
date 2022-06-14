@@ -14,7 +14,7 @@ import com.example.templelinks.data.model.Puja
 import com.example.templelinks.databinding.ConfirmPujaListItemBinding
 
 
-class ConfrimPoojaAdapter : ListAdapter<Puja, ConfrimPoojaAdapter.ConfirmPoojaViewHolder>(ConfirmPoojaDiffUtils()) {
+class ConfrimPoojaAdapter(val count : (List<Puja>) -> Unit) : ListAdapter<Puja, ConfrimPoojaAdapter.ConfirmPoojaViewHolder>(ConfirmPoojaDiffUtils()) {
 
     class ConfirmPoojaViewHolder(val binding : ConfirmPujaListItemBinding) : RecyclerView.ViewHolder(binding.root)
 
@@ -28,15 +28,20 @@ class ConfrimPoojaAdapter : ListAdapter<Puja, ConfrimPoojaAdapter.ConfirmPoojaVi
         holder.binding.apply {
             tvConfirmPoojaName.text = currentItem.translation.pujaName
             tvConfirmPoojaAmount.text = TempleApplication.appContext.getString(R.string.pooja_price, currentItem.price)
-            loadFamilies(this.rvConfirmPoojaFamilyName, currentItem.selectedFamilies)
+            loadFamilies(rvConfirmPoojaFamilyName, currentItem)
         }
 
     }
 
-    private fun loadFamilies(recyclerView : RecyclerView, families : List<Families>? ) {
-        val confirmFamilyAdapter = ConfirmPoojaFamilyAdapter()
+    private fun loadFamilies(recyclerView : RecyclerView, puja : Puja ) {
+        val confirmFamilyAdapter = ConfirmPoojaFamilyAdapter { family ->
+            puja.selectedFamilies?.plus(family)
+            Log.d("CountFam", puja.toString())
+            count(currentList)
+        }
+        count(currentList)
         recyclerView.adapter = confirmFamilyAdapter
-        confirmFamilyAdapter.submitList(families)
+        confirmFamilyAdapter.submitList(puja.selectedFamilies)
     }
 
 }

@@ -11,7 +11,7 @@ data class Families (
 
     var isSelected : Boolean? = false,
 
-    var count : Int = 1,
+    var count: Int = 1,
 
     @SerializedName("id")
     val id : Int?,
