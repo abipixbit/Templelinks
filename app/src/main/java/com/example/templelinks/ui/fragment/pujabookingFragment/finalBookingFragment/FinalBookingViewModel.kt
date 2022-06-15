@@ -9,6 +9,7 @@ class FinalBookingViewModel : ViewModel() {
 
     var puja = listOf<Puja>()
     var price = MutableLiveData(0)
+    var totalAmount = MutableLiveData(0.0)
 
     fun findSum() {
         price.value = 0
@@ -21,9 +22,13 @@ class FinalBookingViewModel : ViewModel() {
         for (i in 0 ..familyCount.size-1) {
                 price.value = price.value?.plus(familyCount[i]?.sum()?.times(pujaAmount[i])!!)
         }
-
         Log.d("totalPrice", price.value.toString())
+        findTotalAmount(18.0, 0.0)
+    }
 
+    fun findTotalAmount(gst : Double, bankCharge : Double) {
+        totalAmount.value = (price.value?.plus(bankCharge))?.times(((gst.plus(100)).div(100)))
+        Log.d("TotalAmount", this.totalAmount.value.toString())
     }
 
 }
