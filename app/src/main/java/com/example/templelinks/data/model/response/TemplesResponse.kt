@@ -66,6 +66,9 @@ data class TemplesResponse(
             @SerializedName("locale")
             val locale: TempleLocale?,
 
+            @SerializedName("bank_charge")
+            val bankingCharge : Double,
+
             @SerializedName("phone")
             val phoneNumber : String?
 

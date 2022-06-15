@@ -88,9 +88,8 @@ class PujaBookingFragment : Fragment() {
                 val currentTemple = arguments.currentTemple.locale
                 if (findNavController().currentDestination?.id == R.id.pujaBookingFragment) {
                     findNavController().navigate(PujaBookingFragmentDirections.actionPujaBookingFragmentToFinalBokingFragment
-                        (currentTemple?.name.toString(),
-                        currentTemple?.address.toString(),
-                        viewModel.selectedPoojas.toTypedArray())
+                        (viewModel.selectedPoojas.toTypedArray(),
+                        arguments.currentTemple)
                     )
                 }
             }

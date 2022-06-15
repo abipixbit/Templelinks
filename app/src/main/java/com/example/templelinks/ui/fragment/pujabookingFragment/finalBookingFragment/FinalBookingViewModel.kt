@@ -23,7 +23,8 @@ class FinalBookingViewModel : ViewModel() {
                 price.value = price.value?.plus(familyCount[i]?.sum()?.times(pujaAmount[i])!!)
         }
         Log.d("totalPrice", price.value.toString())
-        findTotalAmount(18.0, 0.0)
+
+        findTotalAmount(18.0,0.0)
     }
 
     fun findTotalAmount(gst : Double, bankCharge : Double) {

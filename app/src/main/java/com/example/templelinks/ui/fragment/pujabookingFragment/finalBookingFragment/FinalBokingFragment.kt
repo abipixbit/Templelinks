@@ -11,8 +11,11 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.navigation.ui.setupWithNavController
+import com.example.templelinks.R
 import com.example.templelinks.databinding.FragmentFinalBokingBinding
 import com.example.templelinks.ui.adapter.ConfrimPoojaAdapter
+import java.math.RoundingMode
+import java.text.DecimalFormat
 
 
 class FinalBokingFragment : Fragment() {
@@ -21,6 +24,7 @@ class FinalBokingFragment : Fragment() {
     private val arguments : FinalBokingFragmentArgs by navArgs()
     private lateinit var confirmPoojaAdapter : ConfrimPoojaAdapter
     private val viewModel : FinalBookingViewModel by viewModels()
+
 
 
     override fun onCreateView(
@@ -43,24 +47,30 @@ class FinalBokingFragment : Fragment() {
         }
 
         setupUI()
-
-
-        viewModel.price.observe(viewLifecycleOwner) { sum ->
-            binding.tvSubTotalAmount.text = sum.toString()
-        }
-
     }
 
     private fun setupUI() {
         Log.d("Arguments", arguments.toString())
+        val args = arguments.templeArgs
+        val df = DecimalFormat("#.##")
+        df.roundingMode = RoundingMode.DOWN
 
         binding.apply {
             toolBarFinalPujaBooking.toolBar.setupWithNavController(findNavController())
-            tvTempleNameFinalBooking.text = arguments.templeName
-            tvTempleAddressFinalBooking.text = arguments.templeAddress
-
+            tvTempleNameFinalBooking.text = args.locale?.name
+            tvTempleAddressFinalBooking.text = args.locale?.address
+            tvBankingAmount.text = getString(R.string.pooja_price_float, df.format(args.bankingCharge))
+            tvGSTAmount.text = getString(R.string.pooja_price_float, df.format(18.00))
             rvConfirmPooja.adapter = confirmPoojaAdapter
             confirmPoojaAdapter.submitList(arguments.confirmSelectedPoojaArgs?.toMutableList())
+
+            viewModel.price.observe(viewLifecycleOwner) { sum ->
+                binding.tvSubTotalAmount.text = getString(R.string.pooja_price, sum)
+            }
+
+            viewModel.totalAmount.observe(viewLifecycleOwner) { totalPrice ->
+                binding.tvTotalAmount.text = getString(R.string.pooja_price_float, df.format(totalPrice))
+            }
         }
     }
 }

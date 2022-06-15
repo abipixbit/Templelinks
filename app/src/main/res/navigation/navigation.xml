@@ -99,17 +99,14 @@
         android:label="Pooja Booking"
         tools:layout="@layout/fragment_final_boking" >
         <argument
-            android:name="templeName"
-            app:argType="string" />
-        <argument
-            android:name="templeAddress"
-            app:argType="string" />
-        <argument
             android:name="confirmSelectedPoojaArgs"
             app:argType="com.example.templelinks.data.model.Puja[]"
             app:nullable="true" />
         <action
             android:id="@+id/action_finalBokingFragment_to_pujaBookingFragment"
             app:destination="@id/pujaBookingFragment" />
+        <argument
+            android:name="templeArgs"
+            app:argType="com.example.templelinks.data.model.response.Temple" />
     </fragment>
 </navigation>

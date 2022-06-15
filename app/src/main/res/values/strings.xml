@@ -20,6 +20,7 @@
     <string name="no_temple">No Temple Found</string>
     <string name="select_deity">Select Deity</string>
     <string name="pooja_price">$ %d</string>
+    <string name="pooja_price_float">$ %s</string>
     <string name="select_date">Select Date</string>
     <string name="book">Book</string>
     <string name="cancel">Cancel</string>

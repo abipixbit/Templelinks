@@ -199,11 +199,12 @@
     <TextView
         android:id="@+id/tvSubTotalAmount"
         android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginEnd="@dimen/margin_large"
         android:layout_marginBottom="@dimen/margin_normal"
-        android:layout_height="wrap_content"
-        android:textAlignment="textEnd"
+        android:digits="2"
         android:text="@string/puja_booking_count"
+        android:textAlignment="textEnd"
         app:layout_constraintBottom_toTopOf="@+id/tvBankingAmount"
         app:layout_constraintEnd_toEndOf="parent" />
 
