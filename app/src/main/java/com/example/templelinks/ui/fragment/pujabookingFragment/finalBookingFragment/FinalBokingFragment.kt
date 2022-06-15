@@ -65,11 +65,11 @@ class FinalBokingFragment : Fragment() {
             confirmPoojaAdapter.submitList(arguments.confirmSelectedPoojaArgs?.toMutableList())
 
             viewModel.price.observe(viewLifecycleOwner) { sum ->
-                binding.tvSubTotalAmount.text = getString(R.string.pooja_price, sum)
+                tvSubTotalAmount.text = getString(R.string.pooja_price, sum)
             }
 
             viewModel.totalAmount.observe(viewLifecycleOwner) { totalPrice ->
-                binding.tvTotalAmount.text = getString(R.string.pooja_price_float, df.format(totalPrice))
+                tvTotalAmount.text = getString(R.string.pooja_price_float, df.format(totalPrice))
             }
         }
     }

@@ -170,7 +170,7 @@
         android:layout_marginEnd="@dimen/margin_large"
         android:textAlignment="textEnd"
         android:textStyle="bold"
-        android:text="@string/puja_booking_count"
+        android:text="@string/pooja_price_float"
         app:layout_constraintBottom_toTopOf="@+id/btnConfirmBook"
         app:layout_constraintEnd_toEndOf="parent" />
 
@@ -181,7 +181,7 @@
         android:layout_marginEnd="@dimen/margin_large"
         android:layout_marginBottom="@dimen/margin_normal"
         android:textAlignment="textEnd"
-        android:text="@string/puja_booking_count"
+        android:text="@string/pooja_price_float"
         app:layout_constraintBottom_toTopOf="@+id/tvTotalAmount"
         app:layout_constraintEnd_toEndOf="parent" />
 
@@ -192,7 +192,7 @@
         android:layout_marginBottom="@dimen/margin_normal"
         android:layout_height="wrap_content"
         android:textAlignment="textEnd"
-        android:text="@string/puja_booking_count"
+        android:text="@string/pooja_price_float"
         app:layout_constraintBottom_toTopOf="@+id/tvGSTAmount"
         app:layout_constraintEnd_toEndOf="parent" />
 
@@ -202,7 +202,6 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="@dimen/margin_large"
         android:layout_marginBottom="@dimen/margin_normal"
-        android:digits="2"
         android:text="@string/puja_booking_count"
         android:textAlignment="textEnd"
         app:layout_constraintBottom_toTopOf="@+id/tvBankingAmount"
