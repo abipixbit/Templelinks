@@ -26,13 +26,13 @@ class ConfirmPoojaFamilyAdapter(var currentItem : (Families)->Unit) : ListAdapte
 
             tvConfirmFamName.text = currentItem.name
 
-            ivAdd.setOnClickListener { count += 1
+            btnAdd.setOnClickListener { count += 1
                 tvConfirmCount.text = count.toString()
                 currentItem.count = count
                 currentItem(currentItem)
             }
 
-            ivMinus.setOnClickListener {
+            btnMinus.setOnClickListener {
                 if (count > 1) { count -= 1 }
                 tvConfirmCount.text = count.toString()
                 currentItem.count = count

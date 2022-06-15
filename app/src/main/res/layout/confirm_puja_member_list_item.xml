@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_marginTop="@dimen/margin_normal"
     android:layout_marginBottom="@dimen/margin_normal"
@@ -15,38 +16,38 @@
         android:layout_marginEnd="@dimen/margin_normal"
         android:maxLines="1"
         android:text="TextView"
-        app:layout_constraintEnd_toStartOf="@+id/ivMinus"
+        app:layout_constraintEnd_toStartOf="@+id/btnMinus"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/tvConfirmCount"
         android:layout_width="wrap_content"
-        android:textStyle="bold"
         android:layout_height="wrap_content"
         android:layout_marginEnd="@dimen/margin_normal"
         android:text="@string/_1"
-        app:layout_constraintEnd_toStartOf="@+id/ivAdd"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/btnAdd"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageView
-        android:id="@+id/ivAdd"
-        android:layout_width="@dimen/margin_large"
-        android:layout_height="@dimen/margin_large"
-        android:layout_marginTop="@dimen/margin_small"
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnAdd"
+        style="@style/button_plus_minus"
         android:layout_marginEnd="@dimen/margin_normal"
+        android:text="@string/minus"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_add" />
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageView
-        android:id="@+id/ivMinus"
-        android:layout_width="@dimen/margin_large"
-        android:layout_height="@dimen/margin_large"
-        android:layout_marginTop="@dimen/margin_small"
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnMinus"
+        style="@style/button_plus_minus"
         android:layout_marginEnd="@dimen/margin_normal"
+        android:text="@string/plus"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/tvConfirmCount"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_minus" />
+        app:layout_constraintTop_toTopOf="parent" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
