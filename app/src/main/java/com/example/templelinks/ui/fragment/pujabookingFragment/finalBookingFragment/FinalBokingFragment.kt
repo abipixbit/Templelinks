@@ -12,6 +12,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.navigation.ui.setupWithNavController
 import com.example.templelinks.R
+import com.example.templelinks.data.model.response.Payment
 import com.example.templelinks.databinding.FragmentFinalBokingBinding
 import com.example.templelinks.ui.adapter.ConfrimPoojaAdapter
 import java.math.RoundingMode
@@ -45,8 +46,13 @@ class FinalBokingFragment : Fragment() {
             viewModel.findSum()
             Log.d("PujaChanged", viewModel.puja.toString())
         }
-
         setupUI()
+
+        binding.btnConfirmBook.setOnClickListener {
+
+        }
+
+
     }
 
     private fun setupUI() {
@@ -57,8 +63,10 @@ class FinalBokingFragment : Fragment() {
 
         binding.apply {
             toolBarFinalPujaBooking.toolBar.setupWithNavController(findNavController())
+
             tvTempleNameFinalBooking.text = args.locale?.name
             tvTempleAddressFinalBooking.text = args.locale?.address
+
             tvBankingAmount.text = getString(R.string.pooja_price_float, df.format(args.bankingCharge))
             tvGSTAmount.text = getString(R.string.pooja_price_float, df.format(18.00))
             rvConfirmPooja.adapter = confirmPoojaAdapter

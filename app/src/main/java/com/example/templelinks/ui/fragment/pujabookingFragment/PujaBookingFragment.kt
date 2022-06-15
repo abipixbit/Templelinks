@@ -85,7 +85,6 @@ class PujaBookingFragment : Fragment() {
             }
 
             btnBook.setOnClickListener {
-                val currentTemple = arguments.currentTemple.locale
                 if (findNavController().currentDestination?.id == R.id.pujaBookingFragment) {
                     findNavController().navigate(PujaBookingFragmentDirections.actionPujaBookingFragmentToFinalBokingFragment
                         (viewModel.selectedPoojas.toTypedArray(),

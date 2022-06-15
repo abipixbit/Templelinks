@@ -66,6 +66,8 @@ class FamilyMemberDialogueFragment(private val puja: Puja, val selectedPujas : (
                         puja.selectedFamilies = puja.selectedFamilies?.plus(viewModel.selectedFamily)
                     } else {
                         puja.isSelected = true
+                        puja.time = if (etTimeSchedule.equals("Morning")) { 1 }
+                        else { 2 }
                         puja.selectedFamilies = viewModel.selectedFamily
                     }
                     selectedPujas(mutableListOf(puja))

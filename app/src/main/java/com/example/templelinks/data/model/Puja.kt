@@ -13,6 +13,8 @@ data class Puja
 
         var selectedFamilies : List<Families>?,
 
+        var time : Int?,
+
         @SerializedName("deity_id")
         val deityId: Int,
 
