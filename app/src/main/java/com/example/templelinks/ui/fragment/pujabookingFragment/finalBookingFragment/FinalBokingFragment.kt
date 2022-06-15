@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.annotation.VisibleForTesting
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
@@ -25,6 +26,9 @@ class FinalBokingFragment : Fragment() {
     private lateinit var confirmPoojaAdapter : ConfrimPoojaAdapter
     private val viewModel : FinalBookingViewModel by viewModels()
     private val finalPoojaMap = mutableMapOf<String, Any?>()
+    private val familyMap = mutableMapOf<String, Any?>()
+    private val pujaMap = mutableMapOf<String, Any?>()
+    private val donationMap = mutableMapOf<String, Any?>()
 
 
 
@@ -52,24 +56,31 @@ class FinalBokingFragment : Fragment() {
 
             val puja = viewModel.puja
 
-            val familyMember = mutableListOf<FamilyMember>()
-
             puja.forEach {
 
                 it.selectedFamilies?.forEach {
-                    familyMember.add(
-                        FamilyMember(
-                            it.id,
-                            it.count
-                        )
-                    )
-
+                    familyMap.put("member_id", it.id)
+                    familyMap.put("count", it.count)
                 }
+
+                puja.forEach {
+                    pujaMap.apply {
+                        put("puja_id", it.translation.pujaId)
+                        put("price", it.price)
+                        put("family_members", listOf(familyMap))
+                        put("time", it.time)
+                    }
+                }
+
+                donationMap.put("amount", 25)
+
 
             finalPoojaMap.apply {
                 put("temple_id", arguments.templeArgs.id)
                 put("date", arguments.selectedDate)
                 put("delivery_charge", 2)
+                put("pujas", listOf(pujaMap))
+                put("donations", donationMap)
                 put("gateway_charge_percentage", arguments.templeArgs.gatewayCharge)
                 put("gateway_charge_amount", arguments.templeArgs.gatewayCharge)
                 put("transfer_commission_percentage", arguments.templeArgs.gatewayCharge)
@@ -77,7 +88,6 @@ class FinalBokingFragment : Fragment() {
                 put("gateway", arguments.templeArgs.isRazorpay)
                 put("sub_total", viewModel.price.value)
                 put("total_amount", viewModel.totalAmount.value)
-                put("family_members", familyMember)
             }
 
 
