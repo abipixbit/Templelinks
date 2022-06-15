@@ -88,7 +88,8 @@ class PujaBookingFragment : Fragment() {
                 if (findNavController().currentDestination?.id == R.id.pujaBookingFragment) {
                     findNavController().navigate(PujaBookingFragmentDirections.actionPujaBookingFragmentToFinalBokingFragment
                         (viewModel.selectedPoojas.toTypedArray(),
-                        arguments.currentTemple)
+                        arguments.currentTemple,
+                        includePoojaBooking.tvBookingDate.text.toString())
                     )
                 }
             }

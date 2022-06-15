@@ -108,5 +108,9 @@
         <argument
             android:name="templeArgs"
             app:argType="com.example.templelinks.data.model.response.Temple" />
+        <argument
+            android:name="selectedDate"
+            app:argType="string"
+            app:nullable="true" />
     </fragment>
 </navigation>

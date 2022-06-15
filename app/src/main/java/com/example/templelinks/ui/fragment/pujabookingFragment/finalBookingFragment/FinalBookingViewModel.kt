@@ -27,7 +27,7 @@ class FinalBookingViewModel : ViewModel() {
         findTotalAmount(18.0,0.0)
     }
 
-    fun findTotalAmount(gst : Double, bankCharge : Double) {
+    private fun findTotalAmount(gst : Double, bankCharge : Double) {
         totalAmount.value = (price.value?.plus(bankCharge))?.times(((gst.plus(100)).div(100)))
         Log.d("TotalAmount", this.totalAmount.value.toString())
     }

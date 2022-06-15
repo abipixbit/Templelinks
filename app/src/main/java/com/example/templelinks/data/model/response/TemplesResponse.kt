@@ -60,6 +60,12 @@ data class TemplesResponse(
             @SerializedName("is_virtual_queue")
             val isVirtualQueue: Boolean?,
 
+            @SerializedName("razorpay_gateway_charge")
+            val gatewayCharge : Int?,
+
+            @SerializedName("is_razorpay")
+            val isRazorpay : Int?,
+
             @SerializedName("is_prasada")
             val isPrasada: Boolean?,
 

@@ -1,7 +1,6 @@
 package com.example.templelinks.ui.fragment.pujabookingFragment.finalBookingFragment
 
 import android.os.Bundle
-import android.os.Handler
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -12,7 +11,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.navigation.ui.setupWithNavController
 import com.example.templelinks.R
-import com.example.templelinks.data.model.response.Payment
+import com.example.templelinks.data.model.response.FamilyMember
 import com.example.templelinks.databinding.FragmentFinalBokingBinding
 import com.example.templelinks.ui.adapter.ConfrimPoojaAdapter
 import java.math.RoundingMode
@@ -25,6 +24,7 @@ class FinalBokingFragment : Fragment() {
     private val arguments : FinalBokingFragmentArgs by navArgs()
     private lateinit var confirmPoojaAdapter : ConfrimPoojaAdapter
     private val viewModel : FinalBookingViewModel by viewModels()
+    private val finalPoojaMap = mutableMapOf<String, Any?>()
 
 
 
@@ -49,6 +49,49 @@ class FinalBokingFragment : Fragment() {
         setupUI()
 
         binding.btnConfirmBook.setOnClickListener {
+
+            val puja = viewModel.puja
+
+            val familyMember = mutableListOf<FamilyMember>()
+
+            puja.forEach {
+
+                it.selectedFamilies?.forEach {
+                    familyMember.add(
+                        FamilyMember(
+                            it.id,
+                            it.count
+                        )
+                    )
+
+                }
+
+            finalPoojaMap.apply {
+                put("temple_id", arguments.templeArgs.id)
+                put("date", arguments.selectedDate)
+                put("delivery_charge", 2)
+                put("gateway_charge_percentage", arguments.templeArgs.gatewayCharge)
+                put("gateway_charge_amount", arguments.templeArgs.gatewayCharge)
+                put("transfer_commission_percentage", arguments.templeArgs.gatewayCharge)
+                put("transfer_commission_amount", arguments.templeArgs.gatewayCharge)
+                put("gateway", arguments.templeArgs.isRazorpay)
+                put("sub_total", viewModel.price.value)
+                put("total_amount", viewModel.totalAmount.value)
+                put("family_members", familyMember)
+            }
+
+
+
+
+
+
+
+            }
+
+
+
+            Log.d("Map", finalPoojaMap.toString())
+
 
         }
 
