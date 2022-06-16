@@ -53,15 +53,14 @@ class FinalBokingFragment : Fragment() {
         setupUI()
 
         binding.btnConfirmBook.setOnClickListener {
-
             val puja = viewModel.puja
 
             puja.forEach {
-
                 it.selectedFamilies?.forEach {
                     familyMap.put("member_id", it.id)
                     familyMap.put("count", it.count)
                 }
+            }
 
                 puja.forEach {
                     pujaMap.apply {
@@ -74,8 +73,7 @@ class FinalBokingFragment : Fragment() {
 
                 donationMap.put("amount", 25)
 
-
-            finalPoojaMap.apply {
+                finalPoojaMap.apply {
                 put("temple_id", arguments.templeArgs.id)
                 put("date", arguments.selectedDate)
                 put("delivery_charge", 2)
@@ -88,25 +86,13 @@ class FinalBokingFragment : Fragment() {
                 put("gateway", arguments.templeArgs.isRazorpay)
                 put("sub_total", viewModel.price.value)
                 put("total_amount", viewModel.totalAmount.value)
-            }
-
-
-
-
-
-
+                }
 
             }
-
-
-
             Log.d("Map", finalPoojaMap.toString())
-
-
         }
 
 
-    }
 
     private fun setupUI() {
         Log.d("Arguments", arguments.toString())
