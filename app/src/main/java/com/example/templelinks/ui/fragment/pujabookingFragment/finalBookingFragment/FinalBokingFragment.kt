@@ -84,7 +84,7 @@ class FinalBokingFragment : Fragment() {
                     viewModel.totalAmount.value
                 ))
 
-                Log.d("Famiiii", Gson().toJson(payment).toString())
+                Log.d("Payment", Gson().toJson(payment).toString())
 
             }
 
