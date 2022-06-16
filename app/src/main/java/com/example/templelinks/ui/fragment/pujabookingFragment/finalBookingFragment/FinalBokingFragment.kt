@@ -13,8 +13,13 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.navigation.ui.setupWithNavController
 import com.example.templelinks.R
+import com.example.templelinks.data.model.Donations
+import com.example.templelinks.data.model.FamilyMember
+import com.example.templelinks.data.model.Payment
+import com.example.templelinks.data.model.PujaPayment
 import com.example.templelinks.databinding.FragmentFinalBokingBinding
 import com.example.templelinks.ui.adapter.ConfrimPoojaAdapter
+import com.google.gson.Gson
 import com.google.gson.JsonParser
 import java.math.RoundingMode
 import java.text.DecimalFormat
@@ -26,10 +31,9 @@ class FinalBokingFragment : Fragment() {
     private val arguments : FinalBokingFragmentArgs by navArgs()
     private lateinit var confirmPoojaAdapter : ConfrimPoojaAdapter
     private val viewModel : FinalBookingViewModel by viewModels()
-    private val finalPoojaMap = mutableMapOf<String, Any?>()
-    private val familyMap = mutableMapOf<String, Any?>()
-    private val pujaMap = mutableMapOf<String, Any?>()
-    private val donationMap = mutableMapOf<String, Any?>()
+    val famMembers  = mutableListOf<FamilyMember>()
+    val pujaPayment = mutableListOf<PujaPayment>()
+    val payment = mutableListOf<Payment>()
 
 
 
@@ -59,34 +63,31 @@ class FinalBokingFragment : Fragment() {
                 val puja = viewModel.puja
                 val args = arguments.templeArgs
 
-
                 puja.forEach {
                     it.selectedFamilies?.forEach {
-                        familyMap["member_id"] = it.id
-                        familyMap["count"] = it.count
+                        famMembers.add(FamilyMember (it.id, it.count))
                     }
 
-                    pujaMap["puja_id"] = it.translation.pujaId
-                    pujaMap["price"] = it.price
-                    pujaMap["family_members"] = listOf(familyMap)
-                    pujaMap["time"] = it.time
+                    pujaPayment.add(PujaPayment(it.translation.pujaId, it.price, famMembers, it.time))
                 }
-                donationMap["amount"] = viewModel.donationAmount.value
+                Donations(viewModel.donationAmount.value)
 
-                finalPoojaMap["temple_id"] = args.id
-                finalPoojaMap["date"] = arguments.selectedDate
-                finalPoojaMap["delivery_charge"] = 2
-                finalPoojaMap["pujas"] = listOf(pujaMap)
-                finalPoojaMap["donations"] = donationMap
-                finalPoojaMap["gateway_charge_percentage"] = args.gatewayCharge
-                finalPoojaMap["gateway_charge_amount"] = args.gatewayCharge
-                finalPoojaMap["transfer_commission_percentage"] = args.gatewayCharge
-                finalPoojaMap["transfer_commission_amount"] = args.gatewayCharge
-                finalPoojaMap["gateway"] = args.isRazorpay
-                finalPoojaMap["sub_total"] = viewModel.price.value
-                finalPoojaMap["total_amount"] = viewModel.totalAmount.value
+                payment.add(Payment(
+                    args.id, arguments.selectedDate,
+                    2.0,
+                    pujaPayment,
+                    Donations(viewModel.donationAmount.value),
+                    args.gatewayCharge?.toDouble(),
+                    args.gatewayCharge?.toDouble(),
+                    args.gatewayCharge?.toDouble(),
+                    args.gatewayCharge?.toDouble(),
+                    args.isRazorpay.toString(),
+                    viewModel.price.value,
+                    viewModel.totalAmount.value
+                ))
 
-                Log.d("Map", JsonParser().parse(finalPoojaMap.toString()).toString())
+                Log.d("Famiiii", Gson().toJson(payment).toString())
+
             }
 
             btnDonation100.setOnClickListener {
@@ -132,7 +133,7 @@ class FinalBokingFragment : Fragment() {
             confirmPoojaAdapter.submitList(arguments.confirmSelectedPoojaArgs?.toMutableList())
 
             viewModel.price.observe(viewLifecycleOwner) { sum ->
-                tvSubTotalAmount.text = getString(R.string.pooja_price, sum)
+                tvSubTotalAmount.text = getString(R.string.pooja_price_s, df.format(sum))
             }
 
             viewModel.totalAmount.observe(viewLifecycleOwner) { totalPrice ->

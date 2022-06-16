@@ -16,13 +16,13 @@ data class Puja
         var time : Int?,
 
         @SerializedName("deity_id")
-        val deityId: Int,
+        val deityId: Int?,
 
         @SerializedName("temple_id")
-        val temple_id: Int,
+        val temple_id: Int?,
 
         @SerializedName("price")
-        val price: Int,
+        val price: Int?,
 
         @SerializedName("translation")
         val translation: Translations
@@ -32,16 +32,16 @@ data class Puja
         data class Translations(
 
         @SerializedName("puja_id")
-        val pujaId: Int,
+        val pujaId: Int?,
 
         @SerializedName("locale_id")
-        val localeId: Int,
+        val localeId: Int?,
 
         @SerializedName("name")
-        val pujaName: String,
+        val pujaName: String?,
 
         @SerializedName("description")
-        val pujaDescription: String,
+        val pujaDescription: String?,
 
     ) : Parcelable
 

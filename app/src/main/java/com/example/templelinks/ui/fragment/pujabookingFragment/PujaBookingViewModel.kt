@@ -61,8 +61,10 @@ class PujaBookingViewModel : ViewModel() {
         Log.d("PujaBookingViewModel", "View Model Cleared")
     }
 
-    fun addtofamMap(pujaId: Int, selectedFamilies: List<Families>?) {
-        famMap.put(pujaId, selectedFamilies)
+    fun addtofamMap(pujaId: Int?, selectedFamilies: List<Families>?) {
+        if (pujaId != null) {
+            famMap.put(pujaId, selectedFamilies)
+        }
     }
 
 }
