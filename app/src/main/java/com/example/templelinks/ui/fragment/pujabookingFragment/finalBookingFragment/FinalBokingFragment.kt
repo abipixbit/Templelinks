@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
+import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
@@ -70,7 +71,7 @@ class FinalBokingFragment : Fragment() {
                     pujaMap["family_members"] = listOf(familyMap)
                     pujaMap["time"] = it.time
                 }
-                donationMap["amount"] = 25
+                donationMap["amount"] = viewModel.donationAmount.value
 
                 finalPoojaMap["temple_id"] = args.id
                 finalPoojaMap["date"] = arguments.selectedDate
@@ -89,41 +90,25 @@ class FinalBokingFragment : Fragment() {
             }
 
             btnDonation100.setOnClickListener {
-                viewModel.donationAmount.value = 100.0
-                viewModel.findSum()
+                etDonation.setText(R.string._100_0)
             }
 
             btnDonation500.setOnClickListener {
-                viewModel.donationAmount.value = 500.0
-                viewModel.findSum()
+                etDonation.setText(R.string._500_0)
             }
 
             btnDonation1000.setOnClickListener {
-                viewModel.donationAmount.value = 1000.0
-                viewModel.findSum()
+                etDonation.setText(R.string._1000)
             }
 
-            viewModel.donationAmount.observe(viewLifecycleOwner) { donationAmount ->
-                        etDonation.setText(donationAmount.toString())
-                        tvDonationAmount.text = getString(R.string.pooja_price_s, donationAmount.toString())
-
-                when (donationAmount) {
-                    100.0 -> {
-                        btnDonation100.backgroundTintList = ContextCompat.getColorStateList(requireContext(), R.color.app_color)
-                        btnDonation500.backgroundTintList = ContextCompat.getColorStateList(requireContext(), R.color.dark_grey)
-                        btnDonation1000.backgroundTintList = ContextCompat.getColorStateList(requireContext(), R.color.dark_grey)
-                    }
-                    500.0 -> {
-                        btnDonation100.backgroundTintList = ContextCompat.getColorStateList(requireContext(), R.color.dark_grey)
-                        btnDonation500.backgroundTintList = ContextCompat.getColorStateList(requireContext(), R.color.app_color)
-                        btnDonation1000.backgroundTintList = ContextCompat.getColorStateList(requireContext(), R.color.dark_grey)
-                    }
-                    1000.0 -> {
-                        btnDonation100.backgroundTintList = ContextCompat.getColorStateList(requireContext(), R.color.dark_grey)
-                        btnDonation500.backgroundTintList = ContextCompat.getColorStateList(requireContext(), R.color.dark_grey)
-                        btnDonation1000.backgroundTintList = ContextCompat.getColorStateList(requireContext(), R.color.app_color)
-                    }
-
+            etDonation.doOnTextChanged { text, start, before, count ->
+                if (text.isNullOrEmpty()) {
+                    etDonation.setText("0.0")
+                    viewModel.findSum()
+                }
+                else {
+                    viewModel.donationAmount.value = text.toString().toDouble()
+                    viewModel.findSum()
                 }
             }
         }
@@ -152,6 +137,35 @@ class FinalBokingFragment : Fragment() {
 
             viewModel.totalAmount.observe(viewLifecycleOwner) { totalPrice ->
                 tvTotalAmount.text = getString(R.string.pooja_price_s, df.format(totalPrice))
+            }
+
+            viewModel.donationAmount.observe(viewLifecycleOwner) { donationAmount ->
+//                etDonation.setText(donationAmount.toString())
+                tvDonationAmount.text = getString(R.string.pooja_price_s, donationAmount.toString())
+
+                when (donationAmount) {
+                    100.0 -> {
+                        btnDonation100.backgroundTintList = ContextCompat.getColorStateList(requireContext(), R.color.app_color)
+                        btnDonation500.backgroundTintList = ContextCompat.getColorStateList(requireContext(), R.color.dark_grey)
+                        btnDonation1000.backgroundTintList = ContextCompat.getColorStateList(requireContext(), R.color.dark_grey)
+                    }
+                    500.0 -> {
+                        btnDonation100.backgroundTintList = ContextCompat.getColorStateList(requireContext(), R.color.dark_grey)
+                        btnDonation500.backgroundTintList = ContextCompat.getColorStateList(requireContext(), R.color.app_color)
+                        btnDonation1000.backgroundTintList = ContextCompat.getColorStateList(requireContext(), R.color.dark_grey)
+                    }
+                    1000.0 -> {
+                        btnDonation100.backgroundTintList = ContextCompat.getColorStateList(requireContext(), R.color.dark_grey)
+                        btnDonation500.backgroundTintList = ContextCompat.getColorStateList(requireContext(), R.color.dark_grey)
+                        btnDonation1000.backgroundTintList = ContextCompat.getColorStateList(requireContext(), R.color.app_color)
+                    }
+                    else -> {
+                        btnDonation100.backgroundTintList = ContextCompat.getColorStateList(requireContext(), R.color.dark_grey)
+                        btnDonation500.backgroundTintList = ContextCompat.getColorStateList(requireContext(), R.color.dark_grey)
+                        btnDonation1000.backgroundTintList = ContextCompat.getColorStateList(requireContext(), R.color.dark_grey)
+                    }
+
+                }
             }
         }
     }
