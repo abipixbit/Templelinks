@@ -25,9 +25,9 @@
             <TextView
                 android:id="@+id/tvTempleNameFinalBooking"
                 android:layout_width="0dp"
-                android:layout_marginTop="@dimen/margin_large"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/margin_large"
+                android:layout_marginTop="@dimen/margin_large"
                 android:layout_marginEnd="@dimen/margin_large"
                 android:text="TextView"
                 android:textSize="@dimen/text_size_large"
@@ -72,17 +72,85 @@
                 android:id="@+id/rvConfirmPooja"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_normal"
                 android:layout_marginTop="@dimen/margin_normal"
+                android:layout_marginEnd="@dimen/margin_normal"
                 android:clipToPadding="false"
                 android:nestedScrollingEnabled="false"
                 android:orientation="vertical"
                 android:paddingTop="@dimen/margin_normal"
                 android:paddingBottom="@dimen/margin_normal"
-                android:layout_marginStart="@dimen/margin_normal"
-                android:layout_marginEnd="@dimen/margin_normal"
-                tools:listitem="@layout/confirm_puja_list_item"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                app:layout_constraintTop_toBottomOf="@+id/tvPooja" />
+                app:layout_constraintTop_toBottomOf="@+id/tvPooja"
+                tools:listitem="@layout/confirm_puja_list_item" />
+
+            <TextView
+                android:id="@+id/tvDonation"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_large"
+                android:layout_marginTop="@dimen/margin_large"
+                android:text="@string/donation"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/rvConfirmPooja">
+            </TextView>
+
+            <EditText
+                android:id="@+id/etDonation"
+                android:layout_width="match_parent"
+                android:inputType="number"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_large"
+                android:layout_marginTop="@dimen/margin_large"
+                android:layout_marginEnd="@dimen/margin_large"
+                android:hint="@string/donation"
+                app:layout_constraintTop_toBottomOf="@id/tvDonation">
+            </EditText>
+
+            <Button
+                android:id="@+id/btnDonation100"
+                android:layout_width="0dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_marginBottom="@dimen/margin_large"
+                android:layout_marginStart="@dimen/margin_large"
+                android:layout_marginEnd="@dimen/margin_large"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_large"
+                android:text="@string/_100_0"
+                app:layout_constraintEnd_toStartOf="@+id/btnDonation500"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/etDonation">
+            </Button>
+
+            <Button
+                android:id="@+id/btnDonation500"
+                android:layout_width="0dp"
+                android:layout_marginStart="@dimen/margin_large"
+                android:layout_marginEnd="@dimen/margin_large"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_large"
+                android:text="@string/_500_0"
+                app:layout_constraintEnd_toStartOf="@+id/btnDonation1000"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/btnDonation100"
+                app:layout_constraintTop_toBottomOf="@id/etDonation">
+            </Button>
+
+            <Button
+                android:id="@+id/btnDonation1000"
+                android:layout_width="0dp"
+                android:layout_marginStart="@dimen/margin_large"
+                android:layout_marginEnd="@dimen/margin_large"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_large"
+                android:text="@string/_100_0"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/btnDonation500"
+                app:layout_constraintTop_toBottomOf="@id/etDonation">
+            </Button>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
