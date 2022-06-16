@@ -60,17 +60,15 @@ class FinalBokingFragment : Fragment() {
         binding.apply {
 
             btnConfirmBook.setOnClickListener {
-                val puja = viewModel.puja
                 val args = arguments.templeArgs
 
-                puja.forEach {
+                viewModel.puja.forEach {
                     it.selectedFamilies?.forEach {
                         famMembers.add(FamilyMember (it.id, it.count))
                     }
 
                     pujaPayment.add(PujaPayment(it.translation.pujaId, it.price, famMembers, it.time))
                 }
-                Donations(viewModel.donationAmount.value)
 
                 payment.add(Payment(
                     args.id, arguments.selectedDate,
