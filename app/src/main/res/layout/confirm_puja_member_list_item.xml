@@ -35,7 +35,7 @@
         android:id="@+id/btnAdd"
         style="@style/button_plus_minus"
         android:layout_marginEnd="@dimen/margin_normal"
-        android:text="@string/minus"
+        android:text="@string/plus"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -44,7 +44,7 @@
         android:id="@+id/btnMinus"
         style="@style/button_plus_minus"
         android:layout_marginEnd="@dimen/margin_normal"
-        android:text="@string/plus"
+        android:text="@string/minus"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/tvConfirmCount"
         app:layout_constraintTop_toTopOf="parent" />

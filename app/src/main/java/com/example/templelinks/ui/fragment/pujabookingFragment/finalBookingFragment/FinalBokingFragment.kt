@@ -6,15 +6,14 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.annotation.VisibleForTesting
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.navigation.ui.setupWithNavController
 import com.example.templelinks.R
-import com.example.templelinks.data.model.response.FamilyMember
 import com.example.templelinks.databinding.FragmentFinalBokingBinding
 import com.example.templelinks.ui.adapter.ConfrimPoojaAdapter
+import com.google.gson.JsonParser
 import java.math.RoundingMode
 import java.text.DecimalFormat
 
@@ -54,42 +53,38 @@ class FinalBokingFragment : Fragment() {
 
         binding.btnConfirmBook.setOnClickListener {
             val puja = viewModel.puja
+            val args = arguments.templeArgs
+
 
             puja.forEach {
                 it.selectedFamilies?.forEach {
-                    familyMap.put("member_id", it.id)
-                    familyMap.put("count", it.count)
+                    familyMap["member_id"] = it.id
+                    familyMap["count"] = it.count
                 }
+
+                pujaMap["puja_id"] = it.translation.pujaId
+                pujaMap["price"] = it.price
+                pujaMap["family_members"] = listOf(familyMap)
+                pujaMap["time"] = it.time
+            }
+                donationMap["amount"] = 25
+
+                finalPoojaMap["temple_id"] = args.id
+                finalPoojaMap["date"] = arguments.selectedDate
+                finalPoojaMap["delivery_charge"] = 2
+                finalPoojaMap["pujas"] = listOf(pujaMap)
+                finalPoojaMap["donations"] = donationMap
+                finalPoojaMap["gateway_charge_percentage"] = args.gatewayCharge
+                finalPoojaMap["gateway_charge_amount"] = args.gatewayCharge
+                finalPoojaMap["transfer_commission_percentage"] = args.gatewayCharge
+                finalPoojaMap["transfer_commission_amount"] = args.gatewayCharge
+                finalPoojaMap["gateway"] = args.isRazorpay
+                finalPoojaMap["sub_total"] = viewModel.price.value
+                finalPoojaMap["total_amount"] = viewModel.totalAmount.value
+
+                Log.d("Map", JsonParser().parse(finalPoojaMap.toString()).toString())
             }
 
-                puja.forEach {
-                    pujaMap.apply {
-                        put("puja_id", it.translation.pujaId)
-                        put("price", it.price)
-                        put("family_members", listOf(familyMap))
-                        put("time", it.time)
-                    }
-                }
-
-                donationMap.put("amount", 25)
-
-                finalPoojaMap.apply {
-                put("temple_id", arguments.templeArgs.id)
-                put("date", arguments.selectedDate)
-                put("delivery_charge", 2)
-                put("pujas", listOf(pujaMap))
-                put("donations", donationMap)
-                put("gateway_charge_percentage", arguments.templeArgs.gatewayCharge)
-                put("gateway_charge_amount", arguments.templeArgs.gatewayCharge)
-                put("transfer_commission_percentage", arguments.templeArgs.gatewayCharge)
-                put("transfer_commission_amount", arguments.templeArgs.gatewayCharge)
-                put("gateway", arguments.templeArgs.isRazorpay)
-                put("sub_total", viewModel.price.value)
-                put("total_amount", viewModel.totalAmount.value)
-                }
-
-            }
-            Log.d("Map", finalPoojaMap.toString())
         }
 
 
