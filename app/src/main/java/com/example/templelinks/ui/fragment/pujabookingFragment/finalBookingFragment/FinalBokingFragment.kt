@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
@@ -51,22 +52,24 @@ class FinalBokingFragment : Fragment() {
         }
         setupUI()
 
-        binding.btnConfirmBook.setOnClickListener {
-            val puja = viewModel.puja
-            val args = arguments.templeArgs
+        binding.apply {
+
+            btnConfirmBook.setOnClickListener {
+                val puja = viewModel.puja
+                val args = arguments.templeArgs
 
 
-            puja.forEach {
-                it.selectedFamilies?.forEach {
-                    familyMap["member_id"] = it.id
-                    familyMap["count"] = it.count
+                puja.forEach {
+                    it.selectedFamilies?.forEach {
+                        familyMap["member_id"] = it.id
+                        familyMap["count"] = it.count
+                    }
+
+                    pujaMap["puja_id"] = it.translation.pujaId
+                    pujaMap["price"] = it.price
+                    pujaMap["family_members"] = listOf(familyMap)
+                    pujaMap["time"] = it.time
                 }
-
-                pujaMap["puja_id"] = it.translation.pujaId
-                pujaMap["price"] = it.price
-                pujaMap["family_members"] = listOf(familyMap)
-                pujaMap["time"] = it.time
-            }
                 donationMap["amount"] = 25
 
                 finalPoojaMap["temple_id"] = args.id
@@ -85,9 +88,47 @@ class FinalBokingFragment : Fragment() {
                 Log.d("Map", JsonParser().parse(finalPoojaMap.toString()).toString())
             }
 
+            btnDonation100.setOnClickListener {
+                viewModel.donationAmount.value = 100.0
+                viewModel.findSum()
+            }
+
+            btnDonation500.setOnClickListener {
+                viewModel.donationAmount.value = 500.0
+                viewModel.findSum()
+            }
+
+            btnDonation1000.setOnClickListener {
+                viewModel.donationAmount.value = 1000.0
+                viewModel.findSum()
+            }
+
+            viewModel.donationAmount.observe(viewLifecycleOwner) { donationAmount ->
+                        etDonation.setText(donationAmount.toString())
+                        tvDonationAmount.text = getString(R.string.pooja_price_s, donationAmount.toString())
+
+                when (donationAmount) {
+                    100.0 -> {
+                        btnDonation100.backgroundTintList = ContextCompat.getColorStateList(requireContext(), R.color.app_color)
+                        btnDonation500.backgroundTintList = ContextCompat.getColorStateList(requireContext(), R.color.dark_grey)
+                        btnDonation1000.backgroundTintList = ContextCompat.getColorStateList(requireContext(), R.color.dark_grey)
+                    }
+                    500.0 -> {
+                        btnDonation100.backgroundTintList = ContextCompat.getColorStateList(requireContext(), R.color.dark_grey)
+                        btnDonation500.backgroundTintList = ContextCompat.getColorStateList(requireContext(), R.color.app_color)
+                        btnDonation1000.backgroundTintList = ContextCompat.getColorStateList(requireContext(), R.color.dark_grey)
+                    }
+                    1000.0 -> {
+                        btnDonation100.backgroundTintList = ContextCompat.getColorStateList(requireContext(), R.color.dark_grey)
+                        btnDonation500.backgroundTintList = ContextCompat.getColorStateList(requireContext(), R.color.dark_grey)
+                        btnDonation1000.backgroundTintList = ContextCompat.getColorStateList(requireContext(), R.color.app_color)
+                    }
+
+                }
+            }
         }
 
-
+    }
 
     private fun setupUI() {
         Log.d("Arguments", arguments.toString())
@@ -101,8 +142,7 @@ class FinalBokingFragment : Fragment() {
             tvTempleNameFinalBooking.text = args.locale?.name
             tvTempleAddressFinalBooking.text = args.locale?.address
 
-            tvBankingAmount.text = getString(R.string.pooja_price_float, df.format(args.bankingCharge))
-            tvGSTAmount.text = getString(R.string.pooja_price_float, df.format(18.00))
+            tvGSTAmount.text = getString(R.string.gst_percentage, df.format(18.0))
             rvConfirmPooja.adapter = confirmPoojaAdapter
             confirmPoojaAdapter.submitList(arguments.confirmSelectedPoojaArgs?.toMutableList())
 
@@ -111,7 +151,7 @@ class FinalBokingFragment : Fragment() {
             }
 
             viewModel.totalAmount.observe(viewLifecycleOwner) { totalPrice ->
-                tvTotalAmount.text = getString(R.string.pooja_price_float, df.format(totalPrice))
+                tvTotalAmount.text = getString(R.string.pooja_price_s, df.format(totalPrice))
             }
         }
     }

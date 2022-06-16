@@ -20,7 +20,8 @@
     <string name="no_temple">No Temple Found</string>
     <string name="select_deity">Select Deity</string>
     <string name="pooja_price">$ %d</string>
-    <string name="pooja_price_float">$ %s</string>
+    <string name="pooja_price_s">$ %s</string>
+    <string name="gst_percentage">%s %%</string>
     <string name="select_date">Select Date</string>
     <string name="book">Book</string>
     <string name="cancel">Cancel</string>
@@ -42,6 +43,7 @@
     <string name="plus">+</string>
     <string name="_100_0">100.0</string>
     <string name="_500_0">500.0</string>
+    <string name="_1000">1000.0</string>
 
     <string-array name="gods_photo">
         <item>"https://www.hindisoch.com/wp-content/uploads/2015/03/Lord-Ganesha-Wallpaper.jpg"</item>

@@ -151,7 +151,7 @@
                 android:layout_marginEnd="@dimen/margin_large"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/margin_large"
-                android:text="@string/_100_0"
+                android:text="@string/_1000"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toEndOf="@+id/btnDonation500"
@@ -243,7 +243,7 @@
         android:layout_marginEnd="@dimen/margin_large"
         android:textAlignment="textEnd"
         android:textStyle="bold"
-        android:text="@string/pooja_price_float"
+        android:text="@string/pooja_price_s"
         app:layout_constraintBottom_toTopOf="@+id/btnConfirmBook"
         app:layout_constraintEnd_toEndOf="parent" />
 
@@ -254,7 +254,7 @@
         android:layout_marginEnd="@dimen/margin_large"
         android:layout_marginBottom="@dimen/margin_normal"
         android:textAlignment="textEnd"
-        android:text="@string/pooja_price_float"
+        android:text="@string/pooja_price_s"
         app:layout_constraintBottom_toTopOf="@+id/tvTotalAmount"
         app:layout_constraintEnd_toEndOf="parent" />
 
@@ -265,7 +265,7 @@
         android:layout_marginBottom="@dimen/margin_normal"
         android:layout_height="wrap_content"
         android:textAlignment="textEnd"
-        android:text="@string/pooja_price_float"
+        android:text="@string/gst_percentage"
         app:layout_constraintBottom_toTopOf="@+id/tvGSTAmount"
         app:layout_constraintEnd_toEndOf="parent" />
 
